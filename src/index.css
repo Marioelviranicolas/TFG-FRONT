@@ -1,6 +1,34 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@font-face {
+  font-family: 'ClashDisplay-Regular';
+  src: url('./assets/fonts/clash-display/ClashDisplay-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
 
+@font-face {
+  font-family: 'ClashDisplay-Medium';
+  src: url('./assets/fonts/clash-display/ClashDisplay-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
 
+@font-face {
+  font-family: 'ClashDisplay-SemiBold';
+  src: url('./assets/fonts/clash-display/ClashDisplay-SemiBold.otf') format('opentype');
+  font-style: normal;
+  font-weight: 600;
+}
 
+@font-face {
+  font-family: 'ClashDisplay-Bold';
+  src: url('./assets/fonts/clash-display/ClashDisplay-Bold.otf') format('opentype');
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
