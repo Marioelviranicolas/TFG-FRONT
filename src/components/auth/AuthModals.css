@@ -1,0 +1,186 @@
+/* src/components/auth/AuthModals.css */
+
+/* ==================== OVERLAY ==================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  /* ==================== MODAL CARD ==================== */
+  .modal-card {
+    background: white;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 450px;
+    padding: 2rem;
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.3),
+      0 0 100px rgba(255, 107, 53, 0.2);
+    position: relative;
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  /* ==================== HEADER ==================== */
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .modal-title {
+    font-family: 'ClashDisplay-Bold', sans-serif;
+    font-size: 1.75rem;
+    letter-spacing: 0.05em;
+    
+    margin: 0;
+  }
+  
+  .modal-close {
+    background: none;
+    border: none;
+    color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-close:hover {
+    background-color: rgba(255, 107, 53, 0.1);
+    color: #FF6B35;
+    transform: rotate(90deg);
+  }
+  
+  /* ==================== FORM ==================== */
+  .modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-group label {
+    font-family: 'ClashDisplay-Medium', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .form-group input {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    padding: 0.875rem 1rem;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+  
+  .form-group input:focus {
+    outline: none;
+    border-color: #FF6B35;
+    background-color: white;
+    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+  }
+  
+  .form-group input::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+  }
+  
+  /* ==================== SUBMIT BUTTON ==================== */
+  .modal-submit {
+    font-family: 'ClashDisplay-Medium', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #FF6B35 0%, #F7B801 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+  }
+  
+  .modal-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 8px 20px rgba(255, 107, 53, 0.4),
+      0 0 30px rgba(255, 107, 53, 0.3);
+  }
+  
+  .modal-submit:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+  }
+  
+  /* ==================== FOOTER ==================== */
+  .modal-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-footer p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .text-link {
+    background: none;
+    border: none;
+    color: #FF6B35;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .text-link:hover {
+    color: #F7B801;
+    text-decoration: underline;
+  }
