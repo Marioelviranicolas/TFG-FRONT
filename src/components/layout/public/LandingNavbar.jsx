@@ -13,40 +13,34 @@ export default function LandingNav() {
   return (
     <>
     <nav className="landing-nav">
-        <div className="landing-nav__tagline">
-        Your music collection
-        </div>
-
       <div className="landing-nav__container">
-        <Link to="/" className="landing-nav__title">
-          <h1 >CRATE</h1>
-        </Link>
+         <Link to="/" className="landing-nav__logo">
+            <img 
+              src="/src/assets/images/LOGO.jpg" 
+              className="landing-nav__logo-img"
+            />
+          </Link>
         
         <div className="landing-nav-links">
           <a href="#about" className="landing-navlink">
             About
           </a>
-          <Link to="/blog" className="landing-navlink">
+          <a onClick={() => setIsLoginOpen(true)} className="landing-navlink landing-nav__btn--signup"
+            >
+              Explorar álbumes
+            </a>
+            <Link to="/blog" className="landing-navlink">
             Blog
           </Link>
-          <a href="#philosophy" className="landing-navlink">
-            Philosophy
-          </a>
         </div>
 
        <div className="landing-nav-buttons">
-            {/* Cambiar Links por buttons */}
-            <button 
-              onClick={() => setIsLoginOpen(true)}
-              className="landing-nav__btn landing-nav__btn--login"
-            >
-              Log in
-            </button>
+           
             <button 
               onClick={() => setIsRegisterOpen(true)}
               className="landing-nav__btn landing-nav__btn--signup"
             >
-              Sign up
+              Unirme
             </button>
           </div>
       </div>

@@ -1,42 +1,30 @@
 .landing-nav {
-  background-color: #ffffff;
-  height: 95px;
+  background-color: #ffffff00;
+  height: 150px;
 
 }
-.landing-nav__tagline {
-  text-align: center;
-  padding: 0.5rem 0;
-  font-family: 'ClashDisplay-Bold', sans-serif;
-  font-size: 1.1rem;
-  letter-spacing: 0.6em;
-  text-transform: uppercase;
-  color: rgba(255, 107, 53, 0.8);
-  background-color: rgba(247, 184, 1, 0.05);
-  border-bottom: 1px solid rgba(255, 107, 53, 0.1);
-}
-
 .landing-nav__container {
   display: flex;
-  border-top: 5px solid rgb(0, 0, 0); ;
-  border-bottom: 5px solid rgb(0, 0, 0);
   margin: 0 auto;
   padding: 2 2rem;
-  height: 120px;
+  height: 150px;
   align-items: center;
   justify-content: space-around;
   position: relative;
+  
 }
 
 .landing-nav-links {
   display: flex;
   align-items:center;
-  gap: 6rem;
+  gap: 10rem;
+
 
 }
 
 .landing-navlink {
   font-family: 'ClashDisplay-Bold';
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 900;
   color: rgba(0, 0, 0, 0.8);
   text-transform: uppercase;
@@ -50,14 +38,10 @@
   color: #FF6B35;
 }
 
-.landing-nav__title {
-  font-family: 'ClashDisplay-Bold';
-  font-size: 2.1rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  color: black;
-  margin: 0;
-  text-decoration: none;
+.landing-nav__logo-img {
+  margin-top: 60px;
+  width: 120px;
+  height: 120px;
 }
 
 .landing-nav-buttons {
@@ -91,7 +75,7 @@
     -6px -6px 12px rgba(255, 107, 53, 0.2);
   
   
-   transform: translateY(-2px); /* Se eleva */
+   
 }
 
 .landing-nav__btn--signup:hover {
@@ -100,6 +84,6 @@
     8px 8px 16px rgba(0, 0, 0, 0.5),
     -6px -6px 12px rgba(0, 0, 0, 0.2),;
   
-  transform: translateY(-2px); /* Se eleva */
+ 
 }
 

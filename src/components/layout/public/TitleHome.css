@@ -1,0 +1,28 @@
+.title-home {
+  display: flex;
+  left: 3rem; /* IZQUIERDA, no derecha */
+  text-align: left; /* IZQUIERDA */
+  text-decoration: none;
+}
+
+.title-home__title {
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 17rem; /* Más grande como en la imagen */
+  text-decoration: none;
+  letter-spacing: 0.02em; /* Menos espacio entre letras */
+  color: #FF6B35;
+  margin-left: 200px;
+  margin-top: 527px;
+ 
+}
+
+.title-home__subtitle {
+  font-family: 'ClashDisplay-Semibold', sans-serif;
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-left: 200px;
+  margin-top: 590px;
+  max-width: 500px;
+  
+  
+}
