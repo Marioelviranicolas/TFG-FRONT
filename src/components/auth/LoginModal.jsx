@@ -24,68 +24,58 @@ export default function LoginModal({ isOpen, onClose, onSwitchToRegister }) {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setErrors({});
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsLoading(true);
+  setErrors({});
 
-    try {
-      // Llamada al endpoint de login
-      const response = await fetch('http://localhost:9001/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: formData.username,
-          password: formData.password,
-        }),
-      });
-      
-      if (!response.ok) {
-        setErrors({ general: 'Usuario o contraseña incorrectos' });
-        return;
-      }
-
-      const user = await response.json();
-
-      if (user && user.idUser) {
-        console.log('Login successful:', user);
-        
-        // Guardar datos del usuario en localStorage
-        localStorage.setItem('currentUser', JSON.stringify({
-          idUser: user.idUser,
-          username: user.username,
-          email: user.email,
-          bio: user.bio,
-          avatarUrl: user.avatarUrl,
-          role: user.role
-        }));
-
-        // Opcional: guardar token si implementas JWT en el futuro
-        // localStorage.setItem('token', user.token);
-
-        alert(`¡Bienvenido, ${user.username}!`);
-        onClose();
-        
-        // Recargar página para refrescar estado (puedes mejorarlo con Context API)
-        window.location.reload();
-
-      } else {
-        setErrors({ 
-          general: 'Usuario o contraseña incorrectos' 
-        });
-      }
-
-    } catch (error) {
-      console.error('Login error:', error);
-      setErrors({ 
-        general: 'Error de conexión. Verifica que el servidor esté activo.' 
-      });
-    } finally {
-      setIsLoading(false);
+  try {
+    const response = await fetch('http://localhost:9001/user/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: formData.username,
+        password: formData.password,
+      }),
+    });
+    
+    if (!response.ok) {
+      setErrors({ general: 'Usuario o contraseña incorrectos' });
+      return;
     }
-  };
+
+    const user = await response.json();
+
+    if (user && user.username) {
+      localStorage.setItem('currentUser', JSON.stringify({
+        idUser: user.idUser,
+        username: user.username,
+        email: user.email,
+        bio: user.bio,
+        avatarUrl: user.avatarUrl,
+        role: user.role
+      }));
+
+      alert(`¡Bienvenido, ${user.username}!`);
+      onClose();
+      window.location.reload();
+
+    } else {
+      setErrors({ 
+        general: 'Usuario o contraseña incorrectos' 
+      });
+    }
+
+  } catch (error) {
+    setErrors({ 
+      general: 'Error de conexión. Verifica que el servidor esté activo.' 
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   if (!isOpen) return null;
 
