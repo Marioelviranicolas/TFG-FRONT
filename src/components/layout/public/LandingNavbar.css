@@ -1,6 +1,12 @@
+
+
 .landing-nav {
-  background-color: #ffffff00;
-  height: 150px;
+  background-color: #ffffff;
+  height: 130px;
+  width: 600px;
+  border-radius: 10px;
+  margin-left: 700px;
+  margin-top: 70px;
 
 }
 .landing-nav__container {
@@ -39,15 +45,21 @@
 }
 
 .landing-nav__logo-img {
-  margin-top: 60px;
+  margin-top: -10px;
   width: 120px;
   height: 120px;
+  margin-right:10px;
 }
 
 .landing-nav-buttons {
   display: flex;
+<<<<<<< Updated upstream
   gap: 1rem;
   align-items: center;
+=======
+  flex-direction: row;
+  gap: 3rem;
+>>>>>>> Stashed changes
 }
 
 .landing-nav__btn {
@@ -57,7 +69,6 @@
   text-align: center;
   padding: 0.375rem 1.25rem;
   border-radius: 12px;
-  position: relative;
   transition: all 0.3s ease;
   border: 3px solid black;
   
@@ -68,7 +79,11 @@
   font-weight: 500;
   color: rgba(12, 12, 12, 0.9);
   background: #ffffff; /* Mismo color del fondo */
+<<<<<<< Updated upstream
   border: 3px solid black;
+=======
+  
+>>>>>>> Stashed changes
 }
 
 
@@ -79,6 +94,7 @@
     -4px -4px 10px rgba(255, 255, 255, 0.8);
 }
 
+<<<<<<< Updated upstream
 
 .landing-nav__btn--register {
   background: #FF6B35;
@@ -90,3 +106,17 @@
     10px 10px 24px rgba(0, 0, 0, 0.45),
     0 0 30px rgba(255, 107, 53, 0.6);
 }
+=======
+.landing-nav__btn--signup:hover {
+  /* Efecto ELEVADO (más relieve) */
+  
+  box-shadow: 
+    8px 8px 16px rgba(0, 0, 0, 0.5),
+    -6px -6px 12px rgba(0, 0, 0, 0.2),;
+  
+ 
+}
+
+
+
+>>>>>>> Stashed changes

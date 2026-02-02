@@ -7,22 +7,35 @@
 
 .title-home__title {
   font-family: 'ClashDisplay-Bold', sans-serif;
-  font-size: 17rem; /* Más grande como en la imagen */
+  font-size: 23rem; /* Más grande como en la imagen */
   text-decoration: none;
   letter-spacing: 0.02em; /* Menos espacio entre letras */
   color: #FF6B35;
-  margin-left: 200px;
-  margin-top: 527px;
- 
+  margin-left: 70px;
+  margin-top: 610px;
+  font-weight: 700;
 }
 
 .title-home__subtitle {
-  font-family: 'ClashDisplay-Semibold', sans-serif;
+  font-family: 'ClashDisplay-Medium', sans-serif;
   font-size: 2.5rem;
   color: #ffffff;
-  margin-left: 200px;
-  margin-top: 590px;
-  max-width: 500px;
-  
-  
+  margin-left: 150px;
+  margin-top: 610px;
+  line-height: 0.9;
+}
+.title-home__subtitle .highlight {
+  font-family: 'ClashDisplay-SemiBold', sans-serif;
+  font-weight: 500;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* hover */
+.title-home__subtitle .highlight:hover {
+  color: #FF6B35;          /* mismo naranja del título */
+  font-weight: 700;       /* más peso */
+  letter-spacing: 0.03em; /* micro detalle muy pro */
+  font-size: 2.8rem;
 }

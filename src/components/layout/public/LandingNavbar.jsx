@@ -22,6 +22,7 @@ export default function LandingNav() {
               className="landing-nav__logo-img"
             />
           </Link>
+<<<<<<< Updated upstream
 
           {/* LINKS */}
           <div className="landing-nav-links">
@@ -44,6 +45,13 @@ export default function LandingNav() {
             <button
               onClick={() => setIsLoginOpen(true)}
               className="landing-nav__btn landing-nav__btn--login"
+=======
+       <div className="landing-nav-buttons">
+           
+            <button 
+              onClick={() => setIsRegisterOpen(true)}
+              className="landing-nav__btn landing-nav__btn--signup"
+>>>>>>> Stashed changes
             >
               Login
             </button>
@@ -54,8 +62,15 @@ export default function LandingNav() {
             >
               Registro
             </button>
+             <button 
+              onClick={() => setIsLoginOpen(true)}
+              className="landing-nav__btn landing-nav__btn--signup"
+            >
+              Explorar
+            </button>
           </div>
 
+<<<<<<< Updated upstream
         </div>
       </nav>
 
@@ -78,5 +93,20 @@ export default function LandingNav() {
         }}
       />
     </>
+=======
+      
+      
+      <LoginModal 
+      isOpen={isLoginOpen} 
+      onClose={() => setIsLoginOpen(false)}
+      onSwitchToRegister={() => setIsRegisterOpen(true)}
+    />
+    <RegisterModal 
+      isOpen={isRegisterOpen} 
+      onClose={() => setIsRegisterOpen(false)}
+      onSwitchToLogin={() => setIsLoginOpen(true)}
+    />
+  </>
+>>>>>>> Stashed changes
   );
 }
