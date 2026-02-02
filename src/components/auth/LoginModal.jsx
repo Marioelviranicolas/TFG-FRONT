@@ -1,4 +1,3 @@
-// src/components/auth/LoginModal.jsx
 import { useState } from 'react';
 import { X } from 'lucide-react';
 import './AuthModals.css';
@@ -9,33 +8,83 @@ export default function LoginModal({ isOpen, onClose, onSwitchToRegister }) {
     password: ''
   });
 
+  const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    if (errors[e.target.name]) {
+      setErrors({
+        ...errors,
+        [e.target.name]: ''
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    //  Implementar llamada GET/POST a tu backend
-    console.log('Login data:', formData);
-    
-    // Ejemplo de llamada (tú implementas la ruta real):
-    // try {
-    //   const response = await fetch('http://localhost:8080/api/auth/login', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(formData)
-    //   });
-    //   const data = await response.json();
-    //   // Guardar token, redirigir, etc.
-    // } catch (error) {
-    //   console.error('Login error:', error);
-    // }
-    
-    onClose();
+    setIsLoading(true);
+    setErrors({});
+
+    try {
+      // Llamada al endpoint de login
+      const response = await fetch('http://localhost:9001/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: formData.username,
+          password: formData.password,
+        }),
+      });
+      
+      if (!response.ok) {
+        setErrors({ general: 'Usuario o contraseña incorrectos' });
+        return;
+      }
+
+      const user = await response.json();
+
+      if (user && user.idUser) {
+        console.log('Login successful:', user);
+        
+        // Guardar datos del usuario en localStorage
+        localStorage.setItem('currentUser', JSON.stringify({
+          idUser: user.idUser,
+          username: user.username,
+          email: user.email,
+          bio: user.bio,
+          avatarUrl: user.avatarUrl,
+          role: user.role
+        }));
+
+        // Opcional: guardar token si implementas JWT en el futuro
+        // localStorage.setItem('token', user.token);
+
+        alert(`¡Bienvenido, ${user.username}!`);
+        onClose();
+        
+        // Recargar página para refrescar estado (puedes mejorarlo con Context API)
+        window.location.reload();
+
+      } else {
+        setErrors({ 
+          general: 'Usuario o contraseña incorrectos' 
+        });
+      }
+
+    } catch (error) {
+      console.error('Login error:', error);
+      setErrors({ 
+        general: 'Error de conexión. Verifica que el servidor esté activo.' 
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (!isOpen) return null;
@@ -46,13 +95,20 @@ export default function LoginModal({ isOpen, onClose, onSwitchToRegister }) {
         {/* Header */}
         <div className="modal-header">
           <h2 className="modal-title">Log in to CRATE</h2>
-          <button className="modal-close" onClick={onClose}>
+          <button className="modal-close" onClick={onClose} disabled={isLoading}>
             <X size={24} />
           </button>
         </div>
 
         {/* Form */}
         <form className="modal-form" onSubmit={handleSubmit}>
+          {/* Error general */}
+          {errors.general && (
+            <div className="error-message error-general">
+              {errors.general}
+            </div>
+          )}
+
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input
@@ -61,8 +117,10 @@ export default function LoginModal({ isOpen, onClose, onSwitchToRegister }) {
               name="username"
               value={formData.username}
               onChange={handleChange}
-              placeholder="Introduce tu User"
+              placeholder="manolo11"
               required
+              disabled={isLoading}
+              className={errors.username ? 'input-error' : ''}
             />
           </div>
 
@@ -76,13 +134,33 @@ export default function LoginModal({ isOpen, onClose, onSwitchToRegister }) {
               onChange={handleChange}
               placeholder="Enter your password"
               required
+              disabled={isLoading}
+              className={errors.password ? 'input-error' : ''}
             />
           </div>
 
-          <button type="submit" className="modal-submit">
-            Log in
+          <button 
+            type="submit" 
+            className="modal-submit"
+            disabled={isLoading}
+          >
+            {isLoading ? 'Logging in...' : 'Log in'}
           </button>
         </form>
+
+        {/* Footer */}
+        <div className="modal-footer">
+          <p>
+            Don't have an account?{' '}
+            <button 
+              className="text-link" 
+              onClick={onSwitchToRegister}
+              disabled={isLoading}
+            >
+              Sign up
+            </button>
+          </p>
+        </div>
       </div>
     </div>
   );
