@@ -5,8 +5,9 @@
   height: 130px;
   width: 600px;
   border-radius: 10px;
-  margin-left: 700px;
-  margin-top: 70px;
+  margin-left: 100px;
+  margin-top: 40px;
+  
 
 }
 .landing-nav__container {
@@ -29,7 +30,7 @@
 }
 
 .landing-navlink {
-  font-family: 'ClashDisplay-Bold';
+  font-family: 'ClashDisplay-Medium';
   font-size: 1.5rem;
   font-weight: 900;
   color: rgba(0, 0, 0, 0.8);
@@ -43,6 +44,7 @@
 .landing-navlink:hover {
   color: #FF6B35;
 }
+
 
 .landing-nav__logo-img {
   margin-top: -10px;

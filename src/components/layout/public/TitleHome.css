@@ -7,12 +7,12 @@
 
 .title-home__title {
   font-family: 'ClashDisplay-Bold', sans-serif;
-  font-size: 23rem; /* Más grande como en la imagen */
+  font-size: 21rem; /* Más grande como en la imagen */
   text-decoration: none;
   letter-spacing: 0.02em; /* Menos espacio entre letras */
   color: #FF6B35;
   margin-left: 70px;
-  margin-top: 610px;
+  margin-top: 360px;
   font-weight: 700;
 }
 
@@ -20,8 +20,8 @@
   font-family: 'ClashDisplay-Medium', sans-serif;
   font-size: 2.5rem;
   color: #ffffff;
-  margin-left: 150px;
-  margin-top: 610px;
+  margin-left: 120px;
+  margin-top: 490px;
   line-height: 0.9;
 }
 .title-home__subtitle .highlight {

@@ -3,36 +3,76 @@ import "./SlideMenu.css";
 import LoginModal from '../../auth/LoginModal';
 import RegisterModal from '../../auth/RegisterModal';
 
+
 export default function SlidingMenu() {
   const [menuActive, setMenuActive] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+  const [isAccordionOpen, setIsAccordionOpen] = useState(false);
+
 
   useEffect(() => {
     document.body.classList.toggle("menu-active", menuActive);
     return () => document.body.classList.remove("menu-active");
   }, [menuActive]);
 
+  useEffect(() => {
+    if (!menuActive) {
+      setIsAccordionOpen(false);
+    }
+  }, [menuActive]);
+
   return (
     <>
       <nav id="slide-menu">
+        <div className="slide-content">
         <ul>
-          <li href="#about" className="landing-navlink">
-            Blog
+          <p id="slideTitle">©Crate</p>
+          <hr />
+          <li href="#about" className="landing-slidelink">
+            <span>Blog</span>
           </li>
-          <li href="#about" className="landing-navlink">
-            About
+          <hr />
+          <li href="#about" className="landing-slidelink">
+            <span>About</span>
           </li>
-          <li className="calendar">Calendar</li>
-          <li onClick={() => setIsLoginOpen(true)} className="landing-navlink landing-nav__btn--signup">
-            Explorar álbumes
+          <hr />
+
+
+          {/* ACCORDION HEADER */}
+          <li
+            className="landing-slidelink accordion-header"
+            onClick={() => setIsAccordionOpen(!isAccordionOpen)}
+          >
+            <span>Qué es Crate?</span>
+            <span className={`accordion-arrow ${isAccordionOpen ? "open" : ""}`}>
+              ▾
+            </span>
+          </li>
+
+          {/* ACCORDION CONTENT */}
+          <ul className={`accordion-content ${isAccordionOpen ? "open" : ""}`}>
+            <li className="landing-subslidelink">
+              <span>Funcionalidad</span>
             </li>
-          <li onClick={() => setIsRegisterOpen(true)} className="landing-navlink landing-nav__btn--signup">
-            Unirme
+            <li className="landing-subslidelink">
+              <span>Diseño</span>
+            </li>
+            <li className="landing-subslidelink">
+              <span>Experiencia</span>
+            </li>
+          </ul>
+            <hr></hr>
+          <li onClick={() => setIsLoginOpen(true)} className="landing-slidelink landing-nav__btn--signup">
+            <span>Explorar álbumes</span>
+            </li>
+            <hr></hr>
+          <li onClick={() => setIsRegisterOpen(true)} className="landing-slidelink landing-nav__btn--signup">
+            <span>Unirme</span>
             </li>
         </ul>
+        </div>
       </nav>
-
         <button
         className="menu-trigger"
         onClick={() => setMenuActive(!menuActive)}

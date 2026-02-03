@@ -14,7 +14,7 @@ export default function LandingNav() {
       <nav className="landing-nav">
         <div className="landing-nav__container">
 
-          {/* LOGO */}
+          
           <Link to="/" className="landing-nav__logo">
             <img
               src="/src/assets/images/LOGO.jpg"
@@ -22,7 +22,7 @@ export default function LandingNav() {
               className="landing-nav__logo-img"
             />
           </Link>
-          {/* AUTH BUTTONS */}
+          
           <div className="landing-nav-buttons">
             <button
               onClick={() => setIsLoginOpen(true)}
@@ -42,7 +42,7 @@ export default function LandingNav() {
         </div>
       </nav>
 
-      {/* MODALES */}
+     
       <LoginModal
         isOpen={isLoginOpen}
         onClose={() => setIsLoginOpen(false)}

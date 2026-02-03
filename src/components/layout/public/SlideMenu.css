@@ -1,14 +1,3 @@
-/* =========================
-   BASE
-========================= */
-
-body {
-	margin: 0;
-	background: #000000;
-	color: #000000;
-	font: 18px/27px 'Oxygen', sans-serif;
-	overflow-x: hidden;
-}
 
 /* =========================
    SLIDE MENU (OVERLAY RIGHT)
@@ -18,33 +7,60 @@ nav#slide-menu {
 	position: fixed;
 	top: 0;
 	right: -100vw;
-	width: 38vw;
+	width: 30vw;
 	height: 100vh;
-	background: #000000ac;
+	background: #000000e1;
 	z-index: 10000;
 	transition: right 500ms ease-in-out;
 	box-shadow: -8px 0 20px rgba(0, 0, 0, 0.35);
+  border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
 }
 
 body.menu-active nav#slide-menu {
 	right: 0;
 }
 
+#slideTitle{
+  color: #FF6B35;
+  font-size: 4rem;
+  font-family:'ClashDisplay-Bold'
+}
+
+.slide-content{
+  padding-top: 45px;
+  margin: 20px;
+}
+
 nav#slide-menu ul {
-	margin: 40px;
+	margin: 0;
 	padding: 0;
 	list-style: none;
 	opacity: 0.85;
+  margin-bottom: 20px;
 }
 
 nav#slide-menu ul li {
-	color: #dfe5eb;
+	color: #ffffff;
 	padding: 10px 0;
 	cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+nav#slide-menu ul li span {
+  display: inline-block;
+  transition: transform 0.3s ease;
 }
 
 nav#slide-menu ul li:hover {
-	color: #59e9df;
+  background-color: white;
+  color: #FF6B35;
+}
+
+nav#slide-menu ul li:hover span {
+  transform: translateX(8px);
 }
 
 nav#slide-menu ul li.sep {
@@ -53,10 +69,31 @@ nav#slide-menu ul li.sep {
 	border-top: 1px solid #6b7a89;
 }
 
+.landing-slidelink {
+  font-family: 'ClashDisplay-SemiBold';
+  font-size: 2rem;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: color 0.3s ease;
+ 
+
+}
+
+.landing-subslidelink{
+  font-family: 'ClashDisplay-Medium';
+  font-size: 1.2rem;
+  margin-left: 15px;
+}
+
+
+
+
 .menu-trigger {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 40px;
+  right: 25px;
   width: 42px;
   height: 42px;
   background: transparent;
@@ -108,4 +145,50 @@ nav#slide-menu ul li.sep {
     transform: rotate(0deg) scale(1);
 	
   }
+}
+
+/* =========================
+   ACCORDION
+========================= */
+
+.accordion-header {
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.accordion-arrow {
+  
+  font-size: 3rem;
+  transition: transform 0.3s ease;
+}
+
+.accordion-arrow.open {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  display: none;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  margin: 0;
+  padding: 0;
+  transition: 
+    max-height 0.4s ease,
+    opacity 0.3s ease;
+  padding-left: 10px;
+}
+
+.accordion-content.open {
+  display: block;
+  max-height: 300px; /* suficiente para los items */
+  opacity: 1;
+}
+
+/* Ajuste hover solo para subitems */
+.accordion-content li:hover {
+  background-color: rgba(255, 255, 255, 0.8);
 }
