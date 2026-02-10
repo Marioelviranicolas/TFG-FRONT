@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+
 import './AuthModals.css';
 
 export default function LoginModal({ isOpen, onClose, onSwitchToRegister }) {
@@ -10,6 +12,7 @@ export default function LoginModal({ isOpen, onClose, onSwitchToRegister }) {
 
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -35,6 +38,7 @@ const handleSubmit = async (e) => {
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include', 
       body: JSON.stringify({
         username: formData.username,
         password: formData.password,
@@ -60,7 +64,7 @@ const handleSubmit = async (e) => {
 
       alert(`¡Bienvenido, ${user.username}!`);
       onClose();
-      window.location.reload();
+      navigate('/user-home'); 
 
     } else {
       setErrors({ 
@@ -69,6 +73,7 @@ const handleSubmit = async (e) => {
     }
 
   } catch (error) {
+    console.error('Error completo:', error);
     setErrors({ 
       general: 'Error de conexión. Verifica que el servidor esté activo.' 
     });
@@ -107,7 +112,7 @@ const handleSubmit = async (e) => {
               name="username"
               value={formData.username}
               onChange={handleChange}
-              placeholder="manolo11"
+              placeholder="Username"
               required
               disabled={isLoading}
               className={errors.username ? 'input-error' : ''}
@@ -122,7 +127,7 @@ const handleSubmit = async (e) => {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              placeholder="Enter your password"
+              placeholder="Contraseña"
               required
               disabled={isLoading}
               className={errors.password ? 'input-error' : ''}
