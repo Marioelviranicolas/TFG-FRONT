@@ -79,7 +79,7 @@ const FollowedReviews = ({ userId }) => {
         <div className="followed-reviews">
             <div className="reviews-carousel">
             <div className="reviews-title">
-            <h2>Nuevas escuchas de tus amigos.</h2>
+            <h2>Nuevas escuchas de tus amigos</h2>
             <a href='##'>All Activity</a>
             </div>
             
@@ -96,7 +96,43 @@ const FollowedReviews = ({ userId }) => {
                                 <div className="review-header">
                                     <span className="username">{review.user.username}</span>
                                     <div className="rating">
-                                        {'⭐'.repeat(Math.floor(review.rating))}
+                                    {Array.from({ length: Math.floor(review.rating) }).map((_, i) => (
+                                        <svg
+                                        key={`full-${review.id}-${i}`}
+                                        viewBox="0 0 100 100"
+                                        width="18"
+                                        height="18"
+                                        >
+                                        {/* Vinilo completo */}
+                                        <circle cx="50" cy="50" r="48" fill="#111" />
+                                        <circle cx="50" cy="50" r="15" fill="#e63946" />
+                                        <circle cx="50" cy="50" r="4" fill="#fff" />
+                                        </svg>
+                                    ))}
+
+                                    {review.rating % 1 !== 0 && (
+                                        <svg
+                                        key={`half-${review.id}`}
+                                        viewBox="0 0 100 100"
+                                        width="18"
+                                        height="18"
+                                        >
+                                        <defs>
+                                            <clipPath id={`half-clip-${review.id}`}>
+                                            <rect x="0" y="0" width="50" height="100" />
+                                            </clipPath>
+                                        </defs>
+
+                                        {/* Vinilo base (medio negro) */}
+                                        <g clipPath={`url(#half-clip-${review.id})`}>
+                                            <circle cx="50" cy="50" r="48" fill="#111" />
+                                        </g>
+
+                                        {/* Etiqueta central */}
+                                        <circle cx="50" cy="50" r="15" fill="#e63946" />
+                                        <circle cx="50" cy="50" r="4" fill="#fff" />
+                                        </svg>
+                                    )}
                                     </div>
                                 </div>
     
