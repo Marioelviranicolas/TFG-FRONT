@@ -11,8 +11,8 @@ const navigate = useNavigate();
   useEffect(() => {
         // Obtener usuario del localStorage
         const userData = JSON.parse(localStorage.getItem('currentUser'));
-        console.log('👤 Usuario desde localStorage:', userData); // ← AÑADE ESTO
-        console.log('🆔 idUser:', userData?.idUser); // ← Y ESTO
+        console.log('Usuario desde localStorage:', userData); // ← AÑADE ESTO
+        console.log('idUser:', userData?.idUser); // ← Y ESTO
         setUser(userData);
     }, []);
 
@@ -21,14 +21,13 @@ const navigate = useNavigate();
     }
 
 
-        console.log('🎯 Pasando userId a FollowedReviews:', user.idUser); // ← Y ESTO
+        console.log('Pasando userId a FollowedReviews:', user.idUser); // ← Y ESTO
     return (
         <div className="user-home">
             {/* Header del usuario */}
             <header className="user-home-header">
                 <div className="user-welcome">
-                    <h1>Bienvenido, {user.username}! 🎧</h1>
-                    {user.bio && <p className="user-bio">{user.bio}</p>}
+                    <h1>Bienvenido, {user.username}!</h1>
                 </div>
                 {user.avatarUrl && (
                     <img 
@@ -47,11 +46,11 @@ const navigate = useNavigate();
             {/* Aquí puedes añadir más secciones */}
             {/* 
             <section className="albums-section">
-                <h2>🔥 Álbumes populares</h2>
+                <h2>Álbumes populares</h2>
             </section>
             
             <section className="my-reviews-section">
-                <h2>📝 Mis reviews</h2>
+                <h2>Mis reviews</h2>
             </section>
             */}
         </div>
