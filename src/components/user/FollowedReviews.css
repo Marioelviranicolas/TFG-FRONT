@@ -73,10 +73,13 @@
 .username {
     font-weight: bold;
     font-size: 14px;
+    text-transform: capitalize;
 }
 
 .rating {
+    display: flex;
     font-size: 12px;
+    gap: 1px;
 }
 
 /* Detalles que aparecen en hover */
