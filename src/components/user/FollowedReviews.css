@@ -1,0 +1,141 @@
+.reviews-carousel {
+    position: relative;
+    width: 70%;
+    margin-left: 320px;
+    margin-top: 50px;
+    
+}
+
+.reviews-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.reviews-title h2 {
+    margin: 0;
+}
+
+.reviews-title a{
+    margin-right: 85px;
+    text-decoration: none;
+    color: black;
+}
+
+.reviews-list-carousel {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 20px 0;
+    scrollbar-width: none;
+}
+
+.reviews-list-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.review-card {
+    min-width: 200px;
+    max-width: 200px;
+    flex-shrink: 0;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+.album-cover {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.review-info {
+    padding: 12px;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.username {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.rating {
+    font-size: 12px;
+}
+
+/* Detalles que aparecen en hover */
+.hover-details {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.review-card:hover .hover-details {
+    max-height: 200px;
+    opacity: 1;
+    margin-top: 8px;
+}
+
+.hover-details h3 {
+    margin: 0 0 5px 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.hover-details p {
+    margin: 0 0 8px 0;
+    color: #666;
+    font-size: 13px;
+}
+
+.hover-details .comment {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+    font-style: italic;
+    color: #555;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 40px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+}
+
+.carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-btn.prev {
+    left: 10px;
+}
+
+.carousel-btn.next {
+    right: 10px;
+}
