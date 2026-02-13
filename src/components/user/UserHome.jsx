@@ -3,16 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import FollowedReviews from '../user/FollowedReviews';
 import './UserHome.css';
 
-
 const UserHome = () => {
-const [user, setUser] = useState(null);
-const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+    const navigate = useNavigate();
 
-  useEffect(() => {
-        // Obtener usuario del localStorage
+    useEffect(() => {
         const userData = JSON.parse(localStorage.getItem('currentUser'));
-        console.log('Usuario desde localStorage:', userData); // ← AÑADE ESTO
-        console.log('idUser:', userData?.idUser); // ← Y ESTO
+        console.log('Usuario desde localStorage:', userData);
+        console.log('idUser:', userData?.idUser);
         setUser(userData);
     }, []);
 
@@ -20,15 +18,19 @@ const navigate = useNavigate();
         return <div className="loading">Cargando...</div>;
     }
 
-
-        console.log('Pasando userId a FollowedReviews:', user.idUser); // ← Y ESTO
+    console.log('Pasando userId a FollowedReviews:', user.idUser);
+    
     return (
         <div className="user-home">
-            {/* Header del usuario */}
             <header className="user-home-header">
                 <div className="user-welcome">
                     <h1>Bienvenido, {user.username}!</h1>
+                    
+                    <button onClick={() => navigate('/profile')}>
+                        Ver mi perfil
+                    </button>
                 </div>
+                
                 {user.avatarUrl && (
                     <img 
                         src={user.avatarUrl} 
