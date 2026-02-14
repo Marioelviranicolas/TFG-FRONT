@@ -29,6 +29,9 @@ const UserHome = () => {
                     <button onClick={() => navigate('/profile')}>
                         Ver mi perfil
                     </button>
+                    <button onClick={()=> navigate ('/explore-users')}>
+                        Explorar usuarios
+                    </button>
                 </div>
                 
                 {user.avatarUrl && (

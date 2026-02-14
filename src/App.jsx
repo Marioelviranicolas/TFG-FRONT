@@ -3,6 +3,7 @@ import Landing from './pages/public/Landing';
 import UserHome from './components/user/UserHome';
 import Profile from './components/user/Profile';
 import EditProfileModal from './components/user/EditProfileModal'
+import ExploreUsers from './components/user/ExploreUsers'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/user-home" element={<UserHome />} />
         <Route path='/profile' element={<ProfileWrapper />} />
         <Route path='/edit-profile' element={<EditProfileModal />} />
+        <Route path='/explore-users' element={<ExploreUsers/>} />
       </Routes>
     </BrowserRouter>
   );
