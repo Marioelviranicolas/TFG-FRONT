@@ -1,12 +1,12 @@
-// src/components/user/EditProfile.jsx
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Trash2 } from 'lucide-react';
 
-export default function EditProfileModal() {
+export default function EditProfile() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
   
   const [formData, setFormData] = useState({
     username: '',
@@ -16,6 +16,8 @@ export default function EditProfileModal() {
   }); 
 
   const [errors, setErrors] = useState({});
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   useEffect(() => {
     loadUserData();
@@ -61,6 +63,73 @@ export default function EditProfileModal() {
     }
   };
 
+  const handleImageSelect = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const maxSize = 5 * 1024 * 1024; // 5MB
+      
+      if (file.size > maxSize) {
+        const fileSizeMB = (file.size / 1024 / 1024).toFixed(2);
+        setErrors({ 
+          general: `La imagen es demasiado grande (${fileSizeMB}MB). El tamaño máximo permitido es 5MB.` 
+        });
+        e.target.value = '';
+        return;
+      }
+      
+      setErrors({});
+      setImageFile(file);
+      
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const uploadImageToCloudinary = async () => {
+    if (!imageFile) return null;
+
+    try {
+      setUploadingImage(true);
+      
+      const formDataImage = new FormData();
+      formDataImage.append('file', imageFile);
+
+      const response = await fetch(
+        `http://localhost:9001/user/username/${formData.username}/foto`,
+        {
+          method: 'POST',
+          body: formDataImage
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Error al subir la imagen');
+      }
+
+      const result = await response.json();
+      return result.foto;
+
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      setErrors({ general: 'Error al subir la imagen: ' + error.message });
+      return null;
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setImageFile(null);
+    setImagePreview(null);
+    setFormData({
+      ...formData,
+      avatarUrl: ''
+    });
+  };
+
   const validateForm = () => {
     const newErrors = {};
 
@@ -91,22 +160,26 @@ export default function EditProfileModal() {
     try {
       setSaving(true);
 
+      let newAvatarUrl = formData.avatarUrl;
+      if (imageFile) {
+        const uploadedUrl = await uploadImageToCloudinary();
+        if (uploadedUrl) {
+          newAvatarUrl = uploadedUrl;
+        }
+      }
+
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
       
-      // Obtener el usuario completo del backend
       const getUserResponse = await fetch(`http://localhost:9001/user/username/${currentUser.username}`);
       const fullUser = await getUserResponse.json();
       
-      // Crear objeto LIMPIO solo con los campos necesarios
       const dataToSend = {
         idUser: fullUser.idUser,
         username: formData.username,
         email: formData.email,
-        password: fullUser.password,
         bio: formData.bio || null,
-        avatarUrl: formData.avatarUrl || null,
-        role: fullUser.role,
-        createdAt: fullUser.createdAt
+        avatarUrl: newAvatarUrl || null,
+        role: fullUser.role
       };
 
       console.log('Datos que se envían:', dataToSend);
@@ -119,19 +192,15 @@ export default function EditProfileModal() {
         body: JSON.stringify(dataToSend)
       });
 
-      console.log('Response status:', response.status);
-
       const result = await response.json();
-      console.log('Result:', result);
 
       if (result === 1) {
-        // Actualizar localStorage
         const updatedUser = {
           idUser: fullUser.idUser,
           username: formData.username,
           email: formData.email,
           bio: formData.bio,
-          avatarUrl: formData.avatarUrl,
+          avatarUrl: newAvatarUrl,
           role: fullUser.role
         };
         
@@ -151,14 +220,10 @@ export default function EditProfileModal() {
     }
   };
 
-  const handleRemoveAvatar = () => {
-    setFormData({
-      ...formData,
-      avatarUrl: ''
-    });
-  };
-
   const getAvatarPreview = () => {
+    if (imagePreview) {
+      return imagePreview;
+    }
     if (formData.avatarUrl) {
       return formData.avatarUrl;
     }
@@ -175,7 +240,6 @@ export default function EditProfileModal() {
 
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
-      {/* Botón volver */}
       <div style={{ marginBottom: '30px' }}>
         <button
           onClick={() => navigate('/profile')}
@@ -196,19 +260,16 @@ export default function EditProfileModal() {
         </button>
       </div>
 
-      {/* Título */}
       <h1 style={{ 
         fontSize: '2rem', 
         marginBottom: '30px',
         borderBottom: '2px solid #FF6B35',
         paddingBottom: '10px'
       }}>
-        ⚙️ Editar Perfil
+        Editar Perfil
       </h1>
 
-      {/* Formulario */}
       <form onSubmit={handleSubmit}>
-        {/* Error general */}
         {errors.general && (
           <div style={{ 
             backgroundColor: '#fee',
@@ -222,7 +283,6 @@ export default function EditProfileModal() {
           </div>
         )}
 
-        {/* SECCIÓN: AVATAR */}
         <div style={{ 
           marginBottom: '40px',
           padding: '20px',
@@ -243,51 +303,92 @@ export default function EditProfileModal() {
             gap: '30px',
             flexWrap: 'wrap'
           }}>
-            {/* Preview del avatar */}
-            <img 
-              src={getAvatarPreview()}
-              alt="Avatar preview"
-              style={{
-                width: '120px',
-                height: '120px',
-                borderRadius: '50%',
-                objectFit: 'cover',
-                border: '3px solid #FF6B35'
-              }}
-              onError={(e) => {
-                e.target.src = `https://ui-avatars.com/api/?name=${formData.username}&size=120&background=FF6B35&color=fff`;
-              }}
-            />
+            <div style={{ 
+              position: 'relative',
+              width: '120px',
+              height: '120px'
+            }}>
+              <img 
+                src={getAvatarPreview()}
+                alt="Avatar preview"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '50%',
+                  objectFit: 'cover',
+                  border: '3px solid #FF6B35'
+                }}
+                onError={(e) => {
+                  e.target.src = `https://ui-avatars.com/api/?name=${formData.username}&size=120&background=FF6B35&color=fff`;
+                }}
+              />
+              {uploadingImage && (
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  backgroundColor: 'rgba(0,0,0,0.5)',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  fontSize: '0.8rem'
+                }}>
+                  Subiendo...
+                </div>
+              )}
+            </div>
 
             <div style={{ flex: 1 }}>
               <p style={{ 
-                marginBottom: '10px', 
+                marginBottom: '15px', 
                 color: '#666',
                 fontSize: '0.9rem'
               }}>
-                URL de tu imagen de perfil
+                Sube una imagen de perfil
               </p>
               
-              <input
-                type="url"
-                name="avatarUrl"
-                value={formData.avatarUrl}
-                onChange={handleChange}
-                placeholder="https://ejemplo.com/avatar.jpg"
-                disabled={saving}
-                style={{
-                  width: '100%',
-                  padding: '12px',
-                  border: '2px solid #ddd',
-                  borderRadius: '8px',
-                  fontSize: '0.9rem'
-                }}
-              />
+              <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                <label
+                  htmlFor="avatar-upload"
+                  style={{
+                    padding: '10px 20px',
+                    backgroundColor: '#FF6B35',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    fontSize: '0.9rem',
+                    fontWeight: 'bold',
+                    display: 'inline-block'
+                  }}
+                >
+                  {imageFile ? 'Cambiar imagen' : 'Seleccionar imagen'}
+                </label>
+                <input
+                  id="avatar-upload"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageSelect}
+                  disabled={saving || uploadingImage}
+                  style={{ display: 'none' }}
+                />
+                
+                {imageFile && (
+                  <span style={{ fontSize: '0.85rem', color: '#666' }}>
+                    {imageFile.name}
+                  </span>
+                )}
+              </div>
 
-              {formData.avatarUrl && (
+              {(imageFile || formData.avatarUrl) && (
                 <button
                   type="button"
-                  onClick={handleRemoveAvatar}
+                  onClick={handleRemoveImage}
+                  disabled={saving || uploadingImage}
                   style={{
                     marginTop: '10px',
                     padding: '8px 16px',
@@ -305,11 +406,18 @@ export default function EditProfileModal() {
                   Eliminar avatar
                 </button>
               )}
+
+              <p style={{ 
+                marginTop: '10px',
+                fontSize: '0.75rem',
+                color: '#999'
+              }}>
+                Formatos soportados: JPG, PNG, GIF. Máximo 5MB.
+              </p>
             </div>
           </div>
         </div>
 
-        {/* SECCIÓN: INFORMACIÓN BÁSICA */}
         <div style={{ 
           marginBottom: '40px',
           padding: '20px',
@@ -324,7 +432,6 @@ export default function EditProfileModal() {
             Información Básica
           </h2>
 
-          {/* Username */}
           <div style={{ marginBottom: '20px' }}>
             <label 
               htmlFor="username"
@@ -365,7 +472,6 @@ export default function EditProfileModal() {
             )}
           </div>
 
-          {/* Email */}
           <div style={{ marginBottom: '20px' }}>
             <label 
               htmlFor="email"
@@ -406,7 +512,6 @@ export default function EditProfileModal() {
             )}
           </div>
 
-          {/* Bio */}
           <div style={{ marginBottom: '20px' }}>
             <label 
               htmlFor="bio"
@@ -458,7 +563,6 @@ export default function EditProfileModal() {
           </div>
         </div>
 
-        {/* Botones de acción */}
         <div style={{ 
           display: 'flex', 
           gap: '15px',
@@ -468,7 +572,7 @@ export default function EditProfileModal() {
           <button 
             type="button"
             onClick={() => navigate('/profile')}
-            disabled={saving}
+            disabled={saving || uploadingImage}
             style={{
               flex: 1,
               padding: '15px',
@@ -476,7 +580,7 @@ export default function EditProfileModal() {
               color: '#666',
               border: '2px solid #ddd',
               borderRadius: '8px',
-              cursor: saving ? 'not-allowed' : 'pointer',
+              cursor: (saving || uploadingImage) ? 'not-allowed' : 'pointer',
               fontSize: '1rem',
               fontWeight: 'bold'
             }}
@@ -486,7 +590,7 @@ export default function EditProfileModal() {
           
           <button 
             type="submit"
-            disabled={saving}
+            disabled={saving || uploadingImage}
             style={{
               flex: 1,
               padding: '15px',
@@ -494,13 +598,13 @@ export default function EditProfileModal() {
               color: 'white',
               border: 'none',
               borderRadius: '8px',
-              cursor: saving ? 'not-allowed' : 'pointer',
+              cursor: (saving || uploadingImage) ? 'not-allowed' : 'pointer',
               fontSize: '1rem',
               fontWeight: 'bold',
-              opacity: saving ? 0.6 : 1
+              opacity: (saving || uploadingImage) ? 0.6 : 1
             }}
           >
-            {saving ? 'Guardando...' : 'Guardar cambios'}
+            {uploadingImage ? 'Subiendo imagen...' : saving ? 'Guardando...' : 'Guardar cambios'}
           </button>
         </div>
       </form>

@@ -34,13 +34,14 @@ const UserHome = () => {
                     </button>
                 </div>
                 
-                {user.avatarUrl && (
+              {/* {user.avatarUrl && (
                     <img 
                         src={user.avatarUrl} 
                         alt={user.username}
                         className="user-avatar"
                     />
                 )}
+              */}
             </header>
 
             {/* Reviews de las personas que sigues */}
