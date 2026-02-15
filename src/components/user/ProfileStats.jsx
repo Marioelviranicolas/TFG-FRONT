@@ -92,17 +92,6 @@ export default function ProfileStats({ username }) {
           Likes
         </div>
       </div>
-
-      {stats.totalReviews > 0 && (
-        <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#FF6B35' }}>
-            ⭐ {stats.averageRating}
-          </div>
-          <div style={{ fontSize: '0.875rem', color: '#666' }}>
-            Rating promedio
-          </div>
-        </div>
-      )}
     </div>
   );
 }

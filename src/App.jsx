@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Landing from './pages/public/Landing';
 import UserHome from './components/user/UserHome';
 import Profile from './components/user/Profile';
-import EditProfileModal from './components/user/EditProfileModal'
+import EditProfile from './components/user/EditProfile'
 import ExploreUsers from './components/user/ExploreUsers'
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
         <Route path="/user-home" element={<UserHome />} />
         <Route path="/user-home" element={<UserHome />} />
         <Route path='/profile' element={<ProfileWrapper />} />
-        <Route path='/edit-profile' element={<EditProfileModal />} />
+        <Route path='/edit-profile' element={<EditProfile />} />
         <Route path='/explore-users' element={<ExploreUsers/>} />
       </Routes>
     </BrowserRouter>
