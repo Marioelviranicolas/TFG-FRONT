@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { apiFetch } from '../../api';
 
 export default function ProfileContent({ username }) {
   // Estado de los tabs
@@ -18,8 +19,8 @@ export default function ProfileContent({ username }) {
   const loadReviews = async () => {
     try {
       setLoading(true);
-      const response = await fetch(
-        `http://localhost:9001/reviews/user/${username}`
+      const response = await apiFetch(
+        `/reviews/user/${username}`
       );
       const data = await response.json();
       setReviews(data || []);
@@ -34,8 +35,8 @@ export default function ProfileContent({ username }) {
   const loadLists = async () => {
     try {
       setLoading(true);
-      const response = await fetch(
-        `http://localhost:9001/soundlist/user/${username}`
+      const response = await apiFetch(
+        `/soundlist/user/${username}`
       );
       const data = await response.json();
       setLists(data || []);

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
+import { apiFetch } from '../../api'; 
 import './FollowedReviews.css';
 
 const FollowedReviews = ({ userId }) => {
@@ -28,30 +28,24 @@ const FollowedReviews = ({ userId }) => {
             
             try {
                 setLoading(true);
-                const url = `http://localhost:9001/reviews/followed/${userId}/recent?limit=30`;
-                console.log('URL:', url);
                 
-                const response = await axios.get(url);
-                console.log('Respuesta recibida:', response.data);
-                console.log('Número de reviews:', response.data.length);
+                const response = await apiFetch(`/reviews/followed/${userId}/recent?limit=30`);
+                const data = await response.json();
                 
-                setReviews(response.data);
+                console.log('Respuesta recibida:', data);
+                setReviews(data);
                 setError(null);
             } catch (err) {
                 console.error('Error completo:', err);
-                console.error('Error response:', err.response);
                 setError('No se pudieron cargar las reviews');
             } finally {
-                console.log('Fetch finalizado, setting loading false');
                 setLoading(false);
             }
         };
-
+    
         if (userId) {
-            console.log('userId existe, haciendo fetch');
             fetchReviews();
         } else {
-            console.log('NO hay userId');
             setLoading(false);
         }
     }, [userId]);

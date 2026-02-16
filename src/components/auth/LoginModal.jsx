@@ -37,8 +37,7 @@ const handleSubmit = async (e) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-      },
-      credentials: 'include', 
+      }, 
       body: JSON.stringify({
         username: formData.username,
         password: formData.password,
@@ -50,27 +49,15 @@ const handleSubmit = async (e) => {
       return;
     }
 
-    const user = await response.json();
+    const data = await response.json();
 
-    if (user && user.username) {
-      localStorage.setItem('currentUser', JSON.stringify({
-        idUser: user.idUser,
-        username: user.username,
-        email: user.email,
-        bio: user.bio,
-        avatarUrl: user.avatarUrl,
-        role: user.role
-      }));
+    // Guardamos el token y el usuario por separado
+    sessionStorage.setItem('token', data.token);
+    sessionStorage.setItem('currentUser', JSON.stringify(data.user));
 
-      alert(`¡Bienvenido, ${user.username}!`);
-      onClose();
-      navigate('/user-home'); 
-
-    } else {
-      setErrors({ 
-        general: 'Usuario o contraseña incorrectos' 
-      });
-    }
+    alert(`¡Bienvenido, ${data.user.username}!`);
+    onClose();
+    navigate('/user-home');
 
   } catch (error) {
     console.error('Error completo:', error);
