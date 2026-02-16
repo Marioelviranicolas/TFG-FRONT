@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import ProfileHeader from './ProfileHeader';
 import ProfileStats from './ProfileStats';
 import ProfileContent from './ProfileContent';
+import { apiFetch } from '../../api';
 
 export default function Profile({ username }) {
   const [user, setUser] = useState(null);           
@@ -17,7 +18,7 @@ export default function Profile({ username }) {
     try {
       setLoading(true);
       
-      const response = await fetch(`http://localhost:9001/user/username/${username}`);
+      const response = await apiFetch(`/user/username/${username}`);
       
       if (!response.ok) {
         throw new Error('Usuario no encontrado');
@@ -26,7 +27,7 @@ export default function Profile({ username }) {
       const userData = await response.json();
       setUser(userData);
       
-      const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+      const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
       setIsOwnProfile(currentUser.username === username);
       
     } catch (err) {

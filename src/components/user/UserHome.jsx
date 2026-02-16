@@ -8,17 +8,22 @@ const UserHome = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const userData = JSON.parse(localStorage.getItem('currentUser'));
-        console.log('Usuario desde localStorage:', userData);
-        console.log('idUser:', userData?.idUser);
+        // Cambiado de localStorage a sessionStorage
+        const userData = JSON.parse(sessionStorage.getItem('currentUser'));
+        console.log('Usuario desde sessionStorage:', userData);
+        
+        if (!userData) {
+            // Si no hay usuario, mandamos al login
+            navigate('/');
+            return;
+        }
+        
         setUser(userData);
     }, []);
 
     if (!user) {
         return <div className="loading">Cargando...</div>;
     }
-
-    console.log('Pasando userId a FollowedReviews:', user.idUser);
     
     return (
         <div className="user-home">
@@ -29,7 +34,7 @@ const UserHome = () => {
                     <button onClick={() => navigate('/profile')}>
                         Ver mi perfil
                     </button>
-                    <button onClick={()=> navigate ('/explore-users')}>
+                    <button onClick={() => navigate('/explore-users')}>
                         Explorar usuarios
                     </button>
                 </div>

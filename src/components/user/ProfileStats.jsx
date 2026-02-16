@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { apiFetch } from '../../api';
 
 export default function ProfileStats({ username }) {
   const [stats, setStats] = useState({
@@ -17,19 +18,19 @@ export default function ProfileStats({ username }) {
     try {
       setLoading(true);
       
-      const reviewsResponse = await fetch(
-        `http://localhost:9001/reviews/user/${username}`
+      const reviewsResponse = await apiFetch(
+        `/reviews/user/${username}`
       );
       const reviews = await reviewsResponse.json();
       
       
-      const listsResponse = await fetch(
-        `http://localhost:9001/soundlist/user/${username}`
+      const listsResponse = await apiFetch(
+        `/soundlist/user/${username}`
       );
       const lists = await listsResponse.json();
       
-      const likesResponse = await fetch(
-        `http://localhost:9001/likes/user/${username}`
+      const likesResponse = await apiFetch(
+        `/likes/user/${username}`
       );
       const likes = await likesResponse.json();
       

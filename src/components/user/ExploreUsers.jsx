@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiFetch } from '../../api';
 import './ExploreUsers.css';
 
 const UserCarousel = ({ title, users, userStats }) => {
@@ -74,7 +75,7 @@ const ExploreUsers = () => {
     const [userStats, setUserStats] = useState({});
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
 
     const fetchStats = async (users) => {
         const stats = {};
@@ -82,9 +83,9 @@ const ExploreUsers = () => {
             users.map(async (user) => {
                 if (stats[user.username]) return; // evita llamadas duplicadas
                 const [reviewsRes, listsRes, followersRes] = await Promise.all([
-                    fetch(`http://localhost:9001/reviews/user/${user.username}`),
-                    fetch(`http://localhost:9001/soundlist/user/${user.username}`),
-                    fetch(`http://localhost:9001/follow/followers/${user.username}`)
+                    apiFetch(`/reviews/user/${user.username}`),
+                    apiFetch(`/soundlist/user/${user.username}`),
+                    apiFetch(`/follow/followers/${user.username}`)
                 ]);
                 const [reviews, lists, followers] = await Promise.all([
                     reviewsRes.json(),
@@ -105,9 +106,9 @@ const ExploreUsers = () => {
         const fetchData = async () => {
             try {
                 const [topRes, reviewersRes, ratedRes] = await Promise.all([
-                    fetch('http://localhost:9001/follow/top-users'),
-                    fetch('http://localhost:9001/user/top-reviewers'),
-                    fetch('http://localhost:9001/user/top-rated')
+                    apiFetch('/follow/top-users'),
+                    apiFetch('/user/top-reviewers'),
+                    apiFetch('/user/top-rated')
                 ]);
                 const [topData, reviewersData, ratedData] = await Promise.all([
                     topRes.json(),

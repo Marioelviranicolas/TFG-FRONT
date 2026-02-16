@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Trash2 } from 'lucide-react';
+import { apiFetch } from '../../api';
 
 export default function EditProfile() {
   const navigate = useNavigate();
@@ -25,14 +26,14 @@ export default function EditProfile() {
 
   const loadUserData = async () => {
     try {
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
       
       if (!currentUser) {
         navigate('/');
         return;
       }
 
-      const response = await fetch(`http://localhost:9001/user/username/${currentUser.username}`);
+      const response = await apiFetch(`/user/username/${currentUser.username}`);
       const userData = await response.json();
 
       setFormData({
@@ -97,10 +98,16 @@ export default function EditProfile() {
       const formDataImage = new FormData();
       formDataImage.append('file', imageFile);
 
+      // Para subir archivos usamos fetch normal pero añadimos el token manualmente
+      const token = sessionStorage.getItem('token');
       const response = await fetch(
         `http://localhost:9001/user/username/${formData.username}/foto`,
         {
           method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`
+            // NO pongas Content-Type aquí, el navegador lo gestiona solo con FormData
+          },
           body: formDataImage
         }
       );
@@ -168,9 +175,9 @@ export default function EditProfile() {
         }
       }
 
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
       
-      const getUserResponse = await fetch(`http://localhost:9001/user/username/${currentUser.username}`);
+      const getUserResponse = await apiFetch(`/user/username/${currentUser.username}`);
       const fullUser = await getUserResponse.json();
       
       const dataToSend = {
@@ -184,7 +191,7 @@ export default function EditProfile() {
 
       console.log('Datos que se envían:', dataToSend);
 
-      const response = await fetch('http://localhost:9001/user/update', {
+      const response = await apiFetch('/user/update', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -204,7 +211,7 @@ export default function EditProfile() {
           role: fullUser.role
         };
         
-        localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+        sessionStorage.setItem('currentUser', JSON.stringify(updatedUser));
         
         alert('¡Perfil actualizado correctamente!');
         navigate('/profile');
