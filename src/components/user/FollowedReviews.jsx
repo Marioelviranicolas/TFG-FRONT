@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { apiFetch } from '../../api'; 
 import './FollowedReviews.css';
+import { useNavigate } from 'react-router-dom';
 
 const FollowedReviews = ({ userId }) => {
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const carouselRef = useRef(null); 
+    const navigate = useNavigate();
 
     console.log('FollowedReviews montado con userId:', userId);
 
@@ -79,7 +81,12 @@ const FollowedReviews = ({ userId }) => {
             
                 <div className="reviews-list-carousel" ref={carouselRef}>
                     {reviews.map(review => (
-                        <div key={review.id} className="review-card">
+                        <div 
+                            key={review.id} 
+                            className="review-card"
+                            onClick={() => navigate(`/album/${review.album.spotifyAlbumId}`)}
+                            style={{ cursor: 'pointer' }}
+                        >
                             <img 
                                 src={review.album.coverUrl} 
                                 alt={review.album.title}
