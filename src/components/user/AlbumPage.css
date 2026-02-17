@@ -1,0 +1,154 @@
+.ap-page {
+    min-height: 100vh;
+    background-color: #111;
+    color: #fff;
+    padding: 32px 48px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.ap-back-btn {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 32px;
+    padding: 0;
+    display: block;
+}
+
+.ap-back-btn:hover {
+    color: #ff5500;
+}
+
+.ap-header {
+    display: flex;
+    gap: 48px;
+    margin-bottom: 64px;
+    align-items: center;
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ap-cover {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+}
+
+.ap-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+}
+
+.ap-info h1 {
+    font-size: 52px;
+    font-weight: 900;
+    margin: 0;
+    color: #fff;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.ap-info h2 {
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.ap-average {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.ap-average-number {
+    font-size: 72px;
+    font-weight: 900;
+    color: #ff5500;
+    line-height: 1;
+}
+
+.ap-average-label {
+    font-size: 16px;
+    color: #aaa;
+    letter-spacing: 1px;
+}
+
+.ap-reviews {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+.ap-reviews h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ff5500;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    border-bottom: 2px solid #ff5500;
+    padding-bottom: 12px;
+    margin-bottom: 32px;
+    display: inline-block;
+}
+
+.ap-review-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 28px 0;
+    border-bottom: 1px solid #222;
+    width: 100%;
+}
+
+.ap-review-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.ap-username {
+    font-weight: 700;
+    color: #fff;
+    font-size: 17px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ap-rating {
+    color: #ff5500;
+    font-size: 20px;
+    letter-spacing: 4px;
+}
+
+.ap-comment {
+    color: #ccc;
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 0;
+    width: 100%;
+}
+
+.ap-date {
+    font-size: 12px;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ap-no-reviews {
+    color: #555;
+    font-style: italic;
+}

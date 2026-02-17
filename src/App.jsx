@@ -4,6 +4,8 @@ import UserHome from './components/user/UserHome';
 import Profile from './components/user/Profile';
 import EditProfile from './components/user/EditProfile'
 import ExploreUsers from './components/user/ExploreUsers'
+import AlbumPage from './components/user/AlbumPage';
+
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
         <Route path='/profile' element={<ProfileWrapper />} />
         <Route path='/edit-profile' element={<EditProfile />} />
         <Route path='/explore-users' element={<ExploreUsers/>} />
+        <Route path='/album/:spotifyAlbumId' element={<AlbumPage />} />
       </Routes>
     </BrowserRouter>
   );
