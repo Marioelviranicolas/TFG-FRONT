@@ -21,6 +21,7 @@
     color: #ff5500;
 }
 
+/* HEADER */
 .ap-header {
     display: flex;
     gap: 48px;
@@ -86,6 +87,7 @@
     letter-spacing: 1px;
 }
 
+/* REVIEWS */
 .ap-reviews {
     max-width: 860px;
     margin: 0 auto;
@@ -110,6 +112,7 @@
     padding: 28px 0;
     border-bottom: 1px solid #222;
     width: 100%;
+    background: none;
 }
 
 .ap-review-top {
@@ -151,4 +154,209 @@
 .ap-no-reviews {
     color: #555;
     font-style: italic;
+}
+
+/* FORMULARIO */
+.ap-review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.ap-review-form h4 {
+    font-size: 14px;
+    color: #ff5500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+/* ESTRELLAS */
+.ap-star-selector {
+    display: flex;
+    gap: 6px;
+    margin: 4px 0;
+}
+
+.ap-star-wrap {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.ap-star-empty {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+    line-height: 1;
+    color: #444;
+    user-select: none;
+}
+
+.ap-star-filled {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 40px;
+    font-size: 40px;
+    line-height: 1;
+    color: #ff5500;
+    overflow: hidden;
+    display: block;
+    white-space: nowrap;
+    user-select: none;
+}
+
+/* TEXTAREA */
+.ap-textarea {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #fff;
+    padding: 12px;
+    font-size: 15px;
+    resize: vertical;
+    font-family: 'Segoe UI', sans-serif;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.ap-textarea:focus {
+    outline: none;
+    border-color: #ff5500;
+}
+
+.ap-form-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.ap-btn-save {
+    background: #ff5500;
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 13px;
+}
+
+.ap-btn-save:hover {
+    background: #e04400;
+}
+
+.ap-btn-cancel {
+    background: none;
+    color: #aaa;
+    border: 1px solid #333;
+    padding: 10px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+/* MI REVIEW */
+.ap-my-card {
+    border-left: 3px solid #ff5500;
+    padding-left: 20px;
+}
+
+.ap-my-empty {
+    border-left: 3px solid #333;
+    padding-left: 20px;
+    gap: 8px;
+}
+
+.ap-you-badge {
+    background: #ff5500;
+    color: #fff;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.ap-no-review-text {
+    color: #555;
+    font-style: italic;
+    margin: 0;
+    font-size: 14px;
+}
+
+.ap-btn-write {
+    background: none;
+    border: 1px solid #ff5500;
+    color: #ff5500;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    align-self: flex-start;
+}
+
+.ap-btn-write:hover {
+    background: #ff5500;
+    color: #fff;
+}
+
+.ap-my-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.ap-btn-edit {
+    background: none;
+    border: 1px solid #555;
+    color: #aaa;
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ap-btn-edit:hover {
+    border-color: #ff5500;
+    color: #ff5500;
+}
+
+.ap-btn-delete {
+    background: none;
+    border: 1px solid #555;
+    color: #aaa;
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ap-btn-delete:hover {
+    border-color: #e04444;
+    color: #e04444;
+}
+
+.ap-loading {
+    color: #aaa;
+    text-align: center;
+    padding: 48px;
 }
