@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Landing from './pages/public/Landing';
 import UserHome from './components/user/UserHome';
 import Profile from './components/user/Profile';
@@ -11,7 +11,6 @@ function App() {
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path="/user-home" element={<UserHome />} />
-        <Route path="/user-home" element={<UserHome />} />
         <Route path='/profile' element={<ProfileWrapper />} />
         <Route path='/edit-profile' element={<EditProfile />} />
         <Route path='/explore-users' element={<ExploreUsers/>} />
@@ -21,7 +20,7 @@ function App() {
 }
 // Componente auxiliar para obtener el username del localStorage no borrar
 function ProfileWrapper() {
-  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
   
   if (!currentUser) {
     return <Navigate to="/" replace />;
