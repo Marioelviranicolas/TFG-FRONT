@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    background-color: #1b1b1b;
+    color: white;
+    font-family: sans-serif;
+}
+
+/* CONTENEDOR FULL WIDTH */
+.contenedor {
+    margin-top: 250px;
+    width: 100%;
+    height: 600px;
+    padding: 60px 40px;
+    box-sizing: border-box;
+}
+
+/* TÍTULO */
+.header {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 50px;
+    font-family: 'ClashDisplay-Bold', sans-serif;
+}
+
+/* GRID DE CARDS */
+.cards {
+    display:flex;
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* CARD */
+.funcionalidad-card {
+    border: 1px solid #989595;
+    border-radius: 12px;
+    width: 600px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+     font-family: 'ClashDisplay-SemiBold', sans-serif;
+     font-size: 1.2rem;;
+}
+
+.funcionalidad-title{
+    font-family: 'ClashDisplay-SemiBold', sans-serif;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* HOVER */
+.funcionalidad-card:hover {
+    transform: translateY(-5px);
+    border-color: #FF6B35;
+}
+
+/* TEXTO */
+.card h3 {
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+
