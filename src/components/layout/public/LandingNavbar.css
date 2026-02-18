@@ -21,35 +21,11 @@
   
 }
 
-.landing-nav-links {
-  display: flex;
-  align-items:center;
-  gap: 10rem;
-
-
-}
-
-.landing-navlink {
-  font-family: 'ClashDisplay-Medium';
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: rgba(0, 0, 0, 0.8);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+.landing-nav__logo{
   text-decoration: none;
-  transition: color 0.3s ease;
-
-}
-
-.landing-navlink:hover {
-  color: #FF6B35;
-}
-
-
-.landing-nav__logo-img {
-  margin-top: -10px;
-  width: 120px;
-  height: 120px;
+  margin-top: -30px;
+  width: 100px;
+  height: 100px;
   margin-right:10px;
 }
 
@@ -71,23 +47,6 @@
   
 }
 
-
-.landing-nav__btn--login {
-  font-weight: 500;
-  color: rgba(12, 12, 12, 0.9);
-  background: #ffffff; /* Mismo color del fondo */
-  border: 3px solid black;
-}
-
-
-.landing-nav__btn--login:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    6px 6px 14px rgba(0, 0, 0, 0.35),
-    -4px -4px 10px rgba(255, 255, 255, 0.8);
-}
-
-
 .landing-nav__btn--register {
   background: #FF6B35;
   color: white;
@@ -97,4 +56,16 @@
   box-shadow:
     10px 10px 24px rgba(0, 0, 0, 0.45),
     0 0 30px rgba(255, 107, 53, 0.6);
+}
+
+
+.title-navbar{
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 3.5rem; /* Más grande como en la imagen */
+  margin-top: 17px;
+  margin-left: 140px;
+  text-decoration: none;
+  letter-spacing: 0.1em; /* Menos espacio entre letras */
+  color: #fffffffd;
+ 
 }

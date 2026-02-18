@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FollowedReviews from '../user/FollowedReviews';
+import UserSlideMenu from '../user/UserSlideMenu';
 import './UserHome.css';
 
 const UserHome = () => {
@@ -26,17 +27,14 @@ const UserHome = () => {
     }
     
     return (
+        <>
+
+        <UserSlideMenu />
+
         <div className="user-home">
             <header className="user-home-header">
                 <div className="user-welcome">
-                    <h1>Bienvenido, {user.username}!</h1>
-                    
-                    <button onClick={() => navigate('/profile')}>
-                        Ver mi perfil
-                    </button>
-                    <button onClick={() => navigate('/explore-users')}>
-                        Explorar usuarios
-                    </button>
+                    <h1>Bienvenido, {user.username}</h1>
                 </div>
                 
               {/* {user.avatarUrl && (
@@ -53,18 +51,8 @@ const UserHome = () => {
             <section className="reviews-section">
                 <FollowedReviews userId={user.idUser} />
             </section>
-
-            {/* Aquí puedes añadir más secciones */}
-            {/* 
-            <section className="albums-section">
-                <h2>Álbumes populares</h2>
-            </section>
-            
-            <section className="my-reviews-section">
-                <h2>Mis reviews</h2>
-            </section>
-            */}
         </div>
+        </>
     );
 };
 

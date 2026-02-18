@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./SlideMenu.css";
 import LoginModal from '../../auth/LoginModal';
 import RegisterModal from '../../auth/RegisterModal';
 
 
 export default function SlidingMenu() {
+  const navigate = useNavigate();
+  const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
   const [menuActive, setMenuActive] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);

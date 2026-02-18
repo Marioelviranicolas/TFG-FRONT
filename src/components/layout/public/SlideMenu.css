@@ -27,6 +27,11 @@ body.menu-active nav#slide-menu {
   font-family:'ClashDisplay-Bold'
 }
 
+#slideUsername{
+  color: #ffffff;
+  font-size: 2rem;
+  font-family:'ClashDisplay-Bold'
+}
 .slide-content{
   padding-top: 45px;
   margin: 20px;
@@ -93,7 +98,7 @@ nav#slide-menu ul li.sep {
 .menu-trigger {
   position: fixed;
   top: 40px;
-  right: 25px;
+  right: 80px;
   width: 42px;
   height: 42px;
   background: transparent;
@@ -104,8 +109,8 @@ nav#slide-menu ul li.sep {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
-  border-radius: 20px;
+  background-color: rgb(255, 255, 255);
+ 
 }
 
 .menu-trigger:hover {
