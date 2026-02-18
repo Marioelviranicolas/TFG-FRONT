@@ -38,7 +38,7 @@
 
 .review-card {
     min-width: 200px;
-    max-width: 200px;
+    max-width: 210px;
     flex-shrink: 0;
     background: white;
     border-radius: 12px;
@@ -71,6 +71,8 @@
 }
 
 .username {
+    font-family: 'ClashDisplay-Medium', sans-serif;
+    color: black;
     font-weight: bold;
     font-size: 14px;
     text-transform: capitalize;
