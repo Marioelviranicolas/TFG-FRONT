@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { apiFetch } from '../../api';
 
 export default function ProfileContent({ username }) {
-  // Estado de los tabs
   const [activeTab, setActiveTab] = useState('reviews');
   const [reviews, setReviews] = useState([]);
   const [lists, setLists] = useState([]);
@@ -19,9 +18,7 @@ export default function ProfileContent({ username }) {
   const loadReviews = async () => {
     try {
       setLoading(true);
-      const response = await apiFetch(
-        `/reviews/user/${username}`
-      );
+      const response = await apiFetch(`/reviews/user/${username}`);
       const data = await response.json();
       setReviews(data || []);
     } catch (error) {
@@ -35,9 +32,7 @@ export default function ProfileContent({ username }) {
   const loadLists = async () => {
     try {
       setLoading(true);
-      const response = await apiFetch(
-        `/soundlist/user/${username}`
-      );
+      const response = await apiFetch(`/soundlist/user/${username}`);
       const data = await response.json();
       setLists(data || []);
     } catch (error) {
@@ -49,23 +44,31 @@ export default function ProfileContent({ username }) {
   };
 
   const renderStars = (rating) => {
-    const fullStars = Math.floor(rating);       
-    const hasHalfStar = rating % 1 !== 0;       
-    
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 !== 0;
     return (
       <span>
-        {'★'.repeat(fullStars)}               
-        {hasHalfStar && '½'}                  
-        {'☆'.repeat(5 - Math.ceil(rating))}   
+        {'★'.repeat(fullStars)}
+        {hasHalfStar && '½'}
+        {'☆'.repeat(5 - Math.ceil(rating))}
       </span>
     );
   };
 
+  const parseDate = (date) => {
+    if (!date) return '';
+    if (Array.isArray(date)) {
+      const [year, month, day] = date;
+      return new Date(year, month - 1, day).toLocaleDateString('es-ES');
+    }
+    return new Date(date).toLocaleDateString('es-ES');
+  };
+
   return (
     <div>
-      <div style={{ 
-        display: 'flex', 
-        gap: '20px', 
+      <div style={{
+        display: 'flex',
+        gap: '20px',
         borderBottom: '2px solid #ddd',
         marginBottom: '20px'
       }}>
@@ -126,9 +129,9 @@ export default function ProfileContent({ username }) {
                   <p>No hay reviews todavía</p>
                 ) : (
                   <div style={{ display: 'grid', gap: '20px' }}>
-                    {reviews.map((review) => (
-                      <div 
-                        key={review.idReviews}
+                    {reviews.map((review, index) => (
+                      <div
+                        key={review.id || index}
                         style={{
                           border: '1px solid #ddd',
                           borderRadius: '8px',
@@ -137,7 +140,7 @@ export default function ProfileContent({ username }) {
                       >
                         <div style={{ display: 'flex', gap: '15px' }}>
                           {review.album && review.album.coverUrl && (
-                            <img 
+                            <img
                               src={review.album.coverUrl}
                               alt={review.album.title}
                               style={{
@@ -148,47 +151,23 @@ export default function ProfileContent({ username }) {
                               }}
                             />
                           )}
-                          
                           <div style={{ flex: 1 }}>
                             {review.album && (
                               <div>
-                                <h3 style={{ margin: '0 0 5px 0' }}>
-                                  {review.album.title}
-                                </h3>
-                                <p style={{ margin: '0 0 10px 0', color: '#666' }}>
-                                  {review.album.artist}
-                                </p>
+                                <h3 style={{ margin: '0 0 5px 0' }}>{review.album.title}</h3>
+                                <p style={{ margin: '0 0 10px 0', color: '#666' }}>{review.album.artist}</p>
                               </div>
                             )}
-                            
-                            <div style={{ 
-                              color: '#FF6B35', 
-                              fontSize: '1.2rem',
-                              marginBottom: '10px'
-                            }}>
+                            <div style={{ color: '#FF6B35', fontSize: '1.2rem', marginBottom: '10px' }}>
                               {renderStars(review.rating)}
-                              <span style={{ 
-                                marginLeft: '10px', 
-                                fontSize: '0.9rem',
-                                color: '#666'
-                              }}>
+                              <span style={{ marginLeft: '10px', fontSize: '0.9rem', color: '#666' }}>
                                 {review.rating}/5
                               </span>
                             </div>
-                            
                             {review.comment && (
-                              <p style={{ margin: '10px 0 0 0', color: '#333' }}>
-                                {review.comment}
-                              </p>
+                              <p style={{ margin: '10px 0 0 0', color: '#333' }}>{review.comment}</p>
                             )}
-                            
-                            <small style={{ color: '#999' }}>
-                              {new Date(review.createdAt).toLocaleDateString('es-ES', {
-                                year: 'numeric',
-                                month: 'long',
-                                day: 'numeric'
-                              })}
-                            </small>
+                            <small style={{ color: '#999' }}>{parseDate(review.createdAt)}</small>
                           </div>
                         </div>
                       </div>
@@ -204,9 +183,9 @@ export default function ProfileContent({ username }) {
                   <p>No hay listas todavía</p>
                 ) : (
                   <div style={{ display: 'grid', gap: '20px' }}>
-                    {lists.map((list) => (
-                      <div 
-                        key={list.idSoundLists}
+                    {lists.map((list, index) => (
+                      <div
+                        key={list.id || list.idSoundLists || index}
                         style={{
                           border: '1px solid #ddd',
                           borderRadius: '8px',
@@ -214,19 +193,11 @@ export default function ProfileContent({ username }) {
                           cursor: 'pointer'
                         }}
                       >
-                        <h3 style={{ margin: '0 0 10px 0' }}>
-                          📝 {list.name}
-                        </h3>
-                        
+                        <h3 style={{ margin: '0 0 10px 0' }}>📝 {list.name}</h3>
                         {list.description && (
-                          <p style={{ margin: '0 0 10px 0', color: '#666' }}>
-                            {list.description}
-                          </p>
+                          <p style={{ margin: '0 0 10px 0', color: '#666' }}>{list.description}</p>
                         )}
-                        
-                        <small style={{ color: '#999' }}>
-                          Creada el {new Date(list.createdAt).toLocaleDateString('es-ES')}
-                        </small>
+                        <small style={{ color: '#999' }}>Creada el {parseDate(list.createdAt)}</small>
                       </div>
                     ))}
                   </div>

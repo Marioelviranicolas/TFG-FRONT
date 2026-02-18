@@ -34,7 +34,8 @@ const FollowedReviews = ({ userId }) => {
                 const response = await apiFetch(`/reviews/followed/${userId}/recent?limit=30`);
                 const data = await response.json();
                 
-                console.log('Respuesta recibida:', data);
+                console.log('Respuesta recibida:', data[0]);
+                
                 setReviews(data);
                 setError(null);
             } catch (err) {
@@ -53,6 +54,7 @@ const FollowedReviews = ({ userId }) => {
     }, [userId]);
 
     console.log('Estado actual:', { loading, error, reviewsCount: reviews.length });
+    
 
     if (loading) {
         console.log('Mostrando loading...');
