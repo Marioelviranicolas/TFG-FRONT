@@ -360,3 +360,198 @@
     text-align: center;
     padding: 48px;
 }
+
+/* BOTÓN AÑADIR A LISTA */
+.ap-btn-add-list {
+    background: none;
+    border: 1px solid #ff5500;
+    color: #ff5500;
+    padding: 8px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    align-self: flex-start;
+    margin-top: 8px;
+    margin-left: 200px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.ap-btn-add-list:hover {
+    background: #ff5500;
+    color: #fff;
+}
+
+/* MODAL */
+.ap-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.ap-modal {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 24px;
+    width: 100%;
+    max-width: 400px;
+    max-height: 80vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.ap-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ap-modal-header h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: 700;
+}
+
+.ap-modal-close {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.ap-modal-close:hover {
+    color: #fff;
+}
+
+.ap-modal-feedback {
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ap-modal-feedback--success {
+    background: #1a2e1a;
+    color: #4caf50;
+    border: 1px solid #2d5a2d;
+}
+
+.ap-modal-feedback--error {
+    background: #2e1a1a;
+    color: #f44336;
+    border: 1px solid #5a2d2d;
+}
+
+.ap-modal-lists {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ap-modal-list-item {
+    background: #222;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 12px 16px;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    width: 100%;
+    transition: border-color 0.2s;
+}
+
+.ap-modal-list-item:hover {
+    border-color: #ff5500;
+}
+
+.ap-modal-list-name {
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ap-modal-list-desc {
+    color: #555;
+    font-size: 12px;
+}
+
+.ap-modal-empty,
+.ap-modal-loading {
+    color: #555;
+    font-size: 13px;
+    text-align: center;
+    margin: 0;
+    font-style: italic;
+}
+
+.ap-btn-new-list {
+    background: none;
+    border: 1px dashed #444;
+    color: #555;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: border-color 0.2s, color 0.2s;
+    width: 100%;
+}
+
+.ap-btn-new-list:hover {
+    border-color: #ff5500;
+    color: #ff5500;
+}
+
+.ap-new-list-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: 1px solid #222;
+    padding-top: 14px;
+}
+
+.ap-new-list-form h4 {
+    margin: 0;
+    color: #ff5500;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.ap-input {
+    background: #222;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 10px 12px;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.ap-input:focus {
+    border-color: #ff5500;
+}
