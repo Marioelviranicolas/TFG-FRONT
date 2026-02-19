@@ -555,3 +555,37 @@
 .ap-input:focus {
     border-color: #ff5500;
 }
+/* TABS */
+.ap-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid #222;
+    margin-bottom: 32px;
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ap-tab {
+    background: none;
+    border: none;
+    color: #555;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.ap-tab:hover {
+    color: #aaa;
+}
+
+.ap-tab--active {
+    color: #ff5500;
+    border-bottom: 2px solid #ff5500;
+}

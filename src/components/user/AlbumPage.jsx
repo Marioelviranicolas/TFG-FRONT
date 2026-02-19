@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { apiFetch } from '../../api';
 import './AlbumPage.css';
 import AlbumReviews from './AlbumReviews';
+import AlbumLists from './AlbumLists';
 
 const AddToListModal = ({ spotifyAlbumId, currentUser, onClose }) => {
     const [lists, setLists] = useState([]);
@@ -157,6 +158,7 @@ const AlbumPage = () => {
     const [loading, setLoading] = useState(true);
     const [myReview, setMyReview] = useState(null);
     const [showListModal, setShowListModal] = useState(false);
+    const [activeTab, setActiveTab] = useState('reviews');
     const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
 
     useEffect(() => {
@@ -228,15 +230,37 @@ const AlbumPage = () => {
                 />
             )}
 
-            <AlbumReviews
-                spotifyAlbumId={spotifyAlbumId}
-                currentUser={currentUser}
-                reviews={reviews}
-                myReview={myReview}
-                setMyReview={setMyReview}
-                setReviews={setReviews}
-                setAverage={setAverage}
-            />
+            {/* TABS */}
+            <div className="ap-tabs">
+                <button
+                    className={`ap-tab ${activeTab === 'reviews' ? 'ap-tab--active' : ''}`}
+                    onClick={() => setActiveTab('reviews')}
+                >
+                    Reviews
+                </button>
+                <button
+                    className={`ap-tab ${activeTab === 'lists' ? 'ap-tab--active' : ''}`}
+                    onClick={() => setActiveTab('lists')}
+                >
+                    Listas
+                </button>
+            </div>
+
+            {activeTab === 'reviews' && (
+                <AlbumReviews
+                    spotifyAlbumId={spotifyAlbumId}
+                    currentUser={currentUser}
+                    reviews={reviews}
+                    myReview={myReview}
+                    setMyReview={setMyReview}
+                    setReviews={setReviews}
+                    setAverage={setAverage}
+                />
+            )}
+
+            {activeTab === 'lists' && (
+                <AlbumLists spotifyAlbumId={spotifyAlbumId} />
+            )}
         </div>
     );
 };
