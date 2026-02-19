@@ -7,21 +7,26 @@
 }
 
 .reviews-title{
+    font-family: 'ClashDisplay-Medium', sans-serif;
+    font-size: 1.2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     
 }
 
-.reviews-title h2 {
-    margin: 0;
+.reviews-title a{
+    margin-right: 60px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
 }
 
-.reviews-title a{
-    margin-right: 85px;
-    text-decoration: none;
-    color: black;
+.reviews-title a:hover{
+    
+    color: rgb(229, 88, 0);
+    transition: 0.4s ease;
 }
+
 
 .reviews-list-carousel {
     display: flex;
@@ -39,9 +44,10 @@
 .review-card {
     min-width: 200px;
     max-width: 210px;
+    height: 290px;
     flex-shrink: 0;
     background: white;
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
@@ -49,7 +55,7 @@
 }
 
 .review-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-2px);
     box-shadow: 0 4px 16px rgba(0,0,0,0.2);
 }
 
@@ -60,6 +66,7 @@
 }
 
 .review-info {
+    display: flex;
     padding: 12px;
 }
 
@@ -68,79 +75,39 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 8px;
+    gap: 20px;
+}
+
+.rating-username{
+    display: flex;
+    flex-direction: column;
+   
 }
 
 .username {
+    display: flex;
     font-family: 'ClashDisplay-Medium', sans-serif;
     color: black;
-    font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
     text-transform: capitalize;
+    margin-top: 9px;
+    cursor: pointer;
+    
+}
+
+.username:hover{
+    font-weight: bold;
 }
 
 .rating {
     display: flex;
-    font-size: 12px;
-    gap: 1px;
-}
-
-/* Detalles que aparecen en hover */
-.hover-details {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: all 0.3s ease;
-}
-
-.review-card:hover .hover-details {
-    max-height: 200px;
-    opacity: 1;
-    margin-top: 8px;
-}
-
-.hover-details h3 {
-    margin: 0 0 5px 0;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.hover-details p {
-    margin: 0 0 8px 0;
-    color: #666;
+    margin-top: 0px;
     font-size: 13px;
+    gap: 3px;
 }
-
-.hover-details .comment {
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid #eee;
-    font-style: italic;
-    color: #555;
-}
-
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    font-size: 40px;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    z-index: 10;
+.avatar{
     border-radius: 50%;
+    width: 40px;
+    height: 40px;
 }
 
-.carousel-btn:hover {
-    background: rgba(0, 0, 0, 0.8);
-}
-
-.carousel-btn.prev {
-    left: 10px;
-}
-
-.carousel-btn.next {
-    right: 10px;
-}

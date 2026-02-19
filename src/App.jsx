@@ -14,6 +14,7 @@ function App() {
         <Route path='/' element={<Landing />} />
         <Route path="/user-home" element={<UserHome />} />
         <Route path='/profile' element={<ProfileWrapper />} />
+        <Route path="/profile/:username" element={<Profile />} />
         <Route path='/edit-profile' element={<EditProfile />} />
         <Route path='/explore-users' element={<ExploreUsers/>} />
         <Route path='/album/:spotifyAlbumId' element={<AlbumPage />} />

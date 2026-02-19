@@ -1,0 +1,23 @@
+
+.fondo-userhome{
+    min-height: 100vh;
+  background: linear-gradient(
+    180deg,
+    #1f1f1f 0%,
+    #111111 60%,
+    #292929 100%
+  );
+}
+
+.title{
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 3.5rem; /* Más grande como en la imagen */
+  padding-top: 30px;
+  margin-left: 320px;
+  margin-bottom: 120px;
+  text-decoration: none;
+  letter-spacing: 0.1em; /* Menos espacio entre letras */
+  color: #fffffffd;
+ 
+ 
+}

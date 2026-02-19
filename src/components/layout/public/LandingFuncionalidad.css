@@ -7,9 +7,9 @@ body {
 
 /* CONTENEDOR FULL WIDTH */
 .contenedor {
-    margin-top: 250px;
+    margin-top: 230px;
     width: 100%;
-    height: 600px;
+    height: 680px;
     padding: 60px 40px;
     box-sizing: border-box;
 }
@@ -17,7 +17,7 @@ body {
 /* TÍTULO */
 .header {
     text-align: center;
-    font-size: 2rem;
+    font-size: 3.2rem;
     margin-bottom: 50px;
     font-family: 'ClashDisplay-Bold', sans-serif;
 }
@@ -44,6 +44,7 @@ body {
 
 .funcionalidad-title{
     font-family: 'ClashDisplay-SemiBold', sans-serif;
+    font-size: 40px;
     text-align: center;
     margin-bottom: 15px;
 }
