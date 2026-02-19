@@ -1,12 +1,20 @@
+// src/components/user/ProfileContent.jsx
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../../api';
 import { useNavigate } from 'react-router-dom';
+import AddToListModal from './AddToListModal';
 
 export default function ProfileContent({ username }) {
   const [activeTab, setActiveTab] = useState('reviews');
   const [reviews, setReviews] = useState([]);
   const [lists, setLists] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const navigate = useNavigate();
+
+  // Detectar si es tu propio perfil
+  const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
+  const isOwnProfile = currentUser.username === username;
 
   useEffect(() => {
     if (activeTab === 'reviews') {
@@ -21,7 +29,6 @@ export default function ProfileContent({ username }) {
       setLoading(true);
       const response = await apiFetch(`/reviews/user/${username}`);
       const data = await response.json();
-      console.log(reviews);
       setReviews(data || []);
     } catch (error) {
       console.error('Error loading reviews:', error);
@@ -65,10 +72,10 @@ export default function ProfileContent({ username }) {
     }
     return new Date(date).toLocaleDateString('es-ES');
   };
-  const navigate = useNavigate();
 
   return (
     <div>
+      {/* TABS */}
       <div style={{
         display: 'flex',
         gap: '20px',
@@ -121,11 +128,13 @@ export default function ProfileContent({ username }) {
         </button>
       </div>
 
+      {/* CONTENIDO */}
       <div>
         {loading ? (
           <p>Cargando...</p>
         ) : (
           <>
+            {/* TAB REVIEWS */}
             {activeTab === 'reviews' && (
               <div>
                 {reviews.length === 0 ? (
@@ -133,7 +142,7 @@ export default function ProfileContent({ username }) {
                 ) : (
                   <div style={{ display: 'grid', gap: '20px' }}>
                     {reviews.map((review, index) => (
-                     <div
+                      <div
                         key={review.id || index}
                         onClick={() => navigate(`/album/${review.album.spotifyAlbumId}`)}
                         style={{
@@ -144,7 +153,7 @@ export default function ProfileContent({ username }) {
                         }}
                       >
                         <div style={{ display: 'flex', gap: '15px' }}>
-                          {review.album && review.album.coverUrl && (
+                          {review.album?.coverUrl && (
                             <img
                               src={review.album.coverUrl}
                               alt={review.album.title}
@@ -182,27 +191,56 @@ export default function ProfileContent({ username }) {
               </div>
             )}
 
+            {/* TAB LISTAS */}
             {activeTab === 'lists' && (
               <div>
+                {/* BOTÓN CREAR LISTA - solo si es tu perfil */}
+                {isOwnProfile && (
+                  <div style={{ marginBottom: '20px' }}>
+                    <button
+                      onClick={() => setShowCreateModal(true)}
+                      style={{
+                        padding: '10px 20px',
+                        backgroundColor: '#FF6B35',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '8px',
+                        cursor: 'pointer',
+                        fontWeight: 'bold',
+                        fontSize: '1rem'
+                      }}
+                    >
+                      + Crear lista
+                    </button>
+                  </div>
+                )}
+
+                {/* LISTAS */}
                 {lists.length === 0 ? (
                   <p>No hay listas todavía</p>
                 ) : (
-                  <div style={{ display: 'grid', gap: '20px' }}>
+                  <div style={{ display: 'grid', gap: '15px' }}>
                     {lists.map((list, index) => (
                       <div
                         key={list.id || list.idSoundLists || index}
+                        onClick={() => navigate(`/list/${list.id}`)}
                         style={{
                           border: '1px solid #ddd',
                           borderRadius: '8px',
                           padding: '15px',
-                          cursor: 'pointer'
+                          cursor: 'pointer',
+                          transition: 'box-shadow 0.2s'
                         }}
+                        onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)'}
+                        onMouseLeave={(e) => e.currentTarget.style.boxShadow = 'none'}
                       >
-                        <h3 style={{ margin: '0 0 10px 0' }}>📝 {list.name}</h3>
+                        <h3 style={{ margin: '0 0 8px 0' }}>📝 {list.name}</h3>
                         {list.description && (
-                          <p style={{ margin: '0 0 10px 0', color: '#666' }}>{list.description}</p>
+                          <p style={{ margin: '0 0 8px 0', color: '#666' }}>{list.description}</p>
                         )}
-                        <small style={{ color: '#999' }}>Creada el {parseDate(list.createdAt)}</small>
+                        <small style={{ color: '#999' }}>
+                          Creada el {parseDate(list.createdAt)}
+                        </small>
                       </div>
                     ))}
                   </div>
@@ -210,6 +248,7 @@ export default function ProfileContent({ username }) {
               </div>
             )}
 
+            {/* TAB ACTIVIDAD */}
             {activeTab === 'activity' && (
               <div>
                 <p>Próximamente: feed de actividad reciente</p>
@@ -218,6 +257,19 @@ export default function ProfileContent({ username }) {
           </>
         )}
       </div>
+
+      {/* MODAL CREAR/AÑADIR A LISTA */}
+      {showCreateModal && (
+        <AddToListModal
+          spotifyAlbumId={null}
+          currentUser={currentUser}
+          onClose={() => setShowCreateModal(false)}
+          onSuccess={() => {
+            setShowCreateModal(false);
+            loadLists();
+          }}
+        />
+      )}
     </div>
   );
 }

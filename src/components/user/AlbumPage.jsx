@@ -1,153 +1,11 @@
+// src/components/user/AlbumPage.jsx
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { apiFetch } from '../../api';
 import './AlbumPage.css';
 import AlbumReviews from './AlbumReviews';
 import AlbumLists from './AlbumLists';
-
-const AddToListModal = ({ spotifyAlbumId, currentUser, onClose }) => {
-    const [lists, setLists] = useState([]);
-    const [loadingLists, setLoadingLists] = useState(true);
-    const [feedback, setFeedback] = useState(null);
-    const [creatingNew, setCreatingNew] = useState(false);
-    const [newName, setNewName] = useState('');
-    const [newDescription, setNewDescription] = useState('');
-    const [savingNew, setSavingNew] = useState(false);
-
-    useEffect(() => {
-        apiFetch(`/soundlist/user/${currentUser.username}`)
-            .then(r => r.json())
-            .then(setLists)
-            .catch(console.error)
-            .finally(() => setLoadingLists(false));
-    }, [currentUser.username]);
-
-    const showFeedback = (type, text) => {
-        setFeedback({ type, text });
-        setTimeout(() => setFeedback(null), 3000);
-    };
-
-    const handleAddToList = async (listId) => {
-        const res = await apiFetch('/listalbum', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ identificadorLista: listId, albumSpotifyId: spotifyAlbumId })
-        });
-        const result = await res.json();
-        if (result === 1) showFeedback('success', '¡Álbum añadido a la lista!');
-        else if (result === -1) showFeedback('error', 'Este álbum ya está en esa lista.');
-        else if (result === -2) showFeedback('error', 'No puedes modificar una lista que no es tuya.');
-        else showFeedback('error', 'No se pudo añadir el álbum.');
-    };
-
-    const handleCreateAndAdd = async () => {
-        if (!newName.trim()) return showFeedback('error', 'El nombre no puede estar vacío.');
-        setSavingNew(true);
-        try {
-            const createRes = await apiFetch('/soundlist/insert', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    user: { idUser: currentUser.idUser },
-                    name: newName.trim(),
-                    description: newDescription.trim()
-                })
-            });
-            const createResult = await createRes.json();
-            if (createResult <= 0) return showFeedback('error', 'No se pudo crear la lista.');
-
-            const updatedLists = await apiFetch(`/soundlist/user/${currentUser.username}`).then(r => r.json());
-            setLists(updatedLists);
-            const newList = updatedLists.find(l => l.name === newName.trim());
-            if (newList) await handleAddToList(newList.id);
-            setCreatingNew(false);
-            setNewName('');
-            setNewDescription('');
-        } catch (err) {
-            showFeedback('error', 'Error de conexión.');
-        } finally {
-            setSavingNew(false);
-        }
-    };
-
-    return (
-        <div className="ap-modal-overlay" onClick={onClose}>
-            <div className="ap-modal" onClick={e => e.stopPropagation()}>
-                <div className="ap-modal-header">
-                    <h3>Añadir a lista</h3>
-                    <button className="ap-modal-close" onClick={onClose}>✕</button>
-                </div>
-
-                {feedback && (
-                    <div className={`ap-modal-feedback ap-modal-feedback--${feedback.type}`}>
-                        {feedback.text}
-                    </div>
-                )}
-
-                {loadingLists ? (
-                    <p className="ap-modal-loading">Cargando tus listas...</p>
-                ) : (
-                    <>
-                        {lists.length === 0 && !creatingNew && (
-                            <p className="ap-modal-empty">No tienes listas aún. ¡Crea una!</p>
-                        )}
-                        <div className="ap-modal-lists">
-                            {lists.map(list => (
-                                <button
-                                    key={list.id}
-                                    className="ap-modal-list-item"
-                                    onClick={() => handleAddToList(list.id)}
-                                >
-                                    <span className="ap-modal-list-name">{list.name}</span>
-                                    {list.description && (
-                                        <span className="ap-modal-list-desc">{list.description}</span>
-                                    )}
-                                </button>
-                            ))}
-                        </div>
-
-                        {!creatingNew ? (
-                            <button className="ap-btn-new-list" onClick={() => setCreatingNew(true)}>
-                                + Crear nueva lista
-                            </button>
-                        ) : (
-                            <div className="ap-new-list-form">
-                                <h4>Nueva lista</h4>
-                                <input
-                                    className="ap-input"
-                                    type="text"
-                                    placeholder="Nombre *"
-                                    value={newName}
-                                    onChange={e => setNewName(e.target.value)}
-                                    maxLength={100}
-                                />
-                                <textarea
-                                    className="ap-textarea"
-                                    placeholder="Descripción (opcional)"
-                                    value={newDescription}
-                                    onChange={e => setNewDescription(e.target.value)}
-                                    rows={2}
-                                />
-                                <div className="ap-form-buttons">
-                                    <button className="ap-btn-save" onClick={handleCreateAndAdd} disabled={savingNew}>
-                                        {savingNew ? 'Creando...' : 'Crear y añadir'}
-                                    </button>
-                                    <button className="ap-btn-cancel" onClick={() => {
-                                        setCreatingNew(false);
-                                        setNewName('');
-                                        setNewDescription('');
-                                    }}>
-                                        Cancelar
-                                    </button>
-                                </div>
-                            </div>
-                        )}
-                    </>
-                )}
-            </div>
-        </div>
-    );
-};
+import AddToListModal from './AddToListModal';
 
 const AlbumPage = () => {
     const { spotifyAlbumId } = useParams();
@@ -222,11 +80,17 @@ const AlbumPage = () => {
                 </div>
             </div>
 
+            {/* MODAL COMPARTIDO */}
             {showListModal && (
                 <AddToListModal
                     spotifyAlbumId={spotifyAlbumId}
                     currentUser={currentUser}
                     onClose={() => setShowListModal(false)}
+                    onSuccess={() => {
+                        setShowListModal(false);
+                        // Cambiar al tab de listas para ver el cambio
+                        setActiveTab('lists');
+                    }}
                 />
             )}
 
