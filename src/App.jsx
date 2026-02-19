@@ -5,6 +5,7 @@ import Profile from './components/user/Profile';
 import EditProfile from './components/user/EditProfile'
 import ExploreUsers from './components/user/ExploreUsers'
 import AlbumPage from './components/user/AlbumPage';
+import ListDetail from './components/user/ListDetail';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path='/edit-profile' element={<EditProfile />} />
         <Route path='/explore-users' element={<ExploreUsers/>} />
         <Route path='/album/:spotifyAlbumId' element={<AlbumPage />} />
+        <Route path='/list/:id' element={<ListDetail />} />
       </Routes>
     </BrowserRouter>
   );
