@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react';
 import ProfileHeader from './ProfileHeader';
 import ProfileStats from './ProfileStats';
 import ProfileContent from './ProfileContent';
+import { useParams } from "react-router-dom";
 import { apiFetch } from '../../api';
 
-export default function Profile({ username }) {
+export default function Profile() {
   const [user, setUser] = useState(null);           
   const [loading, setLoading] = useState(true);     
   const [error, setError] = useState(null);        
   const [isOwnProfile, setIsOwnProfile] = useState(false); 
+  const { username } = useParams();
+
 
   useEffect(() => {
     loadUserProfile();

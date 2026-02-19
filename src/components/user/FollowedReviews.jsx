@@ -4,6 +4,13 @@ import './FollowedReviews.css';
 import { useNavigate } from 'react-router-dom';
 
 const FollowedReviews = ({ userId }) => {
+
+     const getAvatarUrl = (user) => {
+    if (user?.avatarUrl) {
+      return user.avatarUrl;
+    }
+    return `https://ui-avatars.com/api/?name=${user?.username}&size=200&background=FF6B35&color=fff`;
+  };
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -97,56 +104,84 @@ const FollowedReviews = ({ userId }) => {
                             
                             <div className="review-info">
                                 <div className="review-header">
-                                    <span className="username">{review.user.username}</span>
+                                    <img 
+                                    src={getAvatarUrl(review.user)} 
+                                    alt={review.user.username}
+                                    className="avatar"
+                                    />
+                                    <div className='rating-username'>
+                                    <span 
+                                        className="username"
+                                        style={{ cursor: "pointer" }}
+                                        onClick={(e) => {
+                                            e.stopPropagation(); // 🔥 evita que salte el click del padre
+                                            navigate(`/profile/${review.user.username}`);
+                                        }}
+                                        >
+                                        {review.user.username}
+                                    </span>
+                                    
                                     <div className="rating">
-                                    {Array.from({ length: Math.floor(review.rating) }).map((_, i) => (
+                                    {Array.from({ length: 5 }).map((_, i) => {
+                                        const full = i < Math.floor(review.rating);
+                                        const half = i === Math.floor(review.rating) && review.rating % 1 !== 0;
+
+                                        return (
                                         <svg
-                                        key={`full-${review.id}-${i}`}
-                                        viewBox="0 0 100 100"
-                                        width="18"
-                                        height="18"
+                                            key={i}
+                                            viewBox="0 0 24 24"
+                                            width="18"
+                                            height="18"
                                         >
-                                        {/* Vinilo completo */}
-                                        <circle cx="50" cy="50" r="48" fill="#111" />
-                                        <circle cx="50" cy="50" r="15" fill="#e63946" />
-                                        <circle cx="50" cy="50" r="4" fill="#fff" />
+                                            {/* estrella base (vacía) */}
+                                            <path
+                                            d="M12 17.27L18.18 21 16.54 13.97 
+                                                22 9.24 14.81 8.63 
+                                                12 2 9.19 8.63 
+                                                2 9.24 7.46 13.97 
+                                                5.82 21z"
+                                            fill="#ddd"
+                                            />
+
+                                            {/* estrella llena */}
+                                            {full && (
+                                            <path
+                                                d="M12 17.27L18.18 21 16.54 13.97 
+                                                22 9.24 14.81 8.63 
+                                                12 2 9.19 8.63 
+                                                2 9.24 7.46 13.97 
+                                                5.82 21z"
+                                                fill="#f5c518"
+                                            />
+                                            )}
+
+                                            {/* media estrella */}
+                                            {half && (
+                                            <>
+                                                <defs>
+                                                <clipPath id={`half-star-${review.id}-${i}`}>
+                                                    <rect x="0" y="0" width="12" height="24" />
+                                                </clipPath>
+                                                </defs>
+
+                                                <path
+                                                d="M12 17.27L18.18 21 16.54 13.97 
+                                                    22 9.24 14.81 8.63 
+                                                    12 2 9.19 8.63 
+                                                    2 9.24 7.46 13.97 
+                                                    5.82 21z"
+                                                fill="#f5c518"
+                                                clipPath={`url(#half-star-${review.id}-${i})`}
+                                                />
+                                            </>
+                                            )}
                                         </svg>
-                                    ))}
-
-                                    {review.rating % 1 !== 0 && (
-                                        <svg
-                                        key={`half-${review.id}`}
-                                        viewBox="0 0 100 100"
-                                        width="18"
-                                        height="18"
-                                        >
-                                        <defs>
-                                            <clipPath id={`half-clip-${review.id}`}>
-                                            <rect x="0" y="0" width="50" height="100" />
-                                            </clipPath>
-                                        </defs>
-
-                                        {/* Vinilo base (medio negro) */}
-                                        <g clipPath={`url(#half-clip-${review.id})`}>
-                                            <circle cx="50" cy="50" r="48" fill="#111" />
-                                        </g>
-
-                                        {/* Etiqueta central */}
-                                        <circle cx="50" cy="50" r="15" fill="#e63946" />
-                                        <circle cx="50" cy="50" r="4" fill="#fff" />
-                                        </svg>
-                                    )}
+                                        );
+                                    })}
                                     </div>
                                 </div>
-    
-                                <div className="hover-details">
-                                    <h3>{review.album.title}</h3>
-                                    <p>{review.album.artist}</p>
-                                    {review.comment && (
-                                        <p className="comment">{review.comment}</p>
-                                    )}
-                                </div>
                             </div>
+                        </div>
                         </div>
                     ))}
                 </div>

@@ -48,7 +48,7 @@ export default function UserSlideMenu() {
 
             <li
               className="landing-slidelink"
-              onClick={() => navigate("/profile")}
+              onClick={() => navigate(`/profile/${currentUser.username}`)}
             >
               <span>Mi perfil</span>
             </li>

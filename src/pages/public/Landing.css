@@ -25,9 +25,17 @@
 }
 
 .stepper-component{
-  background: linear-gradient(135deg, #fb1e0e 0%, #FF8C61 25%, #F7B801 50%, #FFD147 75%, #b5321e 100%);
+  padding-top: 70px;
+  height: 670px;
+ background: linear-gradient(135deg, 
+    #f7703f 0%,      /* Naranja base */
+    #fd7543 25%,     /* Naranja claro */
+    #ea2c17 50%,     /* Naranja dorado */
+    #FF6B35 75%,
+    #ff440a 100%     /* Naranja rojizo */
+  );
   background-size: 200% 200%;
-  animation: gradientMove 6s ease infinite;
+  
 }
 
 .stepper-component::before {

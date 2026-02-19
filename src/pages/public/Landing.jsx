@@ -5,6 +5,7 @@ import SlideMenu from '../../components/layout/public/SlideMenu';
 import Funcionalidad from '../../components/layout/public/LandingFuncionalidad';
 import './Landing.css'
 import ReviewsStepper from '../../components/layout/public/ReviewsStepper';
+import Footer from '../../components/layout/public/Footer';
 
 export default function Landing() {
 return (
@@ -30,6 +31,12 @@ return (
       </div>
       <div className='stepper-component'>
         <ReviewsStepper />
+      </div>
+      <div>
+        <Funcionalidad />
+      </div>
+      <div>
+        <Footer />
       </div>
     </>
   );

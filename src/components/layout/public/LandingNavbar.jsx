@@ -11,7 +11,7 @@ export default function LandingNav() {
       <>
           <Link to="/" className="landing-nav__logo">
           <h1 className="title-navbar">
-          Crate</h1>
+          CRATE</h1>
           </Link>
     </>
   );
