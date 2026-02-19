@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../../api';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProfileContent({ username }) {
   const [activeTab, setActiveTab] = useState('reviews');
@@ -20,6 +21,7 @@ export default function ProfileContent({ username }) {
       setLoading(true);
       const response = await apiFetch(`/reviews/user/${username}`);
       const data = await response.json();
+      console.log(reviews);
       setReviews(data || []);
     } catch (error) {
       console.error('Error loading reviews:', error);
@@ -63,6 +65,7 @@ export default function ProfileContent({ username }) {
     }
     return new Date(date).toLocaleDateString('es-ES');
   };
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -130,12 +133,14 @@ export default function ProfileContent({ username }) {
                 ) : (
                   <div style={{ display: 'grid', gap: '20px' }}>
                     {reviews.map((review, index) => (
-                      <div
+                     <div
                         key={review.id || index}
+                        onClick={() => navigate(`/album/${review.album.spotifyAlbumId}`)}
                         style={{
                           border: '1px solid #ddd',
                           borderRadius: '8px',
-                          padding: '15px'
+                          padding: '15px',
+                          cursor: 'pointer'
                         }}
                       >
                         <div style={{ display: 'flex', gap: '15px' }}>
