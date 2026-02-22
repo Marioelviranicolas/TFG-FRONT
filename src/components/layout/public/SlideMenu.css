@@ -29,6 +29,7 @@ body.menu-active nav#slide-menu {
 
 #slideUsername{
   color: #ffffff;
+  margin-top: 10px;
   font-size: 2rem;
   font-family:'ClashDisplay-Bold'
 }
