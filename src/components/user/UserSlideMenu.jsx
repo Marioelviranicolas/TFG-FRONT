@@ -7,6 +7,16 @@ export default function UserSlideMenu() {
   const [menuActive, setMenuActive] = useState(false);
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
 
+
+  const getAvatarUrl = () => {
+  if (!currentUser) return "";
+
+  if (currentUser.avatarUrl) {
+    return currentUser.avatarUrl;
+  }
+
+  return `https://ui-avatars.com/api/?name=${currentUser.username}&size=200&background=FF6B35&color=fff`;
+};
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 
   useEffect(() => {
@@ -30,12 +40,21 @@ export default function UserSlideMenu() {
       <nav id="slide-menu">
         <div className="slide-content">
           <ul>
-            <p id="slideTitle">©Crate</p>
+            <img 
+            src={getAvatarUrl()}
+            style={{ 
+              width: '110px', 
+              height: '110px', 
+              borderRadius: '50%',
+              objectFit: 'cover'
+            }}
+            />
             {currentUser && (
               <h1 id="slideUsername">
                 {currentUser.username}
               </h1>
             )}
+            <br></br>
             <hr />
 
             <li

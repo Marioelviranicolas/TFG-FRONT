@@ -6,6 +6,7 @@ import Funcionalidad from '../../components/layout/public/LandingFuncionalidad';
 import './Landing.css'
 import ReviewsStepper from '../../components/layout/public/ReviewsStepper';
 import Footer from '../../components/layout/public/Footer';
+import Jointo from '@/components/layout/public/Jointo';
 
 export default function Landing() {
 return (
@@ -33,7 +34,7 @@ return (
         <ReviewsStepper />
       </div>
       <div>
-        <Funcionalidad />
+        <Jointo />
       </div>
       <div>
         <Footer />

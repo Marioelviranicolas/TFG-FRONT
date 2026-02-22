@@ -33,7 +33,7 @@ const UserHome = () => {
     return (
         <>
         <div className='fondo-userhome'>
-            <h1 className='title'>CRATE</h1>
+           <a href='/'><h1 className='title'>CRATE</h1></a>
         <div>
             {/* Reviews de las personas que sigues */}
             <section>

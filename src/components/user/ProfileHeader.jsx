@@ -34,7 +34,6 @@ export default function ProfileHeader({ user, isOwnProfile }) {
               width: '150px', 
               height: '150px', 
               borderRadius: '50%',
-              border: '4px solid #FF6B35',
               objectFit: 'cover'
             }}
             onError={(e) => {
@@ -72,7 +71,7 @@ export default function ProfileHeader({ user, isOwnProfile }) {
           }}>
             {user.email}
           </p>
-
+          <div>
           {isOwnProfile && (
             <button 
               onClick={() => navigate('/edit-profile')}
@@ -95,7 +94,29 @@ export default function ProfileHeader({ user, isOwnProfile }) {
             >
               Editar perfil
             </button>
+
           )}
+          <button 
+              onClick={() => navigate('/user-home')}
+              style={{
+                display: 'flex',
+                marginTop: '20px',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '10px 20px',
+                backgroundColor: '#000000',
+                color: 'white',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                transition: 'background-color 0.2s'
+              }}
+            >
+              Home
+            </button>
+            </div>
         </div>
       </div>
     </div>

@@ -5,12 +5,13 @@ import ProfileContent from './ProfileContent';
 import { useParams } from "react-router-dom";
 import { apiFetch } from '../../api';
 
-export default function Profile() {
+export default function Profile({ username: propUsername }) {
   const [user, setUser] = useState(null);           
   const [loading, setLoading] = useState(true);     
   const [error, setError] = useState(null);        
   const [isOwnProfile, setIsOwnProfile] = useState(false); 
-  const { username } = useParams();
+  const { username: paramUsername } = useParams();
+  const username = propUsername || paramUsername;
 
 
   useEffect(() => {

@@ -3,31 +3,35 @@ import './ReviewsStepper.css';
 import { ChevronLeftIcon, ChevronRightIcon, StarIcon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import avatarLucia from "@/assets/images/Home-CrateDiggin2.jpg";
+import avatarCarlos from "@/assets/images/Home-CrateDiggin3.jpg";
+import avatarDavid from "@/assets/images/avatar.png";
+import avatarAna from "@/assets/images/images.jpg";
 
 const reviews = [
   {
     user: "Carlos Martinez.",
     text: "He descubierto más música en una semana que en todo el año. La forma de explorar y conectar con otros melómanos es increíble.",
     rating: 5,
-    avatar: "CM"
+    avatar: avatarCarlos
   },
   {
     user: "Lucía Rueda.",
     text: "Me encanta poder guardar todo lo que escucho y ver las recomendaciones de mis amigos.",
     rating: 5,
-    avatar: "LR"
+    avatar: avatarLucia
   },
   {
     user: "David Castro.",
     text: "Las listas son adictivas. Siempre acabo explorando algo nuevo y descubriendo joyas ocultas que nunca habría encontrado solo.",
     rating: 4,
-    avatar: "DK"
+    avatar: avatarDavid
   },
   {
     user: "Ana Tamariz.",
     text: "Por fin encuentro una app donde puedo escribir lo que pienso de la música sin sentir presión, la seguire usando cada día. Mi voz, mi estilo.",
     rating: 4,
-    avatar: "AT"
+    avatar: avatarAna
   },
 ];
 
@@ -62,8 +66,18 @@ export default function ReviewsStepper() {
           <div className="relative bg-black border border-neutral-800 rounded-2xl p-8 md:p-12 shadow-xl">
             {/* Avatar and user info */}
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-14 h-14 rounded-full bg-orange-400/15 border border-orange-400/25 flex items-center justify-center text-orange-300 font-bold text-lg">
-                {currentReview.avatar}
+              <div className="w-14 h-14 rounded-full overflow-hidden border border-orange-400/25">
+                {currentReview.avatar && currentReview.avatar.length > 2 ? (
+                  <img
+                    src={currentReview.avatar}
+                    alt={currentReview.user}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-orange-400/15 text-orange-300 font-bold text-lg">
+                    {currentReview.avatar}
+                  </div>
+                )}
               </div>
               <div className="flex-1">
                 <h3 className="text-white font-semibold text-lg">
