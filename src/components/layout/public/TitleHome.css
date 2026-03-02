@@ -5,9 +5,10 @@
   margin-left: 140px;         
   margin-top: 150px;           
   text-decoration: none;
-  width: 700px;
+  width: 800px;
+  height: 420px;
   /* Fondo semitransparente para destacar sobre el hero */
-  background-color: rgba(0, 0, 0, 0.192); 
+  background-color: rgba(0, 0, 0, 0.226); 
   /* Sombra más marcada */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.226);     
   border-radius: 15px;
@@ -28,7 +29,7 @@
   font-size: 3rem;
   color: #ffffff;
   line-height: 1.1;
-  margin: 0;  
+  padding: 10px;  
   text-shadow: 1px 1px 3px rgba(0,0,0,0.25); /* hace que destaque del fondo */   
               
 }

@@ -28,19 +28,19 @@ export default function Footer() {
         <div className="footer-right">
           {/* Social Media & Newsletter */}
           <div className="social-newsletter">
-            <div className="social-section">
+            <div className="social-section-footer">
               <h3>Follow Us</h3>
-              <div className="social-icons">
-                <a href="https://instagram.com" className="social-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <div className="social-icons-footer">
+                <a href="https://instagram.com" className="social-icon-footer" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
                   <FaInstagram />
                 </a>
-                <a href="https://linkedin.com" className="social-icon" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <a href="https://linkedin.com" className="social-icon-footer" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
                   <FaLinkedinIn />
                 </a>
-                <a href="https://youtube.com" className="social-icon" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+                <a href="https://youtube.com" className="social-icon-footer" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
                   <FaYoutube />
                 </a>
-                <a href="https://twitter.com" className="social-icon" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+                <a href="https://twitter.com" className="social-icon-footer" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
                   <FaTwitter />
                 </a>
               </div>

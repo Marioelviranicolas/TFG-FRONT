@@ -125,15 +125,15 @@ export default function UserSlideMenu() {
       >
         {!menuActive ? (
           <svg width="28" height="28" viewBox="0 0 28 28">
-            <rect x="4" y="4" width="20" height="20" stroke="black" strokeWidth="2" fill="none"/>
-            <line x1="4" y1="10" x2="24" y2="10" stroke="black" strokeWidth="1.5"/>
-            <line x1="4" y1="14" x2="24" y2="14" stroke="black" strokeWidth="1.5"/>
-            <line x1="4" y1="18" x2="24" y2="18" stroke="black" strokeWidth="1.5"/>
+            <rect x="4" y="4" width="20" height="20" stroke="white" strokeWidth="2" fill="none"/>
+            <line x1="4" y1="10" x2="24" y2="10" stroke="white" strokeWidth="1.5"/>
+            <line x1="4" y1="14" x2="24" y2="14" stroke="white" strokeWidth="1.5"/>
+            <line x1="4" y1="18" x2="24" y2="18" stroke="white" strokeWidth="1.5"/>
           </svg>
         ) : (
           <svg width="28" height="28" viewBox="0 0 28 28">
-            <line x1="6" y1="6" x2="22" y2="22" stroke="black" strokeWidth="2" strokeLinecap="round"/>
-            <line x1="22" y1="6" x2="6" y2="22" stroke="black" strokeWidth="2" strokeLinecap="round"/>
+            <line x1="6" y1="6" x2="22" y2="22" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+            <line x1="22" y1="6" x2="6" y2="22" stroke="white" strokeWidth="2" strokeLinecap="round"/>
           </svg>
         )}
       </button>
