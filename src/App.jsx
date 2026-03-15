@@ -4,7 +4,7 @@ import UserHome from './components/user/UserHome';
 import Profile from './components/user/Profile';
 import EditProfile from './components/user/EditProfile'
 import ExploreUsers from './components/user/ExploreUsers'
-import AlbumPage from './components/user/AlbumPage';
+import AlbumPage from './components/album/AlbumPage';
 import ListDetail from './components/user/ListDetail';
 
 

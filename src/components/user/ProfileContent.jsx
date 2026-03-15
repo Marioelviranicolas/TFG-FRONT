@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../../api';
 import { useNavigate } from 'react-router-dom';
-import AddToListModal from './AddToListModal';
+import AddToListModal from '../album//modal/AddToListModal';
 
 export default function ProfileContent({ username }) {
   const [activeTab, setActiveTab] = useState('reviews');

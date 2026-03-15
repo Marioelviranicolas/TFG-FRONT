@@ -1,22 +1,26 @@
-// src/components/user/AlbumPage.jsx
+// src/components/album/AlbumPage.jsx
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { apiFetch } from '../../api';
-import './AlbumPage.css';
-import AlbumReviews from './AlbumReviews';
-import AlbumLists from './AlbumLists';
-import AddToListModal from './AddToListModal';
+import './album.css';
+
+import AlbumHeader   from './AlbumHeader';
+import AlbumReviews  from './reviews/AlbumReviews';
+import AlbumLists    from './lists/AlbumLists';
+import AddToListModal from './modal/AddToListModal';
 
 const AlbumPage = () => {
     const { spotifyAlbumId } = useParams();
     const navigate = useNavigate();
-    const [album, setAlbum] = useState(null);
-    const [reviews, setReviews] = useState([]);
-    const [average, setAverage] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [myReview, setMyReview] = useState(null);
-    const [showListModal, setShowListModal] = useState(false);
-    const [activeTab, setActiveTab] = useState('reviews');
+
+    const [album,         setAlbum]         = useState(null);
+    const [reviews,       setReviews]       = useState([]);
+    const [average,       setAverage]       = useState(null);
+    const [myReview,      setMyReview]      = useState(null);
+    const [loading,       setLoading]       = useState(true);
+    const [showModal,     setShowModal]     = useState(false);
+    const [activeTab,     setActiveTab]     = useState('reviews');
+
     const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
 
     useEffect(() => {
@@ -27,19 +31,16 @@ const AlbumPage = () => {
                     apiFetch(`/reviews/album/${spotifyAlbumId}`),
                     apiFetch(`/reviews/average/${spotifyAlbumId}`)
                 ]);
-
                 const [albumData, reviewsData, avgData] = await Promise.all([
-                    albumRes.json(),
-                    reviewsRes.json(),
-                    avgRes.json()
+                    albumRes.json(), reviewsRes.json(), avgRes.json()
                 ]);
 
                 setAlbum(albumData);
                 setAverage(avgData);
 
                 if (currentUser) {
-                    const myReviewData = reviewsData.find(r => r.user.username === currentUser.username);
-                    setMyReview(myReviewData || null);
+                    const mine = reviewsData.find(r => r.user.username === currentUser.username);
+                    setMyReview(mine || null);
                     setReviews(reviewsData.filter(r => r.user.username !== currentUser.username));
                 } else {
                     setReviews(reviewsData);
@@ -50,51 +51,37 @@ const AlbumPage = () => {
                 setLoading(false);
             }
         };
-
         fetchData();
     }, [spotifyAlbumId]);
 
-    if (loading) return <div className="ap-loading">Cargando...</div>;
-    if (!album) return <div className="ap-loading">Álbum no encontrado</div>;
+    if (loading) return <div className="ap-loading">Cargando…</div>;
+    if (!album)  return <div className="ap-loading">Álbum no encontrado</div>;
+
+    const reviewCount = reviews.length + (myReview ? 1 : 0);
 
     return (
         <div className="ap-page">
-            <button className="ap-back-btn" onClick={() => navigate(-1)}>← Volver</button>
+            <button className="ap-back-btn" onClick={() => navigate(-1)}>
+                ← Volver
+            </button>
 
-            <div className="ap-header">
-                <img src={album.coverUrl} alt={album.title} className="ap-cover" />
-                <div className="ap-info">
-                    <h1>{album.title}</h1>
-                    <h2>{album.artist}</h2>
-                    {average !== null && (
-                        <div className="ap-average">
-                            <span className="ap-average-number">{Number(average).toFixed(1)}</span>
-                            <span className="ap-average-label"> / 5 · {reviews.length + (myReview ? 1 : 0)} reviews</span>
-                        </div>
-                    )}
-                    {currentUser && (
-                        <button className="ap-btn-add-list" onClick={() => setShowListModal(true)}>
-                            + Añadir a lista
-                        </button>
-                    )}
-                </div>
-            </div>
+            <AlbumHeader
+                album={album}
+                average={average}
+                reviewCount={reviewCount}
+                currentUser={currentUser}
+                onAddToList={() => setShowModal(true)}
+            />
 
-            {/* MODAL COMPARTIDO */}
-            {showListModal && (
+            {showModal && (
                 <AddToListModal
                     spotifyAlbumId={spotifyAlbumId}
                     currentUser={currentUser}
-                    onClose={() => setShowListModal(false)}
-                    onSuccess={() => {
-                        setShowListModal(false);
-                        // Cambiar al tab de listas para ver el cambio
-                        setActiveTab('lists');
-                    }}
+                    onClose={() => setShowModal(false)}
+                    onSuccess={() => { setShowModal(false); setActiveTab('lists'); }}
                 />
             )}
 
-            {/* TABS */}
             <div className="ap-tabs">
                 <button
                     className={`ap-tab ${activeTab === 'reviews' ? 'ap-tab--active' : ''}`}
