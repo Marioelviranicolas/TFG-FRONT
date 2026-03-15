@@ -133,13 +133,13 @@ const handleSubmit = async (e) => {
         {/* Footer */}
         <div className="modal-footer">
           <p>
-            Don't have an account?{' '}
+            No tienes cuenta?{' '}
             <button 
               className="text-link" 
               onClick={onSwitchToRegister}
               disabled={isLoading}
             >
-              Sign up
+              Registarse
             </button>
           </p>
         </div>

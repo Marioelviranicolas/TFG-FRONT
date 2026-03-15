@@ -1,27 +1,26 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../components/layout/public/SlideMenu.css";
+import "./UserSlideMenu.css";
 
 export default function UserSlideMenu() {
   const navigate = useNavigate();
+  const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
   const [menuActive, setMenuActive] = useState(false);
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
 
-
   const getAvatarUrl = () => {
-  if (!currentUser) return "";
+    if (!currentUser) return "";
 
-  if (currentUser.avatarUrl) {
-    return currentUser.avatarUrl;
-  }
+    if (currentUser.avatarUrl) {
+      return currentUser.avatarUrl;
+    }
 
-  return `https://ui-avatars.com/api/?name=${currentUser.username}&size=200&background=FF6B35&color=fff`;
-};
-  const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+    return `https://ui-avatars.com/api/?name=${currentUser.username}&size=200&background=FF6B35&color=fff`;
+  };
 
   useEffect(() => {
-    document.body.classList.toggle("menu-active", menuActive);
-    return () => document.body.classList.remove("menu-active");
+    document.body.classList.toggle("user-menu-active", menuActive);
+    return () => document.body.classList.remove("user-menu-active");
   }, [menuActive]);
 
   useEffect(() => {
@@ -37,101 +36,72 @@ export default function UserSlideMenu() {
 
   return (
     <>
-      <nav id="slide-menu">
-        <div className="slide-content">
-          <ul>
+      <nav id="user-slide-menu">
+        <div className="user-slide-content">
+          <div className="user-avatar-container">
             <img 
-            src={getAvatarUrl()}
-            style={{ 
-              width: '110px', 
-              height: '110px', 
-              borderRadius: '50%',
-              objectFit: 'cover'
-            }}
+              src={getAvatarUrl()}
+              alt={currentUser?.username || "User"}
             />
-            {currentUser && (
-              <h1 id="slideUsername">
-                {currentUser.username}
-              </h1>
-            )}
-            <br></br>
-            <hr />
-
-            <li
-              className="landing-slidelink"
-              onClick={() => navigate("/userhome")}
-            >
-              <span>Inicio</span>
+          </div>
+          {currentUser && (
+            <p id="userSlideUsername">{currentUser.username}</p>
+          )}
+          <ul>
+            <li className="user-slidelink" onClick={() => navigate("/userhome")}>
+              <span>INICIO</span>
             </li>
-            <hr />
-
-            <li
-              className="landing-slidelink"
-              onClick={() => navigate(`/profile/${currentUser.username}`)}
-            >
-              <span>Mi perfil</span>
+            <li className="user-slidelink" onClick={() => navigate(`/profile/${currentUser.username}`)}>
+              <span>MI PERFIL</span>
             </li>
-            <hr />
-
-            <li
-              className="landing-slidelink"
-              onClick={() => navigate("/explore-users")}
-            >
-              <span>Explorar usuarios</span>
+            <li className="user-slidelink" onClick={() => navigate("/explore-users")}>
+              <span>EXPLORAR USUARIOS</span>
             </li>
-            <hr />
-
-            {/* Accordion */}
-            <li
-              className="landing-slidelink accordion-header"
-              onClick={() => setIsAccordionOpen(!isAccordionOpen)}
+            <li 
+              className="user-slidelink"
             >
-              <span>Mi actividad</span>
-              <span className={`accordion-arrow ${isAccordionOpen ? "open" : ""}`}>
-                ▾
-              </span>
+              <span>MI ACTIVIDAD</span>
             </li>
-
-            <ul className={`accordion-content ${isAccordionOpen ? "open" : ""}`}>
-              <li
-                className="landing-subslidelink"
-                onClick={() => navigate("/my-reviews")}
-              >
+              <li className="user-subslidelink" onClick={() => navigate("/my-reviews")}>
                 <span>Mis reviews</span>
               </li>
-              <li
-                className="landing-subslidelink"
-                onClick={() => navigate("/favorites")}
-              >
+              <li className="user-subslidelink" onClick={() => navigate("/favorites")}>
                 <span>Favoritos</span>
               </li>
-            </ul>
-
-            <hr />
-
-            <li
-              className="landing-slidelink"
-              onClick={handleLogout}
-            >
-              <span>Cerrar sesión</span>
+            <li className="user-slidelink" onClick={handleLogout}>
+              <span>LOG OUT</span>
             </li>
           </ul>
         </div>
       </nav>
-
+      
       <button
-        className="menu-trigger"
+        className="user-menu-trigger"
         onClick={() => setMenuActive(!menuActive)}
       >
         {!menuActive ? (
-          <svg width="28" height="28" viewBox="0 0 28 28">
+          <svg 
+            width="28" 
+            height="28" 
+            viewBox="0 0 28 28" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg"
+            className="user-icon-crate"
+          >
             <rect x="4" y="4" width="20" height="20" stroke="white" strokeWidth="2" fill="none"/>
             <line x1="4" y1="10" x2="24" y2="10" stroke="white" strokeWidth="1.5"/>
             <line x1="4" y1="14" x2="24" y2="14" stroke="white" strokeWidth="1.5"/>
             <line x1="4" y1="18" x2="24" y2="18" stroke="white" strokeWidth="1.5"/>
           </svg>
         ) : (
-          <svg width="28" height="28" viewBox="0 0 28 28">
+          <svg 
+            width="28" 
+            height="28" 
+            viewBox="0 0 28 28" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg"
+            className="user-icon-close"
+          >
             <line x1="6" y1="6" x2="22" y2="22" stroke="white" strokeWidth="2" strokeLinecap="round"/>
             <line x1="22" y1="6" x2="6" y2="22" stroke="white" strokeWidth="2" strokeLinecap="round"/>
           </svg>

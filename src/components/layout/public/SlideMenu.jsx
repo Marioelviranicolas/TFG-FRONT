@@ -26,6 +26,16 @@ export default function SlidingMenu() {
     }
   }, [menuActive]);
 
+  const handleOpenLogin = () => {
+    setMenuActive(false);
+    setIsLoginOpen(true);
+  };
+ 
+  const handleOpenRegister = () => {
+    setMenuActive(false);
+    setIsRegisterOpen(true);
+  };
+
   return (
     <>
       <nav id="slide-menu">
@@ -41,10 +51,10 @@ export default function SlidingMenu() {
           <li href="#about" className="landing-slidelink">
             <span>CONTACTO</span>
           </li>
-          <li onClick={() => setIsLoginOpen(true)} className="landing-slidelink landing-nav__btn--signup">
+          <li onClick={handleOpenLogin} className="landing-slidelink landing-nav__btn--signup">
             <span>LOG IN</span>
             </li>
-          <li onClick={() => setIsRegisterOpen(true)} className="landing-slidelink landing-nav__btn--signup">
+          <li onClick={handleOpenRegister} className="landing-slidelink landing-nav__btn--signup">
             <span>REGISTER</span>
             </li>
         <div className="social-section-SlideMenu">
