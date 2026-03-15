@@ -203,14 +203,14 @@ export default function RegisterModal({ isOpen, onClose, onSwitchToLogin }) {
           </div>
 
           <button type="submit" className="modal-submit">
-            Create Account
+            Crear cuenta
           </button>
         </form>
 
         {/* Footer */}
         <div className="modal-footer">
           <p>
-            Already have an account?{' '}
+            Ya estas registrado?{' '}
             <button className="text-link" onClick={onSwitchToLogin}>
               Log in
             </button>

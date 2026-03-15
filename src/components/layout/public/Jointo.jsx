@@ -18,7 +18,7 @@ export default function Jointo() {
                       />
                     </div>
             <div className='header-jointo'>
-                <h1>Te quieres unir a create?</h1>
+                <h1>Te quieres unir a crate?</h1>
             </div>
         <button 
           onClick={() => setIsRegisterOpen(true)}

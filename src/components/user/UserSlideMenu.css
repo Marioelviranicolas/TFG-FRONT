@@ -1,0 +1,237 @@
+/* =========================
+   USER SLIDE MENU (OVERLAY RIGHT)
+========================= */
+
+nav#user-slide-menu {
+	position: fixed;
+	bottom: -103vh;
+  left: 0;
+	width: 100vw;
+	height: 100vh;
+ background: linear-gradient(
+    #0a0a0a 0%,
+    #141414 25%,
+    #1a1a1a 60%,
+    #202020 100%
+  );
+	z-index: 10000;
+	transition: bottom 900ms ease-in-out;
+}
+
+body.user-menu-active nav#user-slide-menu {
+	bottom: 0;
+}
+
+.user-avatar-container {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-left: 120px;
+  margin-top: -80px;
+  margin-bottom: 20px;
+  border: 3px solid #FF6B35;
+}
+
+.user-avatar-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#userSlideUsername {
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 3rem; 
+  margin-bottom: 10px;
+  margin-left: 120px;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  color: #fffffffd;
+}
+
+.user-slide-content { 
+  padding-top: 110px; 
+  height: 100%; 
+  position: relative; 
+}
+
+nav#user-slide-menu ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+  margin-bottom: 20px;
+}
+
+nav#user-slide-menu ul li {
+	color: #ffffff;
+	padding: 10px 0;
+	cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+nav#user-slide-menu ul li span {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+nav#user-slide-menu ul li:hover {
+  color: #FF6B35;
+}
+
+nav#user-slide-menu ul li:hover span {
+  transform: translateX(15px);
+}
+
+.user-slidelink {
+  font-family: 'ClashDisplay-Bold';
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  margin-left: 700px;
+}
+
+.user-subslidelink {
+  font-family: 'ClashDisplay-Medium';
+  font-size: 1.2rem;
+  margin-left: 700px;
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.3s ease;
+}
+
+
+.user-menu-trigger {
+  position: fixed;
+  top: 40px;
+  right: 80px;
+  width: 42px;
+  height: 42px;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  z-index: 10002;
+  transition: transform 300ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-menu-trigger:hover {
+  transform: scale(1.1);
+}
+
+.user-menu-trigger svg {
+  transition: all 300ms ease;
+}
+
+.user-icon-crate {
+  animation: fadeIn 300ms ease;
+}
+
+.user-icon-close {
+  animation: rotateIn 300ms ease;
+}
+
+/* Initial states for animations */
+.user-avatar-container,
+#userSlideUsername,
+.user-slidelink,
+.user-subslidelink {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* Animations when menu is active */
+body.user-menu-active .user-avatar-container {
+  animation: fadeSlideLeft 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+body.user-menu-active #userSlideUsername {
+  animation: fadeSlideLeft 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+body.user-menu-active .user-slidelink {
+  animation: fadeSlideUp 0.6s ease forwards;
+}
+
+body.user-menu-active .user-subslidelink {
+  animation: fadeSlideUp 0.6s ease forwards;
+}
+
+body.user-menu-active .user-slidelink:nth-child(1) {
+  animation-delay: 0.2s;
+}
+body.user-menu-active .user-slidelink:nth-child(2) {
+  animation-delay: 0.3s;
+}
+body.user-menu-active .user-slidelink:nth-child(3) {
+  animation-delay: 0.4s;
+}
+body.user-menu-active .user-slidelink:nth-child(4) {
+  animation-delay: 0.5s;
+}
+body.user-menu-active .user-subslidelink:nth-child(5) {
+  animation-delay: 0.55s;
+}
+body.user-menu-active .user-subslidelink:nth-child(6) {
+  animation-delay: 0.6s;
+}
+body.user-menu-active .user-slidelink:nth-child(7) {
+  animation-delay: 0.65s;
+}
+
+nav#user-slide-menu {
+  transform: scale(1.05);
+  transition: 
+    bottom 500ms ease-in-out,
+    transform 500ms ease;
+}
+
+body.user-menu-active nav#user-slide-menu {
+  transform: scale(1);
+}
+
+@keyframes fadeSlideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-1000px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
