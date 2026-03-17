@@ -1,8 +1,37 @@
+/* --- ANIMACIONES (Keyframes) --- */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  80% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --- ESTILOS GENERALES --- */
+
 .title-home {
   display: flex;
   flex-direction: column;      
   align-items: flex-start;    
-  margin-left: 140px;         
+  margin-left: 140px;          
   margin-top: 120px;           
   text-decoration: none;
   width: 900px;
@@ -11,26 +40,27 @@
   padding-right: 150px;
 }
 
-
-.title-home-title{
+.title-home-title {
   font-family: 'ClashDisplay-SemiBold', sans-serif;
   font-size: 3.5rem;
   color: #FF6B35;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-
+  /* Animación */
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
 }
 
-/* Texto */
 .title-home__subtitle {
   font-family: 'ClashDisplay-Medium', sans-serif;
   font-size: 3rem;
   color: #ffffff;
   line-height: 1.1;
   padding: 10px;  
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.25); /* hace que destaque del fondo */   
-              
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.25);
+  /* Animación con delay */
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.3s forwards;
 }
-
 
 .btn-title-home {
   display: flex;
@@ -52,38 +82,41 @@
   color: #FF6B35;
   font-weight: 700;
   letter-spacing: 0.03em;
-  transform: scale(1.05); 
+  transform: scale(1.05) rotate(-1deg);
+  text-shadow: 3px 3px 0px #FFD93D;
 }
 
-/* Botón */
+/* Botones con entrada escalonada */
 .landing-nav__btn {
   font-family: 'ClashDisplay-Medium', system-ui, sans-serif;
-   padding: 12px 30px;
-  background: #000;
-  color: white;
-  border: 2px solid #000;
+  padding: 12px 30px;
   border-radius: 25px;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
   text-transform: lowercase;
+  border: 2px solid #000;
+  opacity: 0; /* Para la animación */
+}
+
+.landing-nav__btn--login {
+  background: #000000;
+  color: white;
+  animation: popIn 0.6s cubic-bezier(0.17, 0.67, 0.83, 0.67) 0.6s forwards;
 }
 
 .landing-nav__btn--register {
   background: #FF6B35;
   color: white;
+  animation: popIn 0.6s cubic-bezier(0.17, 0.67, 0.83, 0.67) 0.8s forwards;
 }
-.landing-nav__btn--login {
-  background: #000000;
-  color: white;
-}
-.landing-nav__btn--login:hover {
- background: #FFD93D;
-  color: #000;
-  border-color: #000;
-}
+
+/* Hovers de botones */
+.landing-nav__btn--login:hover, 
 .landing-nav__btn--register:hover {
   background: #FFD93D;
   color: #000;
   border-color: #000;
+  transform: translateY(-3px);
+  box-shadow: 0px 5px 15px rgba(255, 217, 61, 0.4);
 }
