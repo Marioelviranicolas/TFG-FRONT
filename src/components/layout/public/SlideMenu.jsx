@@ -40,7 +40,7 @@ export default function SlidingMenu() {
     <>
       <nav id="slide-menu">
         <div className="slide-content">
-          <p id="slideTitle">©CRATE</p>
+          <p className="slideTitle">©CRATE</p>
         <ul>
           <li href="#about" className="landing-slidelink">
             <span>BLOG</span>

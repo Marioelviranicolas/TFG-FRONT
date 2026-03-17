@@ -23,7 +23,7 @@ body.menu-active nav#slide-menu {
 	bottom: 0;
 }
 
-#slideTitle{
+.slideTitle{
   font-family: 'ClashDisplay-Bold', sans-serif;
   font-size: 3.5rem; 
   margin-top: -80px;
@@ -32,7 +32,12 @@ body.menu-active nav#slide-menu {
   text-decoration: none;
   letter-spacing: 0.1em; /* Menos espacio entre letras */
   color: #fffffffd;
+  opacity: 0;
 }
+
+
+
+
 
 #slideUsername{
   color: #ffffff;
@@ -177,7 +182,7 @@ nav#slide-menu ul li:hover span {
   animation: rotateIn 300ms ease;
 }
 
-#slideTitle{
+.slideTitle{
   opacity: 0;
   transform: translateX(-1000px);
 }
@@ -188,7 +193,7 @@ nav#slide-menu ul li:hover span {
    transform: translateY(40px);
 }
 
-body.menu-active #slideTitle {
+body.menu-active .slideTitle {
   animation: fadeSlideLeft 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 

@@ -29,7 +29,7 @@ export default function Footer() {
           {/* Social Media & Newsletter */}
           <div className="social-newsletter">
             <div className="social-section-footer">
-              <h3>Follow Us</h3>
+              <h3 className="title-footer-section">Follow Us</h3>
               <div className="social-icons-footer">
                 <a href="https://instagram.com" className="social-icon-footer" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
                   <FaInstagram />
@@ -46,18 +46,15 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="newsletter-section">
-              <h3>Subscribe to Our Newsletter</h3>
-              <form className="newsletter-form" onSubmit={handleSubmit}>
-                <input 
-                  type="email" 
-                  placeholder="E-Mail address" 
-                  className="newsletter-input" 
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required 
-                />
-                <button type="submit" className="newsletter-button">subscribe</button>
+            
+            <div class="card">
+              <span class="card__title">Newsletter</span>
+              <p class="card__content">
+                ¿No sabes qué escuchar? Deja que nosotros decidamos tu nueva personalidad musical esta semana.
+              </p>
+              <form class="card__form">
+                <input required="" type="email" placeholder="Ultimos lanzamientos" />
+                <button class="card__button">Click me</button>
               </form>
             </div>
           </div>
