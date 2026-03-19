@@ -1,13 +1,14 @@
-// src/perfil/content/ProfileStats.jsx
+// src/components/perfil/content/ProfileStats.jsx
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../../../api';
 
-export default function ProfileStats({ username }) {
+export default function ProfileStats({ username, onOpenModal }) {
   const [stats, setStats] = useState({
     totalReviews: 0,
     totalLists: 0,
-    totalLikes: 0,
-    averageRating: 0
+    averageRating: 0,
+    totalFollowers: 0,
+    totalFollowing: 0
   });
   const [loading, setLoading] = useState(true);
 
@@ -18,17 +19,18 @@ export default function ProfileStats({ username }) {
   const loadStats = async () => {
     try {
       setLoading(true);
-
-      const [reviewsRes, listsRes, likesRes] = await Promise.all([
+      const [reviewsRes, listsRes, followersRes, followingRes] = await Promise.all([
         apiFetch(`/reviews/user/${username}`),
         apiFetch(`/soundlist/user/${username}`),
-        apiFetch(`/likes/user/${username}`)
+        apiFetch(`/follow/followers/${username}`),
+        apiFetch(`/follow/following/${username}`)
       ]);
 
-      const [reviews, lists, likes] = await Promise.all([
+      const [reviews, lists, followers, following] = await Promise.all([
         reviewsRes.json(),
         listsRes.json(),
-        likesRes.json()
+        followersRes.json(),
+        followingRes.json()
       ]);
 
       let avgRating = 0;
@@ -38,10 +40,11 @@ export default function ProfileStats({ username }) {
       }
 
       setStats({
-        totalReviews: reviews?.length || 0,
-        totalLists: lists?.length || 0,
-        totalLikes: likes?.length || 0,
-        averageRating: avgRating
+        totalReviews:   reviews?.length   || 0,
+        totalLists:     lists?.length     || 0,
+        averageRating:  avgRating,
+        totalFollowers: followers?.length || 0,
+        totalFollowing: following?.length || 0
       });
     } catch (error) {
       console.error('Error loading stats:', error);
@@ -58,17 +61,31 @@ export default function ProfileStats({ username }) {
         <span className="pp-stat-number">{stats.totalReviews}</span>
         <span className="pp-stat-label">Reviews</span>
       </div>
+
       <div className="pp-stat">
         <span className="pp-stat-number">{stats.totalLists}</span>
         <span className="pp-stat-label">Listas</span>
       </div>
-      <div className="pp-stat">
-        <span className="pp-stat-number">{stats.totalLikes}</span>
-        <span className="pp-stat-label">Likes</span>
-      </div>
+
       <div className="pp-stat">
         <span className="pp-stat-number">{stats.averageRating}</span>
         <span className="pp-stat-label">Media</span>
+      </div>
+
+      <div
+        className="pp-stat pp-stat--clickable"
+        onClick={() => onOpenModal('followers')}
+      >
+        <span className="pp-stat-number">{stats.totalFollowers}</span>
+        <span className="pp-stat-label">Seguidores</span>
+      </div>
+
+      <div
+        className="pp-stat pp-stat--clickable"
+        onClick={() => onOpenModal('following')}
+      >
+        <span className="pp-stat-number">{stats.totalFollowing}</span>
+        <span className="pp-stat-label">Siguiendo</span>
       </div>
     </div>
   );

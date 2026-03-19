@@ -3,7 +3,7 @@ import Landing from './pages/public/Landing';
 import UserHome from './components/user/UserHome';
 import ExploreUsers from './components/user/ExploreUsers';
 import AlbumPage from './components/album/AlbumPage';
-import ListDetail from './components/user/ListDetail';
+import ListDetail from './components/perfil/content/ListDetail';
 import Profile from './components/perfil/Profile';
 import EditProfile from './components/perfil/edit/EditProfile';
 
