@@ -6,6 +6,7 @@ import AlbumPage from './components/album/AlbumPage';
 import ListDetail from './components/user/ListDetail';
 import Profile from './components/perfil/Profile';
 import EditProfile from './components/perfil/edit/EditProfile';
+import AboutUs from './components/layout/public/AboutUs';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/user-home" element={<UserHome />} />
         <Route path='/profile' element={<ProfileWrapper />} />
         <Route path="/profile/:username" element={<Profile />} />
+         <Route path="/about" element={<AboutUs />} />
         <Route path='/edit-profile' element={<EditProfile />} />
         <Route path='/explore-users' element={<ExploreUsers />} />
         <Route path='/album/:spotifyAlbumId' element={<AlbumPage />} />

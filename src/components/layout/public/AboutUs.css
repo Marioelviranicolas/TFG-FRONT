@@ -1,0 +1,379 @@
+/* src/pages/public/AboutUs.css */
+
+body {
+    margin: 0;
+    background-color: #1b1b1b;
+    color: white;
+    font-family: sans-serif;
+}
+
+/* ========== SECTION ABOUT (HERO) ========== */
+.sectionAbout {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    padding: 60px 40px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Imagen de fondo con animación zoom */
+.about-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    
+    /* Animación */
+    animation: zoomIn 1.2s ease forwards;
+}
+
+.about-background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    
+    /* Animación */
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.about-background__img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.header-about {
+    text-align: center;
+    margin-top: 60px;
+    font-size: 3.2rem;
+    margin-bottom: 50px;
+    font-family: 'ClashDisplay-Bold', sans-serif;
+    
+    /* Animación inicial */
+    opacity: 0;
+    transform: translateY(-50px);
+    animation: fadeSlideDown 1s ease forwards;
+    animation-delay: 0.3s;
+}
+
+/* ========== SECTION TEAM ========== */
+.sectionTeam {
+    position: relative;
+    width: 100%;
+    height: 1800px;
+    background-color: #222020;
+}
+
+.contenedor-team {
+    width: 550px;
+    margin-left: 300px;
+    padding-top: 80px;
+    
+    /* Animación inicial */
+    opacity: 0;
+    transform: translateX(-100px);
+    animation: fadeSlideRight 1s ease forwards;
+    animation-delay: 0.2s;
+}
+
+.header-team {
+    font-family: 'ClashDisplay-Bold', sans-serif;
+    font-size: 2.7rem;
+    
+    /* Animación */
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: fadeSlideRight 0.8s ease forwards;
+    animation-delay: 0.4s;
+}
+
+.content-team {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    
+    /* Animación */
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeSlideUp 0.8s ease forwards;
+}
+
+/* Delays diferentes para cada párrafo */
+.content-team:nth-of-type(1) {
+    animation-delay: 0.5s;
+}
+
+.content-team:nth-of-type(2) {
+    animation-delay: 0.7s;
+}
+
+.content-team:nth-of-type(3) {
+    animation-delay: 0.9s;
+}
+
+/* Líneas hr con animación */
+.contenedor-team hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.3), transparent);
+    margin: 2rem 0;
+    
+    /* Animación */
+    opacity: 0;
+    transform: scaleX(0);
+    animation: expandLine 0.8s ease forwards;
+}
+
+.contenedor-team hr:nth-of-type(1) {
+    animation-delay: 0.6s;
+}
+
+.contenedor-team hr:nth-of-type(2) {
+    animation-delay: 0.8s;
+}
+
+.team-img {
+    margin-left: 700px;
+    margin-top: -750px;
+    border-radius: 10px;
+    
+    /* Animación */
+    opacity: 0;
+    transform: translateX(100px);
+    animation: fadeSlideLeft 1s ease forwards;
+    animation-delay: 0.6s;
+    
+    /* Hover effect */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-img:hover {
+    transform: translateX(100px) translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 40px rgba(255, 107, 53, 0.3);
+}
+
+/* ========== RECOMMEND SECTION ========== */
+.recomend-about {
+    margin-top: 150px;
+    text-align: center;
+    width: 800px;
+    margin-left: 540px;
+    margin-bottom: 200px;
+    padding: 3rem;
+   
+    
+    
+    /* Animación */
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+    animation: fadeScaleUp 1s ease forwards;
+    animation-delay: 1.2s;
+}
+
+.recomend-header {
+    font-family: 'ClashDisplay-Bold', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+   
+    
+    /* Animación */
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeSlideDown 0.8s ease forwards;
+    animation-delay: 1.4s;
+}
+
+.recomend-content {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    line-height: 1.8;
+    
+    /* Animación */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeSlideUp 0.8s ease forwards;
+}
+
+/* Delays para cada párrafo del recommend */
+.recomend-content:nth-of-type(1) {
+    animation-delay: 1.6s;
+}
+
+.recomend-content:nth-of-type(2) {
+    animation-delay: 1.8s;
+}
+
+.register-btn {
+    font-family: 'ClashDisplay-Medium', system-ui, sans-serif;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: lowercase;
+    border: 2px solid #000;
+    background-color: #FF6B35;
+    
+    /* Animación */
+    opacity: 0;
+    transform: scale(0.9);
+    animation: fadeScale 0.8s ease forwards;
+    animation-delay: 2s;
+}
+
+.register-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.6);
+}
+
+.register-btn:active {
+    transform: translateY(0) scale(1);
+}
+
+/* ========== KEYFRAMES ANIMATIONS ========== */
+
+/* Fade + Slide Down */
+@keyframes fadeSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade + Slide Up */
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade + Slide Right (desde izquierda) */
+@keyframes fadeSlideRight {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Fade + Slide Left (desde derecha) */
+@keyframes fadeSlideLeft {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Fade + Scale */
+@keyframes fadeScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Fade + Scale Up (para el recommend box) */
+@keyframes fadeScaleUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Zoom In (para background) */
+@keyframes zoomIn {
+    from {
+        transform: scale(1.1);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Fade In simple */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Expand Line (para los hr) */
+@keyframes expandLine {
+    from {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    to {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1400px) {
+    .contenedor-team {
+        margin-left: 150px;
+    }
+    
+    .team-img {
+        margin-left: 550px;
+    }
+    
+    .recomend-about {
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .contenedor-team {
+        width: 90%;
+        margin-left: 5%;
+    }
+    
+    .team-img {
+        margin-left: 0;
+        margin-top: 2rem;
+        width: 100%;
+    }
+    
+    .recomend-about {
+        width: 90%;
+        margin-left: 5%;
+        padding: 2rem;
+    }
+}

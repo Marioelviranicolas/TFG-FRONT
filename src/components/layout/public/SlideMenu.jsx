@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { FaInstagram, FaLinkedinIn, FaYoutube, FaTwitter } from 'react-icons/fa';
 import "./SlideMenu.css";
@@ -40,13 +41,19 @@ export default function SlidingMenu() {
     <>
       <nav id="slide-menu">
         <div className="slide-content">
-          <p className="slideTitle">©CRATE</p>
+          <p className="slideTitle">
+            <Link to="/">
+            <span>©CRATE</span>
+            </Link>
+            </p>
         <ul>
           <li href="#about" className="landing-slidelink">
             <span>BLOG</span>
           </li>
-          <li href="#about" className="landing-slidelink">
+          <li href="#" className="landing-slidelink">
+             <Link to="/about">
             <span>ABOUT</span>
+            </Link>
           </li>
           <li href="#about" className="landing-slidelink">
             <span>CONTACTO</span>
