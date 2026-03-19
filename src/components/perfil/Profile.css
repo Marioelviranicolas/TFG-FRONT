@@ -208,6 +208,17 @@
   padding-right: 0;
 }
 
+.pp-stat--clickable {
+  cursor: pointer;
+  transition: opacity var(--transition);
+}
+.pp-stat--clickable:hover .pp-stat-number {
+  color: var(--accent-dim);
+}
+.pp-stat--clickable:hover .pp-stat-label {
+  color: var(--text-secondary);
+}
+
 .pp-stat-number {
   font-family: var(--font-display);
   font-size: 40px;
@@ -444,6 +455,71 @@
   font-style: italic;
   font-size: 14px;
   padding: 32px 0;
+}
+
+/* ============================================
+   FOLLOW MODAL — lista de seguidores/siguiendo
+   ============================================ */
+.fm-user-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  background: var(--bg-hover);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--transition), background var(--transition);
+}
+.fm-user-item:hover {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+}
+
+.fm-user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+
+.fm-user-username {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+}
+
+/* ============================================
+   LIST DETAIL — buscador inline
+   ============================================ */
+.ld-search-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ld-search-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ld-search-box .pp-section-title {
+  margin-bottom: 0;
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 /* ============================================

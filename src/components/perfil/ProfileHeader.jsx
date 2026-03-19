@@ -1,8 +1,51 @@
-// src/perfil/ProfileHeader.jsx
+// src/components/perfil/ProfileHeader.jsx
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiFetch } from '../../api';
 
 export default function ProfileHeader({ user, isOwnProfile }) {
   const navigate = useNavigate();
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [loadingFollow, setLoadingFollow] = useState(false);
+
+  const currentUser = JSON.parse(sessionStorage.getItem('currentUser') || '{}');
+
+  useEffect(() => {
+    if (!isOwnProfile && currentUser.username) {
+      checkFollowStatus();
+    }
+  }, [user.username]);
+
+  const checkFollowStatus = async () => {
+    try {
+      const res = await apiFetch(`/follow/status/${currentUser.username}/${user.username}`);
+      const data = await res.json();
+      setIsFollowing(data);
+    } catch (error) {
+      console.error('Error checking follow status:', error);
+    }
+  };
+
+  const handleFollow = async () => {
+    try {
+      setLoadingFollow(true);
+      if (isFollowing) {
+        await apiFetch(`/follow/${user.username}?followerUsername=${currentUser.username}`, {
+          method: 'DELETE'
+        });
+        setIsFollowing(false);
+      } else {
+        await apiFetch(`/follow/${user.username}?followerUsername=${currentUser.username}`, {
+          method: 'POST'
+        });
+        setIsFollowing(true);
+      }
+    } catch (error) {
+      console.error('Error toggling follow:', error);
+    } finally {
+      setLoadingFollow(false);
+    }
+  };
 
   const getAvatarUrl = () => {
     if (user.avatarUrl) return user.avatarUrl;
@@ -32,12 +75,25 @@ export default function ProfileHeader({ user, isOwnProfile }) {
         <p className="pp-email">{user.email}</p>
 
         <div className="pp-header-actions">
-          {isOwnProfile && (
+          {isOwnProfile ? (
             <button
               className="pp-btn-edit"
               onClick={() => navigate('/edit-profile')}
             >
               Editar perfil
+            </button>
+          ) : (
+            <button
+              className={isFollowing ? 'pp-btn-home' : 'pp-btn-edit'}
+              onClick={handleFollow}
+              disabled={loadingFollow}
+            >
+              {loadingFollow
+                ? '...'
+                : isFollowing
+                  ? 'Dejar de seguir'
+                  : '+ Seguir'
+              }
             </button>
           )}
           <button
