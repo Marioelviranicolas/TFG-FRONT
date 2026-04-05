@@ -4,22 +4,24 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { apiFetch } from '../../api';
 import './album.css';
 
-import AlbumHeader   from './AlbumHeader';
-import AlbumReviews  from './reviews/AlbumReviews';
-import AlbumLists    from './lists/AlbumLists';
+import AlbumHeader    from './AlbumHeader';
+import AlbumReviews   from './reviews/AlbumReviews';
+import AlbumLists     from './lists/AlbumLists';
 import AddToListModal from './modal/AddToListModal';
+import SearchBar      from '../ui/SearchBar';
+import UserSlideMenu  from '../user/UserSlideMenu';
 
 const AlbumPage = () => {
     const { spotifyAlbumId } = useParams();
     const navigate = useNavigate();
 
-    const [album,         setAlbum]         = useState(null);
-    const [reviews,       setReviews]       = useState([]);
-    const [average,       setAverage]       = useState(null);
-    const [myReview,      setMyReview]      = useState(null);
-    const [loading,       setLoading]       = useState(true);
-    const [showModal,     setShowModal]     = useState(false);
-    const [activeTab,     setActiveTab]     = useState('reviews');
+    const [album,     setAlbum]     = useState(null);
+    const [reviews,   setReviews]   = useState([]);
+    const [average,   setAverage]   = useState(null);
+    const [myReview,  setMyReview]  = useState(null);
+    const [loading,   setLoading]   = useState(true);
+    const [showModal, setShowModal] = useState(false);
+    const [activeTab, setActiveTab] = useState('reviews');
 
     const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
 
@@ -54,64 +56,94 @@ const AlbumPage = () => {
         fetchData();
     }, [spotifyAlbumId]);
 
-    if (loading) return <div className="ap-loading">Cargando…</div>;
-    if (!album)  return <div className="ap-loading">Álbum no encontrado</div>;
+    if (loading) return (
+        <div className="ap-shell">
+            <nav className="ap-navbar">
+                <span className="ap-navbar-logo" onClick={() => navigate('/user-home')}>CRATE</span>
+            </nav>
+            <div className="ap-loading">Cargando…</div>
+            <UserSlideMenu />
+        </div>
+    );
+
+    if (!album) return (
+        <div className="ap-shell">
+            <nav className="ap-navbar">
+                <span className="ap-navbar-logo" onClick={() => navigate('/user-home')}>CRATE</span>
+            </nav>
+            <div className="ap-loading">Álbum no encontrado</div>
+            <UserSlideMenu />
+        </div>
+    );
 
     const reviewCount = reviews.length + (myReview ? 1 : 0);
 
     return (
-        <div className="ap-page">
-            <button className="ap-back-btn" onClick={() => navigate(-1)}>
-                ← Volver
-            </button>
+        <div className="ap-shell">
+            <nav className="ap-navbar">
+                <span className="ap-navbar-logo" onClick={() => navigate('/user-home')}>
+                    CRATE
+                </span>
+                <div className="ap-navbar-search">
+                    <SearchBar />
+                </div>
+            </nav>
 
-            <AlbumHeader
-                album={album}
-                average={average}
-                reviewCount={reviewCount}
-                currentUser={currentUser}
-                onAddToList={() => setShowModal(true)}
-            />
+            <div className="ap-page">
+                <button className="ap-back-btn" onClick={() => navigate(-1)}>
+                    ← Volver
+                </button>
 
-            {showModal && (
-                <AddToListModal
-                    spotifyAlbumId={spotifyAlbumId}
+                <AlbumHeader
+                    album={album}
+                    average={average}
+                    reviewCount={reviewCount}
                     currentUser={currentUser}
-                    onClose={() => setShowModal(false)}
-                    onSuccess={() => { setShowModal(false); setActiveTab('lists'); }}
+                    onAddToList={() => setShowModal(true)}
                 />
-            )}
 
-            <div className="ap-tabs">
-                <button
-                    className={`ap-tab ${activeTab === 'reviews' ? 'ap-tab--active' : ''}`}
-                    onClick={() => setActiveTab('reviews')}
-                >
-                    Reviews
-                </button>
-                <button
-                    className={`ap-tab ${activeTab === 'lists' ? 'ap-tab--active' : ''}`}
-                    onClick={() => setActiveTab('lists')}
-                >
-                    Listas
-                </button>
+                {showModal && (
+                    <AddToListModal
+                        spotifyAlbumId={spotifyAlbumId}
+                        currentUser={currentUser}
+                        onClose={() => setShowModal(false)}
+                        onSuccess={() => { setShowModal(false); setActiveTab('lists'); }}
+                    />
+                )}
+
+                <div className="ap-tabs">
+                    <button
+                        className={`ap-tab ${activeTab === 'reviews' ? 'ap-tab--active' : ''}`}
+                        onClick={() => setActiveTab('reviews')}
+                    >
+                        Reviews
+                    </button>
+                    <button
+                        className={`ap-tab ${activeTab === 'lists' ? 'ap-tab--active' : ''}`}
+                        onClick={() => setActiveTab('lists')}
+                    >
+                        Listas
+                    </button>
+                </div>
+
+                {activeTab === 'reviews' && (
+                    <AlbumReviews
+                        spotifyAlbumId={spotifyAlbumId}
+                        currentUser={currentUser}
+                        reviews={reviews}
+                        myReview={myReview}
+                        setMyReview={setMyReview}
+                        setReviews={setReviews}
+                        setAverage={setAverage}
+                    />
+                )}
+
+                {activeTab === 'lists' && (
+                    <AlbumLists spotifyAlbumId={spotifyAlbumId} />
+                )}
             </div>
 
-            {activeTab === 'reviews' && (
-                <AlbumReviews
-                    spotifyAlbumId={spotifyAlbumId}
-                    currentUser={currentUser}
-                    reviews={reviews}
-                    myReview={myReview}
-                    setMyReview={setMyReview}
-                    setReviews={setReviews}
-                    setAverage={setAverage}
-                />
-            )}
-
-            {activeTab === 'lists' && (
-                <AlbumLists spotifyAlbumId={spotifyAlbumId} />
-            )}
+            <UserSlideMenu />
         </div>
     );
 };

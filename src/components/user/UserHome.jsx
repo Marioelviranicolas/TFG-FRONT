@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import FollowedReviews from '../user/FollowedReviews';
 import UserSlideMenu from '../user/UserSlideMenu';
 import Footer from '../layout/public/Footer';
+import SearchBar from '../ui/SearchBar';
 import './UserHome.css';
 
 const UserHome = () => {
@@ -33,7 +34,10 @@ const UserHome = () => {
     return (
         <>
         <div className='fondo-userhome'>
-           <h1 className='title'>CRATE</h1>
+          <div className='userhome-header'>
+            <h1 className='title'>CRATE</h1>
+            <SearchBar />
+          </div>
         <div>
             {/* Reviews de las personas que sigues */}
             <section>

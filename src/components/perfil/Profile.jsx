@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { apiFetch } from '../../api';
 import ProfileHeader from './ProfileHeader';
 import ProfileContent from './content/ProfileContent';
+import UserSlideMenu from '../user/UserSlideMenu';
 import './profile.css';
 
 export default function Profile({ username: propUsername }) {
@@ -35,14 +36,35 @@ export default function Profile({ username: propUsername }) {
     }
   };
 
-  if (loading) return <div className="pp-page"><p className="pp-loading">Cargando perfil…</p></div>;
-  if (error)   return <div className="pp-page"><p className="pp-error">{error}</p></div>;
-  if (!user)   return <div className="pp-page"><p className="pp-error">Usuario no encontrado</p></div>;
+  if (loading) return (
+    <div className="pp-shell">
+      <p className="pp-loading">Cargando perfil…</p>
+      <UserSlideMenu />
+    </div>
+  );
+  if (error) return (
+    <div className="pp-shell">
+      <p className="pp-error">{error}</p>
+      <UserSlideMenu />
+    </div>
+  );
+  if (!user) return (
+    <div className="pp-shell">
+      <p className="pp-error">Usuario no encontrado</p>
+      <UserSlideMenu />
+    </div>
+  );
 
   return (
-    <div className="pp-page">
-      <ProfileHeader user={user} isOwnProfile={isOwnProfile} />
-      <ProfileContent username={username} />
+    <div className="pp-shell">
+      <div className="pp-navbar">
+        <span className="pp-navbar-logo">CRATE</span>
+      </div>
+      <div className="pp-page">
+        <ProfileHeader user={user} isOwnProfile={isOwnProfile} />
+        <ProfileContent username={username} />
+      </div>
+      <UserSlideMenu />
     </div>
   );
 }
