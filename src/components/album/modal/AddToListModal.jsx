@@ -1,5 +1,5 @@
 // src/components/album/modal/AddToListModal.jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { apiFetch } from '../../../api';
 
 const AddToListModal = ({ spotifyAlbumId, currentUser, onClose, onSuccess }) => {
@@ -15,6 +15,7 @@ const AddToListModal = ({ spotifyAlbumId, currentUser, onClose, onSuccess }) => 
     const [searchResults, setSearchResults] = useState([]);
     const [searching, setSearching] = useState(false);
     const [selectedList, setSelectedList] = useState(null);
+    const debounceRef = useRef(null);
 
     useEffect(() => {
         apiFetch(`/soundlist/user/${currentUser.username}`)
@@ -84,18 +85,21 @@ const AddToListModal = ({ spotifyAlbumId, currentUser, onClose, onSuccess }) => 
         }
     };
 
-    const handleSearch = async (query) => {
+    const handleSearch = (query) => {
         setSearchQuery(query);
-        if (query.length < 2) return setSearchResults([]);
+        if (debounceRef.current) clearTimeout(debounceRef.current);
+        if (query.length < 2) { setSearchResults([]); return; }
         setSearching(true);
-        try {
-            const data = await apiFetch(`/albums/search?query=${encodeURIComponent(query)}`).then(r => r.json());
-            setSearchResults(data || []);
-        } catch {
-            setSearchResults([]);
-        } finally {
-            setSearching(false);
-        }
+        debounceRef.current = setTimeout(async () => {
+            try {
+                const data = await apiFetch(`/albums/search?query=${encodeURIComponent(query)}`).then(r => r.json());
+                setSearchResults(data || []);
+            } catch {
+                setSearchResults([]);
+            } finally {
+                setSearching(false);
+            }
+        }, 300);
     };
 
     const handleSelectAlbum = async (album) => {

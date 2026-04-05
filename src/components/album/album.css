@@ -38,9 +38,50 @@
 /* ============================================
    PAGE SHELL
    ============================================ */
-.ap-page {
+.ap-shell {
   min-height: 100vh;
   background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+}
+
+.ap-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 0 60px;
+  height: 100px;
+  background: rgba(14, 14, 14, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+.ap-navbar-logo {
+  font-family: 'ClashDisplay-Bold', 'Barlow Condensed', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.18s ease;
+}
+
+.ap-navbar-logo:hover {
+  color: var(--accent);
+}
+
+.ap-navbar-search {
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.ap-page {
   color: var(--text-primary);
   font-family: var(--font-body);
   padding: 40px 48px 80px;

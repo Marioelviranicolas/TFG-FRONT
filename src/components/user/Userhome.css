@@ -9,15 +9,22 @@
   );
 }
 
-.title{
-  font-family: 'ClashDisplay-Bold', sans-serif;
-  font-size: 3.5rem; /* Más grande como en la imagen */
+.userhome-header {
+  display: flex;
+  align-items: center;
+  gap: 32px;
   padding-top: 30px;
   margin-left: 320px;
-  margin-bottom: 120px;
+  margin-bottom: 60px;
+  padding-right: 48px;
+}
+
+.title{
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 3.5rem;
+  margin: 0;
   text-decoration: none;
-  letter-spacing: 0.1em; /* Menos espacio entre letras */
+  letter-spacing: 0.1em;
   color: #fffffffd;
- 
- 
+  flex-shrink: 0;
 }

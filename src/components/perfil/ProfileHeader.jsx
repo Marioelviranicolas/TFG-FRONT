@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiFetch } from '../../api';
+import FavoriteAlbums from './FavoriteAlbums';
 
 export default function ProfileHeader({ user, isOwnProfile }) {
   const navigate = useNavigate();
@@ -30,14 +31,10 @@ export default function ProfileHeader({ user, isOwnProfile }) {
     try {
       setLoadingFollow(true);
       if (isFollowing) {
-        await apiFetch(`/follow/${user.username}?followerUsername=${currentUser.username}`, {
-          method: 'DELETE'
-        });
+        await apiFetch(`/follow/${user.username}?followerUsername=${currentUser.username}`, { method: 'DELETE' });
         setIsFollowing(false);
       } else {
-        await apiFetch(`/follow/${user.username}?followerUsername=${currentUser.username}`, {
-          method: 'POST'
-        });
+        await apiFetch(`/follow/${user.username}?followerUsername=${currentUser.username}`, { method: 'POST' });
         setIsFollowing(true);
       }
     } catch (error) {
@@ -54,6 +51,7 @@ export default function ProfileHeader({ user, isOwnProfile }) {
 
   return (
     <div className="pp-header">
+      {/* Avatar */}
       <div className="pp-avatar-wrap">
         <img
           src={getAvatarUrl()}
@@ -65,6 +63,7 @@ export default function ProfileHeader({ user, isOwnProfile }) {
         />
       </div>
 
+      {/* Info */}
       <div className="pp-info">
         <h1 className="pp-username">{user.username}</h1>
 
@@ -76,10 +75,7 @@ export default function ProfileHeader({ user, isOwnProfile }) {
 
         <div className="pp-header-actions">
           {isOwnProfile ? (
-            <button
-              className="pp-btn-edit"
-              onClick={() => navigate('/edit-profile')}
-            >
+            <button className="pp-btn-edit" onClick={() => navigate('/edit-profile')}>
               Editar perfil
             </button>
           ) : (
@@ -88,22 +84,17 @@ export default function ProfileHeader({ user, isOwnProfile }) {
               onClick={handleFollow}
               disabled={loadingFollow}
             >
-              {loadingFollow
-                ? '...'
-                : isFollowing
-                  ? 'Dejar de seguir'
-                  : '+ Seguir'
-              }
+              {loadingFollow ? '...' : isFollowing ? 'Dejar de seguir' : '+ Seguir'}
             </button>
           )}
-          <button
-            className="pp-btn-home"
-            onClick={() => navigate('/user-home')}
-          >
+          <button className="pp-btn-home" onClick={() => navigate('/user-home')}>
             ← Home
           </button>
         </div>
       </div>
+
+      {/* Favoritos */}
+      <FavoriteAlbums username={user.username} isOwnProfile={isOwnProfile} />
     </div>
   );
 }

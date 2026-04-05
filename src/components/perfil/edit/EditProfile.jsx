@@ -3,12 +3,13 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Trash2 } from 'lucide-react';
 import { apiFetch } from '../../../api';
+import UserSlideMenu from '../../user/UserSlideMenu';
 import '../profile.css';
 
 export default function EditProfile() {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
+  const [loading, setLoading]               = useState(true);
+  const [saving, setSaving]                 = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -18,26 +19,22 @@ export default function EditProfile() {
     avatarUrl: ''
   });
 
-  const [errors, setErrors] = useState({});
-  const [imageFile, setImageFile] = useState(null);
+  const [errors, setErrors]         = useState({});
+  const [imageFile, setImageFile]   = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 
-  useEffect(() => {
-    loadUserData();
-  }, []);
+  useEffect(() => { loadUserData(); }, []);
 
   const loadUserData = async () => {
     try {
       const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
       if (!currentUser) { navigate('/'); return; }
-
-      const res = await apiFetch(`/user/username/${currentUser.username}`);
+      const res      = await apiFetch(`/user/username/${currentUser.username}`);
       const userData = await res.json();
-
       setFormData({
-        username: userData.username,
-        email: userData.email,
-        bio: userData.bio || '',
+        username:  userData.username,
+        email:     userData.email,
+        bio:       userData.bio || '',
         avatarUrl: userData.avatarUrl || ''
       });
     } catch (error) {
@@ -55,14 +52,12 @@ export default function EditProfile() {
   const handleImageSelect = (e) => {
     const file = e.target.files[0];
     if (!file) return;
-
     if (file.size > 5 * 1024 * 1024) {
       const mb = (file.size / 1024 / 1024).toFixed(2);
       setErrors({ general: `La imagen es demasiado grande (${mb}MB). Máximo 5MB.` });
       e.target.value = '';
       return;
     }
-
     setErrors({});
     setImageFile(file);
     const reader = new FileReader();
@@ -79,11 +74,7 @@ export default function EditProfile() {
       const token = sessionStorage.getItem('token');
       const res = await fetch(
         `http://localhost:9001/user/username/${formData.username}/foto`,
-        {
-          method: 'POST',
-          headers: { 'Authorization': `Bearer ${token}` },
-          body: formDataImage
-        }
+        { method: 'POST', headers: { 'Authorization': `Bearer ${token}` }, body: formDataImage }
       );
       if (!res.ok) throw new Error('Error al subir la imagen');
       const result = await res.json();
@@ -117,44 +108,38 @@ export default function EditProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-
     try {
       setSaving(true);
-
       let newAvatarUrl = formData.avatarUrl;
       if (imageFile) {
         const uploaded = await uploadImageToCloudinary();
         if (uploaded) newAvatarUrl = uploaded;
       }
-
-      const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-      const fullUserRes = await apiFetch(`/user/username/${currentUser.username}`);
-      const fullUser = await fullUserRes.json();
-
-      const dataToSend = {
-        idUser: fullUser.idUser,
-        username: formData.username,
-        email: formData.email,
-        bio: formData.bio || null,
+      const currentUser  = JSON.parse(sessionStorage.getItem('currentUser'));
+      const fullUserRes  = await apiFetch(`/user/username/${currentUser.username}`);
+      const fullUser     = await fullUserRes.json();
+      const dataToSend   = {
+        idUser:    fullUser.idUser,
+        username:  formData.username,
+        email:     formData.email,
+        bio:       formData.bio || null,
         avatarUrl: newAvatarUrl || null,
-        role: fullUser.role
+        role:      fullUser.role
       };
-
-      const res = await apiFetch('/user/update', {
+      const res    = await apiFetch('/user/update', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dataToSend)
       });
       const result = await res.json();
-
       if (result === 1) {
         sessionStorage.setItem('currentUser', JSON.stringify({
-          idUser: fullUser.idUser,
-          username: formData.username,
-          email: formData.email,
-          bio: formData.bio,
+          idUser:    fullUser.idUser,
+          username:  formData.username,
+          email:     formData.email,
+          bio:       formData.bio,
           avatarUrl: newAvatarUrl,
-          role: fullUser.role
+          role:      fullUser.role
         }));
         navigate('/profile');
       } else {
@@ -170,35 +155,43 @@ export default function EditProfile() {
   const getAvatarPreview = () => {
     if (imagePreview) return imagePreview;
     if (formData.avatarUrl) return formData.avatarUrl;
-    return `https://ui-avatars.com/api/?name=${formData.username}&size=150&background=ff5500&color=fff`;
+    return `https://ui-avatars.com/api/?name=${formData.username}&size=200&background=ff5500&color=fff`;
   };
 
-  if (loading) return <div className="pp-edit-page"><p className="pp-loading">Cargando…</p></div>;
+  if (loading) return (
+    <div className="pp-shell">
+      <nav className="pp-navbar">
+        <span className="pp-navbar-logo">CRATE</span>
+      </nav>
+      <p className="pp-loading">Cargando…</p>
+      <UserSlideMenu />
+    </div>
+  );
 
   return (
-    <div className="pp-edit-page">
-      <button className="pp-back-btn" onClick={() => navigate('/profile')}>
-        ← Volver al perfil
-      </button>
+    <div className="pp-shell">
+      <nav className="pp-navbar">
+        <span className="pp-navbar-logo" onClick={() => navigate('/user-home')} style={{ cursor: 'pointer' }}>
+          CRATE
+        </span>
+      </nav>
 
-      <h1 className="pp-edit-title">Editar perfil</h1>
+      <div className="pp-edit-layout">
 
-      {errors.general && (
-        <div className="pp-feedback pp-feedback--error">{errors.general}</div>
-      )}
+        {/* ── PANEL IZQUIERDO ── */}
+        <aside className="pp-edit-sidebar">
+          <button className="pp-edit-sidebar-back" onClick={() => navigate('/profile')}>
+            ← Volver al perfil
+          </button>
 
-      <form onSubmit={handleSubmit}>
-        {/* AVATAR */}
-        <div className="pp-edit-section">
-          <p className="pp-edit-section-title">Avatar</p>
-          <div className="pp-avatar-editor">
+          <div className="pp-edit-sidebar-avatar">
             <div className="pp-avatar-preview-wrap">
               <img
                 src={getAvatarPreview()}
                 alt="Preview"
-                className="pp-avatar-preview"
+                className="pp-edit-sidebar-img"
                 onError={(e) => {
-                  e.target.src = `https://ui-avatars.com/api/?name=${formData.username}&size=120&background=ff5500&color=fff`;
+                  e.target.src = `https://ui-avatars.com/api/?name=${formData.username}&size=200&background=ff5500&color=fff`;
                 }}
               />
               {uploadingImage && (
@@ -206,8 +199,10 @@ export default function EditProfile() {
               )}
             </div>
 
-            <div className="pp-avatar-actions">
-              <label htmlFor="avatar-upload" className="pp-btn-upload">
+            <span className="pp-edit-sidebar-username">{formData.username}</span>
+
+            <div className="pp-edit-sidebar-actions">
+              <label htmlFor="avatar-upload" className="pp-btn-upload" style={{ textAlign: 'center' }}>
                 {imageFile ? 'Cambiar imagen' : 'Seleccionar imagen'}
               </label>
               <input
@@ -219,7 +214,7 @@ export default function EditProfile() {
                 style={{ display: 'none' }}
               />
               {imageFile && (
-                <span className="pp-avatar-hint">{imageFile.name}</span>
+                <span className="pp-edit-sidebar-hint">{imageFile.name}</span>
               )}
               {(imageFile || formData.avatarUrl) && (
                 <button
@@ -232,87 +227,103 @@ export default function EditProfile() {
                   Eliminar avatar
                 </button>
               )}
-              <span className="pp-avatar-hint">JPG, PNG, GIF · Máx 5MB</span>
+              <span className="pp-edit-sidebar-hint">JPG, PNG, GIF · Máx 5MB</span>
             </div>
           </div>
-        </div>
+        </aside>
 
-        {/* INFO BÁSICA */}
-        <div className="pp-edit-section">
-          <p className="pp-edit-section-title">Información básica</p>
+        {/* ── PANEL DERECHO ── */}
+        <main className="pp-edit-main">
+          <div className="pp-edit-page">
+            <h1 className="pp-edit-title">Editar perfil</h1>
 
-          <div className="pp-field">
-            <label className="pp-label" htmlFor="username">Username *</label>
-            <input
-              id="username"
-              name="username"
-              type="text"
-              className={`pp-input ${errors.username ? 'pp-input--error' : ''}`}
-              value={formData.username}
-              onChange={handleChange}
-              required
-              disabled={saving}
-            />
-            {errors.username && <span className="pp-field-error">{errors.username}</span>}
+            {errors.general && (
+              <div className="pp-feedback pp-feedback--error">{errors.general}</div>
+            )}
+
+            <form onSubmit={handleSubmit}>
+              <div className="pp-edit-section">
+                <p className="pp-edit-section-title">Información básica</p>
+
+                <div className="pp-fields-row">
+                  <div className="pp-field">
+                    <label className="pp-label" htmlFor="username">Username *</label>
+                    <input
+                      id="username"
+                      name="username"
+                      type="text"
+                      className={`pp-input ${errors.username ? 'pp-input--error' : ''}`}
+                      value={formData.username}
+                      onChange={handleChange}
+                      required
+                      disabled={saving}
+                    />
+                    {errors.username && <span className="pp-field-error">{errors.username}</span>}
+                  </div>
+
+                  <div className="pp-field">
+                    <label className="pp-label" htmlFor="email">Email *</label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      className={`pp-input ${errors.email ? 'pp-input--error' : ''}`}
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      disabled={saving}
+                    />
+                    {errors.email && <span className="pp-field-error">{errors.email}</span>}
+                  </div>
+                </div>
+
+                <div className="pp-field">
+                  <label className="pp-label" htmlFor="bio">Bio</label>
+                  <textarea
+                    id="bio"
+                    name="bio"
+                    className={`pp-textarea ${errors.bio ? 'pp-textarea--error' : ''}`}
+                    value={formData.bio}
+                    onChange={handleChange}
+                    disabled={saving}
+                    rows={6}
+                    maxLength={500}
+                    placeholder="Cuéntanos sobre tus gustos musicales…"
+                  />
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    {errors.bio
+                      ? <span className="pp-field-error">{errors.bio}</span>
+                      : <span />
+                    }
+                    <span className="pp-field-hint">{formData.bio.length}/500</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pp-form-actions">
+                <button
+                  type="button"
+                  className="pp-btn-cancel"
+                  onClick={() => navigate('/profile')}
+                  disabled={saving || uploadingImage}
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  className="pp-btn-save"
+                  disabled={saving || uploadingImage}
+                >
+                  {uploadingImage ? 'Subiendo imagen…' : saving ? 'Guardando…' : 'Guardar cambios'}
+                </button>
+              </div>
+            </form>
           </div>
+        </main>
 
-          <div className="pp-field">
-            <label className="pp-label" htmlFor="email">Email *</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              className={`pp-input ${errors.email ? 'pp-input--error' : ''}`}
-              value={formData.email}
-              onChange={handleChange}
-              required
-              disabled={saving}
-            />
-            {errors.email && <span className="pp-field-error">{errors.email}</span>}
-          </div>
+      </div>
 
-          <div className="pp-field">
-            <label className="pp-label" htmlFor="bio">Bio</label>
-            <textarea
-              id="bio"
-              name="bio"
-              className={`pp-textarea ${errors.bio ? 'pp-textarea--error' : ''}`}
-              value={formData.bio}
-              onChange={handleChange}
-              disabled={saving}
-              rows={5}
-              maxLength={500}
-              placeholder="Cuéntanos sobre tus gustos musicales…"
-            />
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              {errors.bio
-                ? <span className="pp-field-error">{errors.bio}</span>
-                : <span />
-              }
-              <span className="pp-field-hint">{formData.bio.length}/500</span>
-            </div>
-          </div>
-        </div>
-
-        {/* ACCIONES */}
-        <div className="pp-form-actions">
-          <button
-            type="button"
-            className="pp-btn-cancel"
-            onClick={() => navigate('/profile')}
-            disabled={saving || uploadingImage}
-          >
-            Cancelar
-          </button>
-          <button
-            type="submit"
-            className="pp-btn-save"
-            disabled={saving || uploadingImage}
-          >
-            {uploadingImage ? 'Subiendo imagen…' : saving ? 'Guardando…' : 'Guardar cambios'}
-          </button>
-        </div>
-      </form>
+      <UserSlideMenu />
     </div>
   );
 }

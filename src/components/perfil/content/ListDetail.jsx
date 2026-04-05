@@ -1,5 +1,5 @@
 // src/components/perfil/content/ListDetail.jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Trash2, X } from 'lucide-react';
 import { apiFetch } from '../../../api';
@@ -18,6 +18,7 @@ export default function ListDetail() {
   const [searching, setSearching] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [feedback, setFeedback] = useState(null);
+  const debounceRef = useRef(null);
 
   const showFeedback = (type, message) => {
     setFeedback({ type, message });
@@ -54,21 +55,23 @@ export default function ListDetail() {
     }
   };
 
-  const handleSearch = async (e) => {
+  const handleSearch = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
     if (query.length < 2) { setSearchResults([]); return; }
-    try {
-      setSearching(true);
-      const response = await apiFetch(`/albums/search?query=${encodeURIComponent(query)}`);
-      const data = await response.json();
-      setSearchResults(data || []);
-    } catch (error) {
-      console.error('Error searching:', error);
-      setSearchResults([]);
-    } finally {
-      setSearching(false);
-    }
+    setSearching(true);
+    debounceRef.current = setTimeout(async () => {
+      try {
+        const response = await apiFetch(`/albums/search?query=${encodeURIComponent(query)}`);
+        const data = await response.json();
+        setSearchResults(data || []);
+      } catch {
+        setSearchResults([]);
+      } finally {
+        setSearching(false);
+      }
+    }, 300);
   };
 
   const handleAddAlbum = async (album) => {
@@ -139,7 +142,7 @@ export default function ListDetail() {
       {/* HEADER LISTA */}
       <div className="pp-header" style={{ alignItems: 'flex-start' }}>
         <div className="pp-info">
-          <h1 className="pp-username">📝 {list.name}</h1>
+          <h1 className="pp-username"> {list.name}</h1>
           {list.description && <p className="pp-bio">{list.description}</p>}
           <p className="pp-email">
             Por {list.username} · {albums.length} álbumes
