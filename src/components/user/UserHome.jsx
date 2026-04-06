@@ -4,6 +4,8 @@ import FollowedReviews from '../user/FollowedReviews';
 import UserSlideMenu from '../user/UserSlideMenu';
 import Footer from '../layout/public/Footer';
 import SearchBar from '../ui/SearchBar';
+import RecommendedAlbums from '../user/RecommendedAlbums';
+import EditorialSection from '../user/EditorialSection';
 import './UserHome.css';
 
 const UserHome = () => {
@@ -44,6 +46,12 @@ const UserHome = () => {
                 <FollowedReviews 
                 userId={user.idUser} 
                 />
+            </section>
+            <section>
+                <RecommendedAlbums />
+            </section>
+            <section>
+                <EditorialSection />
             </section>
         </div>
          </div>

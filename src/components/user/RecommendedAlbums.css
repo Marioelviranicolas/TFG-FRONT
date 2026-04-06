@@ -1,0 +1,29 @@
+.album-only-card {
+    height: auto !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 200px;
+    max-width: 210px;
+   
+}
+
+.recommended-albums{
+    margin-top: 80px;
+    margin-bottom: 150px;
+
+}
+
+.album-only-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+}
+
+.album-only-card .album-cover {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
