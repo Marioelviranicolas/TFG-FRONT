@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
+import { apiFetch } from '../../api';
 import './AuthModals.css';
 
 export default function RegisterModal({ isOpen, onClose, onSwitchToLogin }) {
@@ -68,20 +69,15 @@ export default function RegisterModal({ isOpen, onClose, onSwitchToLogin }) {
       // Preparar datos para enviar (sin confirmPassword)
       const { confirmPassword, ...dataToSend } = formData;
       
-      console.log('Register data:', dataToSend);
-
-      // IMPLEMENTAR: Llamada a tu backend
-      const response = await fetch('http://localhost:9001/user/register', {
+      const response = await apiFetch('/user/register', {
         method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json' 
-        },
+        skipRedirect: true,
         body: JSON.stringify({
           username: dataToSend.username,
           email: dataToSend.email,
           password: dataToSend.password,
           bio: dataToSend.bio || null,
-          role: 'USER' 
+          role: 'USER'
         })
       });
 
@@ -101,7 +97,6 @@ export default function RegisterModal({ isOpen, onClose, onSwitchToLogin }) {
       }
 
     } catch (error) {
-      console.error('Register error:', error);
       setErrors({ 
         general: 'Error de conexión. Verifica que el servidor esté activo.' 
       });

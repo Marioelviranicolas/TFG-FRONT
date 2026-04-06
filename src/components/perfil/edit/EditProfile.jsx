@@ -71,10 +71,9 @@ export default function EditProfile() {
       setUploadingImage(true);
       const formDataImage = new FormData();
       formDataImage.append('file', imageFile);
-      const token = sessionStorage.getItem('token');
-      const res = await fetch(
-        `http://localhost:9001/user/username/${formData.username}/foto`,
-        { method: 'POST', headers: { 'Authorization': `Bearer ${token}` }, body: formDataImage }
+      const res = await apiFetch(
+        `/user/username/${formData.username}/foto`,
+        { method: 'POST', body: formDataImage }
       );
       if (!res.ok) throw new Error('Error al subir la imagen');
       const result = await res.json();

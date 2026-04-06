@@ -48,26 +48,32 @@ export default function UserSlideMenu() {
             <p id="userSlideUsername">{currentUser.username}</p>
           )}
           <ul>
-            <li className="user-slidelink" onClick={() => navigate("/userhome")}>
+            <li className="user-slidelink" onClick={() => { navigate("/user-home"); setMenuActive(false); }}>
               <span>INICIO</span>
             </li>
-            <li className="user-slidelink" onClick={() => navigate(`/profile/${currentUser.username}`)}>
+            <li className="user-slidelink" onClick={() => { navigate(`/profile/${currentUser?.username}`); setMenuActive(false); }}>
               <span>MI PERFIL</span>
             </li>
-            <li className="user-slidelink" onClick={() => navigate("/explore-users")}>
+            <li className="user-slidelink" onClick={() => { navigate("/explore-users"); setMenuActive(false); }}>
               <span>EXPLORAR USUARIOS</span>
             </li>
-            <li 
+            <li
               className="user-slidelink"
+              onClick={() => setIsAccordionOpen(prev => !prev)}
             >
               <span>MI ACTIVIDAD</span>
+              <span className={`user-accordion-arrow ${isAccordionOpen ? 'open' : ''}`}>›</span>
             </li>
-              <li className="user-subslidelink" onClick={() => navigate("/my-reviews")}>
-                <span>Mis reviews</span>
-              </li>
-              <li className="user-subslidelink" onClick={() => navigate("/favorites")}>
-                <span>Favoritos</span>
-              </li>
+            {isAccordionOpen && (
+              <>
+                <li className="user-subslidelink" onClick={() => { navigate(`/profile/${currentUser?.username}`); setMenuActive(false); }}>
+                  <span>Mis reviews</span>
+                </li>
+                <li className="user-subslidelink" onClick={() => { navigate(`/profile/${currentUser?.username}`); setMenuActive(false); }}>
+                  <span>Favoritos</span>
+                </li>
+              </>
+            )}
             <li className="user-slidelink" onClick={handleLogout}>
               <span>LOG OUT</span>
             </li>

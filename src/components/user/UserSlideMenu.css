@@ -100,6 +100,18 @@ nav#user-slide-menu ul li:hover span {
   transition: color 0.3s ease;
 }
 
+.user-accordion-arrow {
+  display: inline-block;
+  margin-left: 12px;
+  font-size: 1.8rem;
+  transition: transform 0.3s ease;
+  transform: rotate(0deg);
+}
+
+.user-accordion-arrow.open {
+  transform: rotate(90deg);
+}
+
 
 .user-menu-trigger {
   position: fixed;

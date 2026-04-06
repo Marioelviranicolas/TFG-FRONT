@@ -14,7 +14,7 @@ const AlbumLists = ({ spotifyAlbumId }) => {
         apiFetch(`/listalbum/album/${spotifyAlbumId}`)
             .then(r => r.json())
             .then(data => setLists(data || []))
-            .catch(err => { console.error(err); setLists([]); })
+            .catch(() => setLists([]))
             .finally(() => setLoading(false));
     }, [spotifyAlbumId]);
 
@@ -52,8 +52,7 @@ const AlbumLists = ({ spotifyAlbumId }) => {
                 });
             }
             showFeedback('success', `"${item.listName}" copiada con ${albums.length} álbumes.`);
-        } catch (err) {
-            console.error(err);
+        } catch {
             showFeedback('error', 'Error de conexión.');
         } finally {
             setCopying(null);

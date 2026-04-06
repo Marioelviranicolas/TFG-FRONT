@@ -39,7 +39,7 @@ export default function SearchBar() {
       setLoading(true);
       try {
         const [albumsRes, usersRes] = await Promise.allSettled([
-          apiFetch(`/albums/search?query=${encodeURIComponent(query.trim())}`, { skipRedirect: true }),
+          apiFetch(`/spotify/search?query=${encodeURIComponent(query.trim())}`, { skipRedirect: true }),
           apiFetch(`/user/search?query=${encodeURIComponent(query.trim())}`, { skipRedirect: true }),
         ]);
 

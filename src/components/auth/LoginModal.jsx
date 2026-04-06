@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
+import { apiFetch } from '../../api';
 import './AuthModals.css';
 
 export default function LoginModal({ isOpen, onClose, onSwitchToRegister }) {
@@ -33,15 +33,13 @@ const handleSubmit = async (e) => {
   setErrors({});
 
   try {
-    const response = await fetch('http://localhost:9001/user/login', {
+    const response = await apiFetch('/user/login', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      }, 
       body: JSON.stringify({
         username: formData.username,
         password: formData.password,
       }),
+      skipRedirect: true,
     });
     
     if (!response.ok) {
@@ -60,7 +58,6 @@ const handleSubmit = async (e) => {
     navigate('/user-home');
 
   } catch (error) {
-    console.error('Error completo:', error);
     setErrors({ 
       general: 'Error de conexión. Verifica que el servidor esté activo.' 
     });

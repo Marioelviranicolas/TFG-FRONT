@@ -7,20 +7,24 @@ import ListDetail from './components/perfil/content/ListDetail';
 import Profile from './components/perfil/Profile';
 import EditProfile from './components/perfil/edit/EditProfile';
 import AboutUs from './components/layout/public/AboutUs';
+import PrivateRoute from './components/layout/PrivateRoute';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Rutas públicas */}
         <Route path='/' element={<Landing />} />
-        <Route path="/user-home" element={<UserHome />} />
-        <Route path='/profile' element={<ProfileWrapper />} />
-        <Route path="/profile/:username" element={<Profile />} />
-         <Route path="/about" element={<AboutUs />} />
-        <Route path='/edit-profile' element={<EditProfile />} />
-        <Route path='/explore-users' element={<ExploreUsers />} />
-        <Route path='/album/:spotifyAlbumId' element={<AlbumPage />} />
-        <Route path='/list/:id' element={<ListDetail />} />
+        <Route path='/about' element={<AboutUs />} />
+
+        {/* Rutas privadas */}
+        <Route path='/user-home' element={<PrivateRoute><UserHome /></PrivateRoute>} />
+        <Route path='/profile' element={<PrivateRoute><ProfileWrapper /></PrivateRoute>} />
+        <Route path='/profile/:username' element={<PrivateRoute><Profile /></PrivateRoute>} />
+        <Route path='/edit-profile' element={<PrivateRoute><EditProfile /></PrivateRoute>} />
+        <Route path='/explore-users' element={<PrivateRoute><ExploreUsers /></PrivateRoute>} />
+        <Route path='/album/:spotifyAlbumId' element={<PrivateRoute><AlbumPage /></PrivateRoute>} />
+        <Route path='/list/:id' element={<PrivateRoute><ListDetail /></PrivateRoute>} />
       </Routes>
     </BrowserRouter>
   );

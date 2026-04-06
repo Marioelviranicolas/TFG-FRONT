@@ -7,10 +7,11 @@ export const apiFetch = async (endpoint, options = {}) => {
     const token = getToken();
     const { skipRedirect, ...fetchOptions } = options;
 
-    const headers = {
-        'Content-Type': 'application/json',
-        ...fetchOptions.headers,
-    };
+    const headers = {};
+    if (!(fetchOptions.body instanceof FormData)) {
+        headers['Content-Type'] = 'application/json';
+    }
+    Object.assign(headers, fetchOptions.headers);
 
     // SOLO añadir Authorization si el token existe
     if (token) {

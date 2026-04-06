@@ -1,5 +1,6 @@
 // src/components/album/reviews/LikeButton.jsx
 import { useState, useEffect } from 'react';
+import { apiFetch } from '../../../api';
 
 const LikeButton = ({ reviewId }) => {
     const [liked, setLiked] = useState(false);
@@ -10,18 +11,16 @@ const LikeButton = ({ reviewId }) => {
     const userId = currentUser?.idUser;
 
     useEffect(() => {
-        // Carga el contador
-        fetch(`http://localhost:9001/likes/count/${reviewId}`)
+        apiFetch(`/likes/count/${reviewId}`, { skipRedirect: true })
             .then(res => res.json())
             .then(count => setLikeCount(count))
-            .catch(console.error);
+            .catch(() => {});
 
-        // Comprueba si el usuario ya dio like
         if (userId) {
-            fetch(`http://localhost:9001/likes/check?userId=${userId}&reviewId=${reviewId}`)
+            apiFetch(`/likes/check?userId=${userId}&reviewId=${reviewId}`, { skipRedirect: true })
                 .then(res => res.json())
                 .then(isLiked => setLiked(isLiked))
-                .catch(console.error);
+                .catch(() => {});
         }
     }, [reviewId, userId]);
 
@@ -34,8 +33,8 @@ const LikeButton = ({ reviewId }) => {
         setLikeCount(prev => liked ? prev - 1 : prev + 1);
 
         try {
-            const res = await fetch(
-                `http://localhost:9001/likes/toggle?userId=${userId}&reviewId=${reviewId}`,
+            const res = await apiFetch(
+                `/likes/toggle?userId=${userId}&reviewId=${reviewId}`,
                 { method: 'POST' }
             );
             const result = await res.json(); // devuelve 1 (liked) o 0 (unliked) o -2 (error)
@@ -47,9 +46,10 @@ const LikeButton = ({ reviewId }) => {
             } else {
                 setLiked(result === 1);
                 // Recargamos el count real del back para estar sincronizados
-                fetch(`http://localhost:9001/likes/count/${reviewId}`)
+                apiFetch(`/likes/count/${reviewId}`, { skipRedirect: true })
                     .then(res => res.json())
-                    .then(count => setLikeCount(count));
+                    .then(count => setLikeCount(count))
+                    .catch(() => {});
             }
         } catch {
             setLiked(prev => !prev);

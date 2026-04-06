@@ -17,8 +17,6 @@ const FollowedReviews = ({ userId }) => {
     const carouselRef = useRef(null); 
     const navigate = useNavigate();
 
-    console.log('FollowedReviews montado con userId:', userId);
-
     const scroll = (direction) => {
         const container = carouselRef.current;
         const scrollAmount = 320; // ancho de la tarjeta + gap
@@ -33,20 +31,13 @@ const FollowedReviews = ({ userId }) => {
 
     useEffect(() => {
         const fetchReviews = async () => {
-            console.log('Iniciando fetch para userId:', userId);
-            
             try {
                 setLoading(true);
-                
                 const response = await apiFetch(`/reviews/followed/${userId}/recent?limit=30`);
                 const data = await response.json();
-                
-                console.log('Respuesta recibida:', data[0]);
-                
                 setReviews(data);
                 setError(null);
-            } catch (err) {
-                console.error('Error completo:', err);
+            } catch {
                 setError('No se pudieron cargar las reviews');
             } finally {
                 setLoading(false);
@@ -60,25 +51,9 @@ const FollowedReviews = ({ userId }) => {
         }
     }, [userId]);
 
-    console.log('Estado actual:', { loading, error, reviewsCount: reviews.length });
-    
-
-    if (loading) {
-        console.log('Mostrando loading...');
-        return <div className="loading">Cargando reviews...</div>;
-    }
-    
-    if (error) {
-        console.log('Mostrando error:', error);
-        return <div className="error">{error}</div>;
-    }
-    
-    if (!reviews.length) {
-        console.log('No hay reviews');
-        return <div className="no-reviews">No hay reviews de las personas que sigues</div>;
-    }
-
-    console.log('Renderizando', reviews.length, 'reviews');
+    if (loading) return <div className="loading">Cargando reviews...</div>;
+    if (error)   return <div className="error">{error}</div>;
+    if (!reviews.length) return <div className="no-reviews">No hay reviews de las personas que sigues</div>;
 
     return (
         <div className="followed-reviews">

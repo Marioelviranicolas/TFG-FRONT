@@ -1,0 +1,95 @@
+.at-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.at-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.at-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #252525;
+  transition: background 0.15s ease;
+}
+
+.at-row:first-child {
+  border-top: 1px solid #252525;
+}
+
+.at-row:hover {
+  background: #161616;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-left: -8px;
+  margin-right: -8px;
+  border-radius: 4px;
+}
+
+.at-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #444;
+  width: 24px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.at-name {
+  flex: 1;
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  color: #f0f0f0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.at-duration {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  color: #555;
+  flex-shrink: 0;
+  min-width: 40px;
+  text-align: right;
+}
+
+.at-spotify-btn {
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #1db954;
+  text-decoration: none;
+  border: 1px solid #1db954;
+  border-radius: 4px;
+  padding: 4px 10px;
+  flex-shrink: 0;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.at-spotify-btn:hover {
+  background: #1db954;
+  color: #000;
+}
+
+.at-status {
+  color: #555;
+  font-size: 14px;
+  font-style: italic;
+  text-align: center;
+  padding: 40px 0;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.at-error {
+  color: #e04444;
+}
