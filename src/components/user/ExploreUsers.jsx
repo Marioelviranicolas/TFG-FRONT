@@ -131,8 +131,7 @@ const ExploreUsers = () => {
 
                 const stats = await fetchStats(allUsers);
                 setUserStats(stats);
-            } catch (err) {
-                console.error('Error:', err);
+            } catch {
             } finally {
                 setLoading(false);
             }

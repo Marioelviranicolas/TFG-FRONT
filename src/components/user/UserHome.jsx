@@ -15,8 +15,6 @@ const UserHome = () => {
     useEffect(() => {
         // Cambiado de localStorage a sessionStorage
         const userData = JSON.parse(sessionStorage.getItem('currentUser'));
-        console.log('Usuario desde sessionStorage:', userData);
-        
         if (!userData) {
             // Si no hay usuario, mandamos al login
             navigate('/');

@@ -7,9 +7,16 @@ import './album.css';
 import AlbumHeader    from './AlbumHeader';
 import AlbumReviews   from './reviews/AlbumReviews';
 import AlbumLists     from './lists/AlbumLists';
+import AlbumTracks    from './tracks/AlbumTracks';
 import AddToListModal from './modal/AddToListModal';
 import SearchBar      from '../ui/SearchBar';
 import UserSlideMenu  from '../user/UserSlideMenu';
+
+const safeJson = async (res) => {
+  const text = await res.text();
+  if (!text || !text.trim()) return null;
+  try { return JSON.parse(text); } catch { return null; }
+};
 
 const AlbumPage = () => {
     const { spotifyAlbumId } = useParams();
@@ -26,6 +33,12 @@ const AlbumPage = () => {
     const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
 
     useEffect(() => {
+        setAlbum(null);
+        setReviews([]);
+        setAverage(null);
+        setMyReview(null);
+        setLoading(true);
+
         const fetchData = async () => {
             try {
                 const [albumRes, reviewsRes, avgRes] = await Promise.all([
@@ -34,18 +47,19 @@ const AlbumPage = () => {
                     apiFetch(`/reviews/average/${spotifyAlbumId}`)
                 ]);
                 const [albumData, reviewsData, avgData] = await Promise.all([
-                    albumRes.json(), reviewsRes.json(), avgRes.json()
+                    safeJson(albumRes), safeJson(reviewsRes), safeJson(avgRes)
                 ]);
 
                 setAlbum(albumData);
                 setAverage(avgData);
 
+                const reviews = reviewsData || [];
                 if (currentUser) {
-                    const mine = reviewsData.find(r => r.user.username === currentUser.username);
+                    const mine = reviews.find(r => r.user.username === currentUser.username);
                     setMyReview(mine || null);
-                    setReviews(reviewsData.filter(r => r.user.username !== currentUser.username));
+                    setReviews(reviews.filter(r => r.user.username !== currentUser.username));
                 } else {
-                    setReviews(reviewsData);
+                    setReviews(reviews);
                 }
             } catch (err) {
                 console.error('Error cargando álbum:', err);
@@ -124,6 +138,12 @@ const AlbumPage = () => {
                     >
                         Listas
                     </button>
+                    <button
+                        className={`ap-tab ${activeTab === 'tracks' ? 'ap-tab--active' : ''}`}
+                        onClick={() => setActiveTab('tracks')}
+                    >
+                        Canciones
+                    </button>
                 </div>
 
                 {activeTab === 'reviews' && (
@@ -140,6 +160,10 @@ const AlbumPage = () => {
 
                 {activeTab === 'lists' && (
                     <AlbumLists spotifyAlbumId={spotifyAlbumId} />
+                )}
+
+                {activeTab === 'tracks' && (
+                    <AlbumTracks spotifyAlbumId={spotifyAlbumId} />
                 )}
             </div>
 

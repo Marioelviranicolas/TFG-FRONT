@@ -9,7 +9,6 @@ export default function Footer() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Aquí puedes añadir la lógica para enviar el email
-    console.log('Email suscrito:', email);
     setEmail('');
   };
 
