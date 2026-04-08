@@ -52,9 +52,21 @@ export default function Footer() {
               <p class="card__content">
                 ¿No sabes qué escuchar? Deja que nosotros decidamos tu nueva personalidad musical esta semana.
               </p>
-              <form class="card__form">
-                <input required="" type="email" placeholder="Ultimos lanzamientos" />
-                <button class="card__button">Click me</button>
+               <form action="https://gmail.us3.list-manage.com/subscribe/post?u=0ee06799225c50be6cca20263&id=e83eb46eca"
+                    method="post"
+                    target="_blank"
+                    class="card__form">
+                  <input 
+                    type="email" 
+                    name="EMAIL" 
+                    placeholder="Tu email" 
+                    required
+                    class="card__input"
+                  />
+                  <div style={{ position: "absolute", left: "-5000px" }}>
+                    <input type="text" name="b_0ee06799225c50be6cca20263_e83eb46eca" tabIndex={-1} defaultValue=""/>
+                  </div>
+                <button type="submit" className="card__button">Click me</button>
               </form>
             </div>
           </div>
