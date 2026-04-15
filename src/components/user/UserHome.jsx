@@ -34,21 +34,21 @@ const UserHome = () => {
     return (
         <>
         <div className='fondo-userhome'>
-          <div className='userhome-header'>
+          <div className='userhome-header fade-in-section delay-1'>
             <h1 className='title'>CRATE</h1>
             <SearchBar />
           </div>
         <div>
             {/* Reviews de las personas que sigues */}
-            <section>
+            <section className="fade-in-section delay-1">
                 <FollowedReviews 
                 userId={user.idUser} 
                 />
             </section>
-            <section>
+            <section className="fade-in-section delay-2">
                 <RecommendedAlbums />
             </section>
-            <section>
+            <section className="fade-in-section delay-3">
                 <EditorialSection />
             </section>
         </div>
