@@ -1,13 +1,23 @@
 import { useNavigate } from 'react-router-dom';
 import './EditorialSection.css';
 
+
+import charliSabrinaImg from '../../assets/images/charli-sabrina.png';
+import hyperpop from '../../assets/images/hyperpop.jpg';
+import mkguee from '../../assets/images/mkguee.jpg';
+import magdalenabay from '../../assets/images/magdalena-bay.jpg';
+import shygirl from '../../assets/images/Shygirl.jpeg';
+import stereomadness from '../../assets/images/stereo-madness.jpg';
+import kendrick from '../../assets/images/kendrick.avif';
+import thesmile from '../../assets/images/the-smile.jpeg';
+
 const articles = {
   hero: {
     id: 1,
     tag: 'Especial',
     title: 'Charli XCX, Sabrina Carpenter y el año en que el pop volvió a tener dientes',
     desc: '2024 demostró que el mainstream puede ser extraño, irónico y brutalmente honesto al mismo tiempo. Repasamos cómo dos artistas redefinieron lo que significa arrasar en charts sin renunciar a nada.',
-    img: '/articles/hero-pop.jpg',
+    img: charliSabrinaImg,
     readTime: '8 min',
   },
   featured: [
@@ -16,7 +26,7 @@ const articles = {
       tag: 'Tendencia',
       title: 'Por qué todo el mundo está escuchando hyperpop a las 3 de la mañana',
       desc: 'De 100 gecs a Frost Children: la generación Z ha convertido el caos sónico en su música de cabecera. El hyperpop ya no es un meme, es un estado de ánimo.',
-      img: '/articles/hyperpop.jpg',
+      img: hyperpop,
       date: 'Hace 2 días',
       readTime: '5 min',
     },
@@ -25,7 +35,7 @@ const articles = {
       tag: 'Reseña',
       title: 'Mk.gee y el álbum de guitarra más raro que escucharás este año',
       desc: '"Two Star & The Dream Police" suena como si Radiohead y D\'Angelo se hubieran conocido en un sueño lúcido. Mk.gee lleva meses siendo el secreto mejor guardado de internet.',
-      img: '/articles/mkgee.jpg',
+      img: mkguee,
       date: 'Hace 3 días',
       readTime: '6 min',
     },
@@ -34,7 +44,7 @@ const articles = {
       tag: 'Perfil',
       title: 'Magdalena Bay: los arquitectos del pop más inteligente de la década',
       desc: 'Con "Imaginal Disk" han construido un universo propio donde la synth pop de los 80 se convierte en ciencia ficción emocional. Y apenas nadie sabe quiénes son todavía.',
-      img: '/articles/magdalena-bay.jpg',
+      img: magdalenabay,
       date: 'Ayer',
       readTime: '7 min',
     },
@@ -46,15 +56,15 @@ const articles = {
       title: 'Shygirl y la nueva vanguardia del club británico',
       date: 'Hace 4 días',
       readTime: '4 min',
-      img: '/articles/shygirl.jpg',
+      img: shygirl,
     },
     {
       id: 6,
       tag: 'En vivo',
-      title: 'El concierto de Bicep en el Primavera que nadie olvidará',
+      title: 'La Mutant "se agita" con el funky de Stereo Madness',
       date: 'Hace 5 días',
       readTime: '3 min',
-      img: '/articles/bicep.jpg',
+      img: stereomadness,
     },
     {
       id: 7,
@@ -62,7 +72,7 @@ const articles = {
       title: 'Cómo Kendrick Lamar ganó algo más que un beef en 2024',
       date: 'Hace 1 semana',
       readTime: '9 min',
-      img: '/articles/kendrick.jpg',
+      img: kendrick,
     },
     {
       id: 8,
@@ -70,7 +80,7 @@ const articles = {
       title: 'The Smile, Thom Yorke y el rock que no necesita demostrar nada',
       date: 'Hace 1 semana',
       readTime: '6 min',
-      img: '/articles/thesmile.jpg',
+      img: thesmile,
     },
   ],
 };

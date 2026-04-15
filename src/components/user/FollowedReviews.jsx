@@ -83,7 +83,12 @@ const FollowedReviews = ({ userId }) => {
                                     src={getAvatarUrl(review.user)} 
                                     alt={review.user.username}
                                     className="avatar"
-                                    />
+                                    style={{ cursor: "pointer" }}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        navigate(`/profile/${review.user.username}`);
+                                    }}
+                                />
                                     <div className='rating-username'>
                                     <span 
                                         className="username"
