@@ -13,23 +13,17 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 12px 0;
-  border-bottom: 1px solid #252525;
+  padding: 12px 8px;
+  border-bottom: 1px solid #1e1e1e;
+  border-radius: 4px;
+  cursor: pointer;
   transition: background 0.15s ease;
 }
-
-.at-row:first-child {
-  border-top: 1px solid #252525;
-}
-
-.at-row:hover {
-  background: #161616;
-  padding-left: 8px;
-  padding-right: 8px;
-  margin-left: -8px;
-  margin-right: -8px;
-  border-radius: 4px;
-}
+.at-row:first-child { border-top: 1px solid #1e1e1e; }
+.at-row:hover { background: #161616; }
+.at-row:hover .at-num  { color: #ff5500; }
+.at-row:hover .at-name { color: #fff; }
+.at-row:hover .at-play-hint { opacity: 1; }
 
 .at-num {
   font-family: 'Barlow Condensed', sans-serif;
@@ -39,6 +33,7 @@
   width: 24px;
   text-align: right;
   flex-shrink: 0;
+  transition: color 0.15s;
 }
 
 .at-name {
@@ -49,35 +44,24 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: color 0.15s;
 }
 
 .at-duration {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 13px;
-  color: #555;
+  color: #444;
   flex-shrink: 0;
   min-width: 40px;
   text-align: right;
 }
 
-.at-spotify-btn {
-  font-family: 'Barlow', sans-serif;
+.at-play-hint {
   font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
   color: #1db954;
-  text-decoration: none;
-  border: 1px solid #1db954;
-  border-radius: 4px;
-  padding: 4px 10px;
   flex-shrink: 0;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-
-.at-spotify-btn:hover {
-  background: #1db954;
-  color: #000;
+  opacity: 0;
+  transition: opacity 0.15s;
 }
 
 .at-status {
@@ -89,7 +73,4 @@
   max-width: 900px;
   margin: 0 auto;
 }
-
-.at-error {
-  color: #e04444;
-}
+.at-error { color: #e04444; }

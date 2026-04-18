@@ -1,13 +1,14 @@
-// src/components/perfil/content/ProfileContent.jsx
 import { useState } from 'react';
 import ProfileStats from './ProfileStats';
 import ProfileReviews from './ProfileReviews';
 import ProfileList from './ProfileList';
+import ProfileActivity from './ProfileActivity';
+import ProfileInsights from './ProfileInsights';
 import FollowModal from './FollowModal';
 
 export default function ProfileContent({ username }) {
   const [activeTab, setActiveTab] = useState('reviews');
-  const [modalType, setModalType] = useState(null); // 'followers' | 'following' | null
+  const [modalType, setModalType] = useState(null);
 
   return (
     <div>
@@ -35,13 +36,18 @@ export default function ProfileContent({ username }) {
         >
           Actividad
         </button>
+        <button
+          className={`pp-tab ${activeTab === 'insights' ? 'pp-tab--active' : ''}`}
+          onClick={() => setActiveTab('insights')}
+        >
+          Estadísticas
+        </button>
       </div>
 
-      {activeTab === 'reviews'  && <ProfileReviews username={username} />}
-      {activeTab === 'lists'    && <ProfileList username={username} />}
-      {activeTab === 'activity' && (
-        <p className="pp-activity-soon">Próximamente: feed de actividad reciente.</p>
-      )}
+      {activeTab === 'reviews'  && <ProfileReviews  username={username} />}
+      {activeTab === 'lists'    && <ProfileList      username={username} />}
+      {activeTab === 'activity' && <ProfileActivity  username={username} />}
+      {activeTab === 'insights' && <ProfileInsights  username={username} />}
 
       {modalType && (
         <FollowModal
