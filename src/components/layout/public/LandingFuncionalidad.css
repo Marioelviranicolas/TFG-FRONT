@@ -7,9 +7,9 @@ body {
 
 /* CONTENEDOR FULL WIDTH */
 .contenedor {
-    margin-top: 170px;
+    margin-top: 145px;
     width: 100%;
-    height: 900px;
+    height: 1150px;
     padding: 60px 40px;
     box-sizing: border-box;
 }
@@ -17,9 +17,11 @@ body {
 /* TÍTULO */
 .header {
     text-align: center;
-    font-size: 3.2rem;
-    margin-bottom: 50px;
+    margin-top: 90px;
+    font-size: 3.7rem;
+    margin-bottom: 90px;
     font-family: 'ClashDisplay-Bold', sans-serif;
+    
     
 }
 

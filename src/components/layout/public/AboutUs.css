@@ -2,7 +2,12 @@
 
 body {
     margin: 0;
-    background-color: #1b1b1b;
+      background: linear-gradient(
+        #0c0c15 0%, 
+        #121220 25%, 
+        #1b1b2e 60%, 
+        #24243d 100%
+    );
     color: white;
     font-family: sans-serif;
 }
@@ -65,7 +70,7 @@ body {
     position: relative;
     width: 100%;
     height: 1800px;
-    background-color: #222020;
+   
 }
 
 .contenedor-team {
@@ -95,6 +100,7 @@ body {
     font-size: 1.2rem;
     line-height: 1.8;
     margin-bottom: 1.5rem;
+    font-family: 'ClashDisplay-SemiBold', sans-serif;
     
     /* Animación */
     opacity: 0;
@@ -191,6 +197,7 @@ body {
     font-size: 1.3rem;
     margin-bottom: 30px;
     line-height: 1.8;
+    font-family: 'ClashDisplay-Semibold', sans-serif;
     
     /* Animación */
     opacity: 0;

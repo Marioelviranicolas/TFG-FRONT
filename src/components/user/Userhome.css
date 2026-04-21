@@ -1,12 +1,7 @@
 
 .fondo-userhome{
     min-height: 100vh;
-  background: linear-gradient(
-    180deg,
-    #1f1f1f 0%,
-    #111111 60%,
-    #292929 100%
-  );
+  background: #121220;
 }
 
 .userhome-header {
