@@ -35,7 +35,7 @@ export default function Funcionalidad() {
                 </WobbleCard>
 
                 {/* Card pequeña - Comunidad (negro) */}
-                <WobbleCard containerClassName="col-span-1 min-h-[300px] !bg-[#0a0a0a]">
+                <WobbleCard containerClassName="col-span-1 min-h-[300px] !bg-[#1b1b2e]">
                     <h2 className="text-left text-3xl font-semibold text-white"
                         style={{ fontFamily: 'ClashDisplay-Bold, sans-serif' }}>
                         Comunidad
@@ -47,7 +47,7 @@ export default function Funcionalidad() {
                 </WobbleCard>
 
                 {/* Card pequeña - Listas (naranja) */}
-                <WobbleCard containerClassName="col-span-1 min-h-[300px] !bg-[#0a0a0a]">
+                <WobbleCard containerClassName="col-span-1 min-h-[300px] !bg-[#0c0c23]">
                     <h2 className="text-left text-3xl font-semibold text-white"
                         style={{ fontFamily: 'ClashDisplay-Bold, sans-serif' }}>
                         Listas

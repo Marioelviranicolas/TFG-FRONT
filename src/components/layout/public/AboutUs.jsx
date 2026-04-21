@@ -5,6 +5,7 @@ import SlideMenu from './SlideMenu';
 import Footer from './Footer';
 import RegisterModal from '../../auth/RegisterModal';
 import Team from '@/assets/images/Team.jpg';
+import Button from '@/components/ui/ButtonVoxy';
 
 import aboutbackground from '@/assets/images/AboutUs.jpg';
 
@@ -58,12 +59,16 @@ export default function AboutUs() {
                 otros están escuchando. En 5 minutos entenderás por qué CRATE es diferente.
                 La mejor forma de entender CRATE es <em>usándolo</em>.
           </p>
-          <button 
-                onClick={() => setIsRegisterOpen(true)}
-                className="register-btn"
-              >
-                <span>Regístrate gratis</span>
-              </button>
+          <Button
+          onClick={() => setIsRegisterOpen(true)}
+          className="landing-nav__btn landing-nav__btn--register"
+          color="#FF6B35" 
+          outlineColor="#000000"
+          fontFamily = 'ClashDisplay-semibold'
+          textColor = '#ffffff'
+        >
+          Regístrate Gratis
+        </Button>
           </div>
           
         </section>

@@ -10,11 +10,11 @@ nav#slide-menu {
 	width: 100vw;
 	height: 100vh;
  background: linear-gradient(
-    #0a0a0a 0%,
-    #141414 25%,
-    #1a1a1a 60%,
-    #202020 100%
-  );
+    #0c0c15 0%,   /* Un tono más profundo para la base */
+    #121220 25%,  /* Tu color principal */
+    #1b1b2e 60%,  /* Un tono medio para dar volumen */
+    #24243d 100%  /* El punto de luz más claro */
+);
 	z-index: 10000;
 	transition: bottom 900ms ease-in-out;
 }
@@ -56,6 +56,7 @@ body.menu-active nav#slide-menu {
   font-size: 2rem;
   text-align: right;
   margin-right: 16px;
+  font-family:'ClashDisplay-Bold'
 }
 
 .social-sectionTitle3{

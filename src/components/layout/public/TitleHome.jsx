@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import RegisterModal from '../../auth/RegisterModal';
 import LoginModal from '../../auth/LoginModal';
+import Button from '@/components/ui/ButtonVoxy';
 import './TitleHome.css';
 
 export default function TitleHome() {
@@ -22,18 +23,25 @@ export default function TitleHome() {
           <span className="highlight">Guarda</span> los que quieres explorar
         </p>
       <div className='btn-title-home'>
-        <button
+        <Button
           onClick={() => setIsRegisterOpen(true)}
           className="landing-nav__btn landing-nav__btn--register"
+          color="#FF6B35" 
+          outlineColor="#000000"
+          fontFamily = 'ClashDisplay-semibold'
+          textColor = '#ffffff'
         >
           Empieza ahora
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={() => setIsLoginOpen(true)}
           className="landing-nav__btn landing-nav__btn--login"
+          color=" #1b1b2e" 
+          outlineColor="#000000"
+          textColor = '#ffffff'
         >
           Entrar
-        </button>
+        </Button>
       </div>
       </div>
           <LoginModal 

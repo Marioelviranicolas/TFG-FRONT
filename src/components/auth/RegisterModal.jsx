@@ -3,6 +3,7 @@ import { X } from 'lucide-react';
 import { apiFetch } from '../../api';
 import './AuthModals.css';
 
+
 export default function RegisterModal({ isOpen, onClose, onSwitchToLogin }) {
   const [formData, setFormData] = useState({
     username: '',
