@@ -3,6 +3,7 @@ import { X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { apiFetch } from '../../api';
 import './AuthModals.css';
+import Button from '@/components/ui/ButtonVoxy';
 
 export default function LoginModal({ isOpen, onClose, onSwitchToRegister }) {
   const [formData, setFormData] = useState({
@@ -53,7 +54,7 @@ const handleSubmit = async (e) => {
     sessionStorage.setItem('token', data.token);
     sessionStorage.setItem('currentUser', JSON.stringify(data.user));
 
-    alert(`¡Bienvenido, ${data.user.username}!`);
+   
     onClose();
     navigate('/user-home');
 
@@ -118,13 +119,17 @@ const handleSubmit = async (e) => {
             />
           </div>
 
-          <button 
-            type="submit" 
-            className="modal-submit"
-            disabled={isLoading}
-          >
-            {isLoading ? 'Logging in...' : 'Log in'}
-          </button>
+          <div style={{ marginTop: '1rem', width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <Button 
+              color="#FF6B35" 
+              hoverColor="#ff8c5a"
+              textColor="white" 
+              fontSize="1.1rem"
+              disabled={isLoading}
+            >
+              {isLoading ? 'Logging in...' : 'Log in'}
+            </Button>
+          </div>
         </form>
 
         {/* Footer */}

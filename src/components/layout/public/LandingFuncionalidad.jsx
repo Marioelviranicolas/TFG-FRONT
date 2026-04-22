@@ -30,7 +30,7 @@ export default function Funcionalidad() {
                         width={500}
                         height={500}
                         alt="Vista de la biblioteca"
-                        className="absolute -right-4 lg:-right-[20%] -bottom-5 object-contain rounded-2xl"
+                        className="absolute -right-4 lg:-right-[20%] -bottom-12 object-contain rounded-2xl"
                     />
                 </WobbleCard>
 

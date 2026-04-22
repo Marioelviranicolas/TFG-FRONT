@@ -37,7 +37,7 @@ export default function AlbumTracks({ spotifyAlbumId }) {
   if (!tracks.length) return <p className="at-status">Sin pistas disponibles.</p>;
 
   return (
-    <div className="at-container">
+    <div className="at-container fade-in-section delay-5">
       <ol className="at-list">
         {tracks.map((track, i) => (
           <li

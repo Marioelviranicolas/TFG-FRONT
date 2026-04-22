@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { apiFetch } from '../../api';
+import Footer from '../layout/public/Footer';
 import './album.css';
 
 import AlbumHeader    from './AlbumHeader';
@@ -94,7 +95,7 @@ const AlbumPage = () => {
 
     return (
         <div className="ap-shell">
-            <nav className="ap-navbar">
+            <nav className="ap-navbar fade-in-section delay-1">
                 <span className="ap-navbar-logo" onClick={() => navigate('/user-home')}>
                     CRATE
                 </span>
@@ -104,10 +105,7 @@ const AlbumPage = () => {
             </nav>
 
             <div className="ap-page">
-                <button className="ap-back-btn" onClick={() => navigate(-1)}>
-                    ← Volver
-                </button>
-
+            
                 <AlbumHeader
                     album={album}
                     average={average}
@@ -125,7 +123,7 @@ const AlbumPage = () => {
                     />
                 )}
 
-                <div className="ap-tabs">
+                <div className="ap-tabs fade-in-section delay-4">
                     <button
                         className={`ap-tab ${activeTab === 'reviews' ? 'ap-tab--active' : ''}`}
                         onClick={() => setActiveTab('reviews')}
@@ -165,7 +163,11 @@ const AlbumPage = () => {
                 {activeTab === 'tracks' && (
                     <AlbumTracks spotifyAlbumId={spotifyAlbumId} />
                 )}
+                
             </div>
+            <div>
+                    <Footer />
+                    </div>
 
             <UserSlideMenu />
         </div>

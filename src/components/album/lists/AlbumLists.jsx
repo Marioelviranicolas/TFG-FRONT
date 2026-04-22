@@ -65,7 +65,7 @@ const AlbumLists = ({ spotifyAlbumId }) => {
     const otherLists = currentUser ? lists.filter(l => l.listOwnerUsername !== currentUser.username) : lists;
 
     return (
-        <div className="ap-reviews-section">
+        <div className="ap-reviews-section fade-in-section delay-5">
             <span className="ap-section-title">Listas</span>
 
             {feedback && (

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaInstagram, FaLinkedinIn, FaYoutube, FaTwitter } from 'react-icons/fa';
 import "./UserSlideMenu.css";
 
 export default function UserSlideMenu() {
@@ -34,11 +35,16 @@ export default function UserSlideMenu() {
     <>
       <nav id="user-slide-menu">
         <div className="user-slide-content">
-          <div className="user-avatar-container">
-            <img src={getAvatarUrl()} alt={currentUser?.username || "User"} />
-          </div>
-          {currentUser && <p id="userSlideUsername">{currentUser.username}</p>}
 
+          {/* LEFT — Avatar + Username (igual que .slideTitle en landing) */}
+          <div className="user-header-left">
+            <div className="user-avatar-container">
+              <img src={getAvatarUrl()} alt={currentUser?.username || "User"} />
+            </div>
+            {currentUser && <p id="userSlideUsername">{currentUser.username}</p>}
+          </div>
+
+          {/* CENTER-RIGHT — Links (igual que .landing-slidelink) */}
           <ul>
             <li className="user-slidelink" onClick={() => go("/user-home")}>
               <span>INICIO</span>
@@ -52,23 +58,29 @@ export default function UserSlideMenu() {
             <li className="user-slidelink" onClick={() => go("/explore-users")}>
               <span>EXPLORAR USUARIOS</span>
             </li>
-            <li className="user-slidelink" onClick={() => setIsAccordionOpen(p => !p)}>
-              <span>MI ACTIVIDAD</span>
-              <span className={`user-accordion-arrow ${isAccordionOpen ? 'open' : ''}`}>›</span>
-            </li>
-            {isAccordionOpen && (
-              <>
-                <li className="user-subslidelink" onClick={() => go(`/profile/${currentUser?.username}`)}>
-                  <span>Mis reviews</span>
-                </li>
-                <li className="user-subslidelink" onClick={() => go(`/profile/${currentUser?.username}`)}>
-                  <span>Favoritos</span>
-                </li>
-              </>
-            )}
             <li className="user-slidelink" onClick={handleLogout}>
               <span>LOG OUT</span>
             </li>
+
+            {/* BOTTOM-RIGHT — Social (igual que landing) */}
+            <div className="social-section-SlideMenu">
+              <h3 className="social-sectionTitle">Follow Us</h3>
+              <h5 className="social-sectionTitle3">crate@crate.com</h5>
+              <div className="social-icons-SlideMenu">
+                <a href="https://instagram.com" className="social-icon-SlideMenu" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                  <FaInstagram />
+                </a>
+                <a href="https://linkedin.com" className="social-icon-SlideMenu" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                  <FaLinkedinIn />
+                </a>
+                <a href="https://youtube.com" className="social-icon-SlideMenu" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+                  <FaYoutube />
+                </a>
+                <a href="https://twitter.com" className="social-icon-SlideMenu" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+                  <FaTwitter />
+                </a>
+              </div>
+            </div>
           </ul>
         </div>
       </nav>

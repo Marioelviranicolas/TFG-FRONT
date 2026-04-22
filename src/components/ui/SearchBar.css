@@ -4,62 +4,14 @@
   max-width: 480px;
 }
 
-.sb-input-wrap {
+.input__container {
+  transform-style: preserve-3d;
   position: relative;
-  display: flex;
-  align-items: center;
 }
 
-.sb-icon {
-  position: absolute;
-  left: 12px;
-  width: 16px;
-  height: 16px;
-  color: #555;
-  pointer-events: none;
-  flex-shrink: 0;
-}
 
-.sb-input {
-  width: 100%;
-  background: #1a1a1a;
-  border: 1px solid #252525;
-  border-radius: 8px;
-  color: #f0f0f0;
-  font-family: 'Barlow', sans-serif;
-  font-size: 14px;
-  padding: 10px 36px 10px 38px;
-  outline: none;
-  transition: border-color 0.18s ease;
-}
-
-.sb-input:focus {
-  border-color: #ff5500;
-}
-
-.sb-input::placeholder {
-  color: #444;
-}
-
-.sb-spinner {
-  position: absolute;
-  right: 36px;
-  width: 14px;
-  height: 14px;
-  border: 2px solid #333;
-  border-top-color: #ff5500;
-  border-radius: 50%;
-  animation: sb-spin 0.7s linear infinite;
-  flex-shrink: 0;
-}
-
-@keyframes sb-spin {
-  to { transform: rotate(360deg); }
-}
 
 .sb-clear {
-  position: absolute;
-  right: 10px;
   background: none;
   border: none;
   color: #555;
@@ -68,24 +20,57 @@
   cursor: pointer;
   padding: 0 4px;
   transition: color 0.15s ease;
+  flex-shrink: 0;
 }
 
 .sb-clear:hover {
   color: #f0f0f0;
 }
 
-/* ---- Dropdown ---- */
+/* ---- Dropdown (renderizado en body) ---- */
 .sb-dropdown {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  right: 0;
-  background: #161616;
-  border: 1px solid #2a2a2a;
-  border-radius: 8px;
-  z-index: 500;
+  position: absolute !important;
+  transform: none;
+  z-index: 999999 !important;
+  background: #111;
+  margin-left: 360px;
+  margin-top: 12px;
+  font-family: 'ClashDisplay-Medium';
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE y Edge */
+  border: 1px solid #080808;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
+  max-height: 400px;
+  overflow-y: auto;
+  box-shadow: 
+    40px 60px 60px rgb(0, 0, 0);
+  
+  
+  opacity: 0;
+  animation: sb-slide-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  pointer-events: auto;
+  background: linear-gradient(
+    #0c0c15 0%,   
+    #121220 25%, 
+    #1b1b2e 60%,  
+    #24243d 100%  
+);
+}
+
+@keyframes sb-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.sb-dropdown::-webkit-scrollbar {
+  display: none;
 }
 
 .sb-empty {
@@ -107,60 +92,45 @@
 }
 
 .sb-section-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 10px;
+  font-family: 'ClashDisplay-Medium';
+  font-size: 25px;
   font-weight: 700;
-  color: #ff5500;
+  color: #FF6B35;
   text-transform: uppercase;
-  letter-spacing: 0.3em;
-  padding: 10px 14px 4px;
-  display: block;
+  padding: 12px 14px 6px;
+  opacity: 0.8;
 }
 
 .sb-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 8px 14px;
+  padding: 10px 14px;
   background: none;
   border: none;
   width: 100%;
   text-align: left;
   cursor: pointer;
-  transition: background 0.15s ease;
-}
-
-.sb-item:last-child {
-  padding-bottom: 10px;
+  transition: all 0.18s ease;
 }
 
 .sb-item:hover {
-  background: #1e1e1e;
+  background: rgba(255, 85, 0, 0.12);
+  transform: translateX(4px);
 }
 
 .sb-cover {
-  width: 40px;
-  height: 40px;
+  width: 65px;
+  height: 65px;
   object-fit: cover;
   border-radius: 4px;
   flex-shrink: 0;
 }
 
-.sb-cover-placeholder {
-  width: 40px;
-  height: 40px;
-  background: #252525;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  flex-shrink: 0;
-}
 
 .sb-avatar {
-  width: 40px;
-  height: 40px;
+  width: 65px;
+  height: 65px;
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
@@ -174,8 +144,8 @@
 }
 
 .sb-item-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 14px;
+  font-family: 'ClashDisplay-Medium';
+  font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -186,7 +156,7 @@
 }
 
 .sb-item-sub {
-  font-size: 11px;
+  font-size: 14px;
   color: #777;
   white-space: nowrap;
   overflow: hidden;

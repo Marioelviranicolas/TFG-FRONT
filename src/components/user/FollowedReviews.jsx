@@ -60,7 +60,14 @@ const FollowedReviews = ({ userId }) => {
             <div className="reviews-carousel">
             <div className="reviews-title">
             <h2>Nuevas escuchas de tus amigos</h2>
-            <a href='##'>All Activity</a>
+            <a 
+            onClick={(e) => {                            
+            navigate(`/profile/`);
+         }}
+            >All Activity
+
+
+            </a>
             </div>
             
                 <div className="reviews-list-carousel" ref={carouselRef}>
@@ -94,7 +101,7 @@ const FollowedReviews = ({ userId }) => {
                                         className="username"
                                         style={{ cursor: "pointer" }}
                                         onClick={(e) => {
-                                            e.stopPropagation(); // 🔥 evita que salte el click del padre
+                                            e.stopPropagation(); // evita que salte el click del padre
                                             navigate(`/profile/${review.user.username}`);
                                         }}
                                         >
