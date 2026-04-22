@@ -1,8 +1,4 @@
 
-/* =========================
-   SLIDE MENU (OVERLAY RIGHT)
-========================= */
-
 nav#slide-menu {
 	position: fixed;
 	bottom: -103vh;
@@ -10,10 +6,10 @@ nav#slide-menu {
 	width: 100vw;
 	height: 100vh;
  background: linear-gradient(
-    #0c0c15 0%,   /* Un tono más profundo para la base */
-    #121220 25%,  /* Tu color principal */
-    #1b1b2e 60%,  /* Un tono medio para dar volumen */
-    #24243d 100%  /* El punto de luz más claro */
+    #0c0c15 0%,   
+    #121220 25%, 
+    #1b1b2e 60%,  
+    #24243d 100%  
 );
 	z-index: 10000;
 	transition: bottom 900ms ease-in-out;
@@ -34,10 +30,6 @@ body.menu-active nav#slide-menu {
   color: #fffffffd;
   opacity: 0;
 }
-
-
-
-
 
 #slideUsername{
   color: #ffffff;

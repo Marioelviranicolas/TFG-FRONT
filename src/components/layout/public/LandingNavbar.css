@@ -1,4 +1,31 @@
+/* --- ANIMACIONES (Asegúrate de que estén al principio del archivo) --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+/* --- ESTILOS ACTUALIZADOS --- */
+
+.title-navbar {
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 3.5rem;
+  margin-top: 17px;
+  margin-left: 140px;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+  
+  /* --- NUEVA ANIMACIÓN --- */
+  opacity: 0; 
+  animation: fadeInUp 0.8s ease-out forwards;
+  animation-delay: 0.2s; /* Un pequeño delay para que entre después del fondo */
+}
 
 .landing-nav {
   background-color: #ffffff;
@@ -7,26 +34,24 @@
   border-radius: 10px;
   margin-left: 100px;
   margin-top: 40px;
-  
-
 }
+
 .landing-nav__container {
   display: flex;
   margin: 0 auto;
-  padding: 2 2rem;
+  padding: 0 2rem; /* Corregido el padding */
   height: 150px;
   align-items: center;
   justify-content: space-around;
   position: relative;
-  
 }
 
-.landing-nav__logo{
+.landing-nav__logo {
   text-decoration: none;
   margin-top: -30px;
   width: 100px;
   height: 100px;
-  margin-right:10px;
+  margin-right: 10px;
 }
 
 .landing-nav-buttons {
@@ -44,28 +69,16 @@
   border-radius: 12px;
   transition: all 0.3s ease;
   border: 3px solid black;
-  
 }
 
 .landing-nav__btn--register {
   background: #FF6B35;
   color: white;
 }
+
 .landing-nav__btn--register:hover {
   transform: translateY(-3px) scale(1.04);
   box-shadow:
     10px 10px 24px rgba(0, 0, 0, 0.45),
     0 0 30px rgba(255, 107, 53, 0.6);
-}
-
-
-.title-navbar{
-  font-family: 'ClashDisplay-Bold', sans-serif;
-  font-size: 3.5rem; /* Más grande como en la imagen */
-  margin-top: 17px;
-  margin-left: 140px;
-  text-decoration: none;
-  letter-spacing: 0.1em; /* Menos espacio entre letras */
-  color: #ffffff;
- 
 }

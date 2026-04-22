@@ -3,7 +3,7 @@ import MyReview from './MyReview';
 import ReviewCard from './ReviewCard';
 
 const AlbumReviews = ({ spotifyAlbumId, currentUser, reviews, myReview, setMyReview, setReviews, setAverage }) => (
-    <div className="ap-reviews-section">
+    <div className="ap-reviews-section fade-in-section delay-5 ">
         <span className="ap-section-title">Reviews</span>
 
         {currentUser && (

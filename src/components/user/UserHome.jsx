@@ -20,7 +20,6 @@ const UserHome = () => {
             navigate('/');
             return;
         }
-        
         setUser(userData);
 
 
@@ -53,6 +52,7 @@ const UserHome = () => {
             </section>
         </div>
          </div>
+         
         <UserSlideMenu />
         <div>
         <Footer />

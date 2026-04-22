@@ -2,8 +2,8 @@
 
 const AlbumHeader = ({ album, average, reviewCount, currentUser, onAddToList }) => (
     <div className="ap-header">
-        <img src={album.coverUrl} alt={album.title} className="ap-cover" />
-        <div className="ap-info">
+        <img src={album.coverUrl} alt={album.title} className="ap-cover fade-in-section delay-2" />
+        <div className="ap-info fade-in-section delay-3">
             <h1 className="ap-info-title">{album.title}</h1>
             <h2 className="ap-info-artist">{album.artist}</h2>
 

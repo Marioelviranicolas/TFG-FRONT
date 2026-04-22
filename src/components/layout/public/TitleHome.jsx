@@ -30,15 +30,19 @@ export default function TitleHome() {
           outlineColor="#000000"
           fontFamily = 'ClashDisplay-semibold'
           textColor = '#ffffff'
+          animation="popIn" 
+          delay="0.6s"
         >
           Empieza ahora
         </Button>
         <Button
           onClick={() => setIsLoginOpen(true)}
           className="landing-nav__btn landing-nav__btn--login"
-          color=" #1b1b2e" 
+          color=" #1b1b2e"
           outlineColor="#000000"
           textColor = '#ffffff'
+          animation="popIn" 
+          delay="0.8s"
         >
           Entrar
         </Button>
