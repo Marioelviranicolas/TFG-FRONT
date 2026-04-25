@@ -9,15 +9,19 @@
 .explore-page {
     min-height: 100vh;
     background: linear-gradient(
-        #0c0c11 0%,
+        #0e0e18 0%,
         #121220 25%,
         #1b1b2e 60%,
         #24243d 100%
     );
     color: #f0f0f0;
     font-family: 'ClashDisplay-Medium', sans-serif;
-   padding: 2.5rem 5vw 8rem 5vw;
-    margin-top: -24px;
+    padding-top: 60px;
+    padding-left: 320px;
+    padding-right: 265px;
+    padding-bottom: 80px;
+   
+  
 }
 
 /* ════════════════════════════════════════

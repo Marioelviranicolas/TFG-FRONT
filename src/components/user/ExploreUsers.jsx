@@ -264,7 +264,7 @@ const ExploreUsers = () => {
     );
 
 return (
-  <div style={{ background: 'linear-gradient(#0c0c15 0%, #121220 25%, #1b1b2e 60%, #24243d 100%)', minHeight: '100vh' }}>
+  <div>
 
     {/* Navbar — sin padding propio */}
     <div className='userhome-header'>
