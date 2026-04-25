@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiFetch } from '../../api';
+import SearchBar from '../ui/SearchBar';
+import Footer from '../layout/public/Footer';
+import UserSlideMenu from './UserSlideMenu';
 import './ExploreUsers.css';
 
 // ─── Fila de portadas de álbumes ──────────────────────────────────────────────
@@ -260,51 +263,45 @@ const ExploreUsers = () => {
         </div>
     );
 
-    return (
-        <div className="explore-page">
-            <header className="explore-header">
-                <button className="back-btn" onClick={() => navigate('/user-home')}>← Volver</button>
-                <h1 className="explore-title">Explorar</h1>
-                <div className="explore-search">
-                    <div className="explore-search__input-wrap">
-                        <span className="explore-search__icon">🔍</span>
-                        <input
-                            type="text"
-                            className="explore-search__input"
-                            placeholder="Buscar usuarios..."
-                            value={searchQuery}
-                            onChange={handleSearchChange}
-                            autoComplete="off"
-                        />
-                        {searchQuery && (
-                            <button className="explore-search__clear" onClick={clearSearch}>✕</button>
-                        )}
-                    </div>
-                </div>
-            </header>
+return (
+  <div style={{ background: 'linear-gradient(#0c0c15 0%, #121220 25%, #1b1b2e 60%, #24243d 100%)', minHeight: '100vh' }}>
 
-            {isSearchActive ? (
-                <div className="explore-search-section">
-                    <div className="carousel-header">
-                        <h2 className="carousel-title">
-                            {searching ? 'Buscando...' : `Resultados para "${searchQuery}"`}
-                        </h2>
-                        {!searching && <span className="carousel-count">{searchResults.length} encontrados</span>}
-                    </div>
-                    {searching
-                        ? <div className="explore-search-loading"><div className="loading-spinner" /></div>
-                        : <SearchResults users={searchResults} currentUsername={currentUser?.username} />
-                    }
-                </div>
-            ) : (
-                <>
-                    <UserCarousel title="Usuarios destacados"  users={topUsers}     userStats={userStats} currentUsername={currentUser?.username} />
-                    <UserCarousel title="Usuarios más activos" users={topReviewers} userStats={userStats} currentUsername={currentUser?.username} />
-                    <UserCarousel title="Mejores valoraciones" users={topRated}     userStats={userStats} currentUsername={currentUser?.username} />
-                </>
-            )}
+    {/* Navbar — sin padding propio */}
+    <div className='userhome-header'>
+      <h1 className='title' onClick={() => navigate('/user-home')}>CRATE</h1>
+      <SearchBar />
+    </div>
+
+    {/* Contenido con padding */}
+    <div className="explore-page">
+      {isSearchActive ? (
+        <div className="explore-search-section">
+          <div className="carousel-header">
+            <h2 className="carousel-title">
+              {searching ? 'Buscando...' : `Resultados para "${searchQuery}"`}
+            </h2>
+            {!searching && <span className="carousel-count">{searchResults.length} encontrados</span>}
+          </div>
+          {searching
+            ? <div className="explore-search-loading"><div className="loading-spinner" /></div>
+            : <SearchResults users={searchResults} currentUsername={currentUser?.username} />
+          }
         </div>
-    );
+      ) : (
+        <>
+          <UserCarousel title="Usuarios destacados"  users={topUsers}     userStats={userStats} currentUsername={currentUser?.username} />
+          <UserCarousel title="Usuarios más activos" users={topReviewers} userStats={userStats} currentUsername={currentUser?.username} />
+          <UserCarousel title="Mejores valoraciones" users={topRated}     userStats={userStats} currentUsername={currentUser?.username} />
+        </>
+      )}
+    </div>
+
+    {/* Footer y menú fuera del padding */}
+    <UserSlideMenu />
+    <Footer />
+
+  </div>
+);
 };
 
 export default ExploreUsers;

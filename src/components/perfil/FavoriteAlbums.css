@@ -8,12 +8,12 @@
 }
 
 .fav-label {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'ClashDisplay-Medium', sans-serif;
   font-size: 20px;
   font-weight: 700;
   color: #ff5500;
   text-transform: uppercase;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.1em;
 }
 
 /* Fila horizontal de 5 */
@@ -115,9 +115,9 @@ button.fav-slot--empty:hover {
   background: #161616;
   border: 1px solid #252525;
   border-radius: 12px;
-  padding: 24px;
+  padding: 30px;
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
   max-height: 80vh;
   overflow-y: auto;
   display: flex;
@@ -132,8 +132,8 @@ button.fav-slot--empty:hover {
 }
 
 .fav-modal-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px;
+  font-family: 'ClashDisplay-Medium', sans-serif;
+  font-size: 15px;
   font-weight: 700;
   color: #f0f0f0;
   text-transform: uppercase;
@@ -144,7 +144,7 @@ button.fav-slot--empty:hover {
   background: none;
   border: none;
   color: #555;
-  font-size: 20px;
+  font-size: 40px;
   cursor: pointer;
   line-height: 1;
   padding: 0;
@@ -159,7 +159,7 @@ button.fav-slot--empty:hover {
   border-radius: 6px;
   padding: 10px 14px;
   color: #f0f0f0;
-  font-family: 'Barlow', sans-serif;
+ font-family: 'ClashDisplay-Medium', sans-serif;
   font-size: 14px;
   outline: none;
   width: 100%;
@@ -172,7 +172,7 @@ button.fav-slot--empty:hover {
 .fav-modal-status {
   color: #555;
   font-size: 13px;
-  font-style: italic;
+  font-family: 'ClashDisplay-Medium', sans-serif;
   margin: 0;
   text-align: center;
 }
@@ -226,8 +226,8 @@ button.fav-slot--empty:hover {
 }
 
 .fav-result-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 14px;
+  font-family: 'ClashDisplay-Medium', sans-serif;
+  font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
   color: #f0f0f0;
@@ -237,7 +237,8 @@ button.fav-slot--empty:hover {
 }
 
 .fav-result-artist {
-  font-size: 11px;
+  font-family: 'ClashDisplay-Medium', sans-serif;
+  font-size: 12px;
   color: #777;
   white-space: nowrap;
   overflow: hidden;

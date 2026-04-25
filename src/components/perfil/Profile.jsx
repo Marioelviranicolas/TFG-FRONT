@@ -1,15 +1,18 @@
 // src/perfil/Profile.jsx
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { apiFetch } from '../../api';
 import ProfileHeader from './ProfileHeader';
 import ProfileContent from './content/ProfileContent';
 import UserSlideMenu from '../user/UserSlideMenu';
+import Footer from '../layout/public/Footer';
 import './profile.css';
 
 export default function Profile({ username: propUsername }) {
   const { username: paramUsername } = useParams();
   const username = propUsername || paramUsername;
+  const navigate = useNavigate(); 
 
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -58,13 +61,16 @@ export default function Profile({ username: propUsername }) {
   return (
     <div className="pp-shell">
       <div className="pp-navbar">
-        <span className="pp-navbar-logo">CRATE</span>
+       <span className="pp-navbar-logo" onClick={() => navigate('/user-home')} style={{ cursor: 'pointer' }}>
+          CRATE
+        </span>
       </div>
       <div className="pp-page">
         <ProfileHeader user={user} isOwnProfile={isOwnProfile} />
         <ProfileContent username={username} />
       </div>
       <UserSlideMenu />
+      <Footer/ >
     </div>
   );
 }

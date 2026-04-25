@@ -578,7 +578,7 @@
   background: none;
   border: 1px solid var(--border-hover);
   color: var(--text-secondary);
-  font-family: var(--font-body);
+  font-family: 'ClashDisplay-Medium', sans-serif;
   font-size: 11px;
   font-weight: 500;
   text-transform: uppercase;
@@ -649,8 +649,8 @@
 
 .ap-modal-header h3 {
   margin: 0;
-  font-family: var(--font-display);
-  font-size: 12px;
+  font-family: 'ClashDisplay-Medium', sans-serif;
+  font-size: 15px;
   font-weight: 700;
   color: var(--text-primary);
   text-transform: uppercase;
@@ -694,7 +694,7 @@
 }
 
 .ap-modal-list-name {
-  font-family: var(--font-display);
+  font-family: 'ClashDisplay-Medium', sans-serif;
   font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
@@ -720,7 +720,7 @@
   background: none;
   border: 1px dashed var(--border-hover);
   color: var(--text-muted);
-  font-family: var(--font-body);
+  font-family: 'ClashDisplay-Medium', sans-serif;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -743,7 +743,7 @@
 
 .ap-new-list-form h4 {
   margin: 0;
-  font-family: var(--font-display);
+  font-family: 'ClashDisplay-Medium', sans-serif;
   font-size: 11px;
   font-weight: 700;
   color: var(--accent);
@@ -756,7 +756,7 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   padding: 10px 14px;
-  color: var(--text-primary);
+   font-family: 'ClashDisplay-Medium', sans-serif;
   font-family: var(--font-body);
   font-size: 14px;
   outline: none;
@@ -824,7 +824,7 @@
 }
 
 .ap-album-title {
-  font-family: var(--font-display);
+  font-family: 'ClashDisplay-Medium', sans-serif;
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;

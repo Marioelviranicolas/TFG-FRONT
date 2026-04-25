@@ -85,8 +85,6 @@ export default function ProfileInsights({ username }) {
 
     return (
         <div className="pi-root">
-            <span className="pp-section-title">Estadísticas</span>
-
             {/* ── Fila superior: 3 métricas grandes ── */}
             <div className="pi-metrics">
 

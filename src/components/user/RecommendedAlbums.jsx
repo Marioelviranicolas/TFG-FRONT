@@ -37,6 +37,7 @@ const RecommendedAlbums = () => {
     if (!albums.length) return null;
 
     return (
+        
         <div className="recommended-albums">
             <div className="reviews-carousel">
                 <div className="reviews-title">

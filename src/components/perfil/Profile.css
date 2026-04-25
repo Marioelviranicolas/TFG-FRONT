@@ -42,38 +42,58 @@
 /* Fondo oscuro que ocupa toda la pantalla */
 .pp-shell {
   min-height: 100vh;
-  background: var(--bg-base);
+  background: linear-gradient(
+    #09090f 0%,   
+    #121220 25%, 
+    #1b1b2e 60%,  
+    #24243d 100%  
+);
   color: var(--text-primary);
-  font-family: var(--font-body);
+  font-family: 'ClashDisplay-Bold', sans-serif;
 }
 
 /* Navbar sticky con blur */
 .pp-navbar {
-  position: sticky;
+  position: absolute;
   top: 0;
-  z-index: 100;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
   display: flex;
   align-items: center;
-  padding: 0 60px;
-  height: 100px;
-  background: rgba(14, 14, 14, 0.92);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
+  padding: 0 320px;
+  gap: 50px;
+  height: 150px;
+  background: #0c0c15;
 }
 
 .pp-navbar-logo {
-  font-family: 'ClashDisplay-Bold', 'Barlow Condensed', sans-serif;
-  font-size: 1.4rem;
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 3.8rem;
   font-weight: 900;
-  letter-spacing: 0.18em;
   color: #fff;
   text-transform: uppercase;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color var(--transition);
+  letter-spacing: 0.3rem;
+}
+ 
+.pp-navbar-logo:hover {
+  color: var(--accent);
+}
+ 
+.pp-navbar-search {
+  max-width: 480px;
+  width: 100%;
 }
 
 /* Contenido centrado y más ancho */
 .pp-page {
+   display: block;
+   margin-top: 150px;
   color: var(--text-primary);
-  font-family: var(--font-body);
+  font-family: 'ClashDisplay-SemiBold', sans-serif;
   padding: 60px 60px 100px;
   max-width: 1400px;
   margin: 0 auto;
@@ -83,7 +103,7 @@
   color: var(--text-secondary);
   text-align: center;
   padding: 80px;
-  font-family: var(--font-display);
+  font-family: 'ClashDisplay-Bold', sans-serif;
   font-size: 18px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -93,7 +113,7 @@
   color: #e04444;
   text-align: center;
   padding: 80px;
-  font-family: var(--font-display);
+  font-family: 'ClashDisplay-Bold', sans-serif;
   font-size: 16px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -106,9 +126,10 @@
   display: flex;
   gap: 52px;
   align-items: center;
-  margin-bottom: 64px;
+  margin-top: 120px;
+  margin-bottom: 45px;
   padding-bottom: 52px;
-  border-bottom: 1px solid var(--border);
+  
 }
 
 .pp-avatar-wrap {
@@ -140,8 +161,8 @@
 }
 
 .pp-username {
-  font-family: var(--font-display);
-  font-size: clamp(32px, 5vw, 56px);
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: clamp(32px, 4vw, 45px);
   font-weight: 900;
   line-height: 0.95;
   letter-spacing: -0.02em;
@@ -151,7 +172,7 @@
 }
 
 .pp-bio {
-  font-family: var(--font-body);
+  font-family: 'ClashDisplay-SemiBold', sans-serif;
   font-size: 14px;
   color: var(--text-secondary);
   line-height: 1.6;
@@ -161,7 +182,7 @@
 }
 
 .pp-email {
-  font-family: var(--font-body);
+  font-family: 'ClashDisplay-medium', sans-serif;
   font-size: 11px;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -180,7 +201,7 @@
   background: none;
   border: 1px solid var(--accent);
   color: var(--accent);
-  font-family: var(--font-body);
+  font-family: 'ClashDisplay-Bold', sans-serif;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -199,7 +220,7 @@
   background: none;
   border: 1px solid var(--border-hover);
   color: var(--text-secondary);
-  font-family: var(--font-body);
+  font-family: 'ClashDisplay-Bold', sans-serif;
   font-size: 11px;
   font-weight: 500;
   text-transform: uppercase;
@@ -220,17 +241,21 @@
 .pp-stats {
   display: flex;
   gap: 0;
-  margin-bottom: 52px;
+  margin-bottom: 140px;
+  margin-top: -40px;
+   
+  
 }
 
 .pp-stat {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 2px;
-  padding-right: 40px;
-  margin-right: 40px;
-  border-right: 1px solid var(--border);
+  padding-right: 110px;
+  margin-right: 100px;
+  
+  
 }
 
 .pp-stat:last-child {
@@ -251,8 +276,8 @@
 }
 
 .pp-stat-number {
-  font-family: var(--font-display);
-  font-size: 40px;
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 35px;
   font-weight: 900;
   color: var(--accent);
   line-height: 1;
@@ -260,12 +285,12 @@
 }
 
 .pp-stat-label {
-  font-family: var(--font-body);
-  font-size: 10px;
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 16px;
   font-weight: 700;
-  color: var(--text-muted);
+  color: white;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
 }
 
 /* ============================================
@@ -273,9 +298,10 @@
    ============================================ */
 .pp-tabs {
   display: flex;
-  gap: 0;
-  border-bottom: 1px solid var(--border);
+  gap: 130px;
   margin-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+  
 }
 
 .pp-tab {
@@ -284,11 +310,11 @@
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
   color: var(--text-muted);
-  font-family: var(--font-body);
-  font-size: 12px;
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 15px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
   padding: 14px 28px;
   cursor: pointer;
   transition: color var(--transition), border-color var(--transition);
@@ -299,21 +325,7 @@
   border-bottom-color: var(--accent);
 }
 
-/* ============================================
-   SECTION TITLE
-   ============================================ */
-.pp-section-title {
-  font-family: var(--font-display);
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.3em;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 32px;
-  display: block;
-}
+
 
 /* ============================================
    REVIEW CARDS (perfil)
@@ -361,7 +373,7 @@
 }
 
 .pp-review-album-title {
-  font-family: var(--font-display);
+ font-family: 'ClashDisplay-Bold', sans-serif;
   font-size: 18px;
   font-weight: 700;
   text-transform: uppercase;
@@ -385,7 +397,7 @@
   color: #bbb;
   font-size: 14px;
   line-height: 1.7;
-  font-style: italic;
+  font-family: 'ClashDisplay-semiBold', sans-serif;
   margin: 4px 0 0;
 }
 
@@ -434,7 +446,7 @@
 }
 
 .pp-list-name {
-  font-family: var(--font-display);
+ font-family: 'ClashDisplay-Bold', sans-serif;
   font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
@@ -462,8 +474,8 @@
   background: none;
   border: 1px solid var(--accent);
   color: var(--accent);
-  font-family: var(--font-body);
-  font-size: 11px;
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -483,7 +495,7 @@
    ============================================ */
 .pp-activity-soon {
   color: var(--text-muted);
-  font-style: italic;
+  font-family: 'ClashDisplay-Bold', sans-serif;
   font-size: 14px;
   padding: 32px 0;
 }
@@ -519,7 +531,7 @@
 }
 
 .fm-user-username {
-  font-family: var(--font-display);
+  font-family: 'ClashDisplay-Bold', sans-serif;
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
@@ -559,28 +571,41 @@
 
 /* Contenedor principal que ocupa el alto restante sin scroll */
 .pp-edit-layout {
+  margin-top: 150px;
+  background: linear-gradient(
+    #0c0c15 0%,   
+    #121220 25%, 
+    #1b1b2e 60%,  
+    #24243d 100%  
+);
   display: flex;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 10px);
   overflow: hidden;
 }
 
 /* Panel izquierdo fijo */
 .pp-edit-sidebar {
-  width: 440px;
+  width: 350px;
+  margin-left: 250px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: 36px;
-  padding: 52px 56px;
-  border-right: 1px solid var(--border);
+  gap: 20px;
+  padding: 150px 56px;
   overflow-y: auto;
+  background: linear-gradient(
+    #0c0c15 0%,   
+    #121220 25%, 
+    #1b1b2e 60%,  
+    #24243d 100%  
+);
 }
 
 .pp-edit-sidebar-back {
   background: none;
   border: none;
   color: var(--text-secondary);
-  font-family: var(--font-body);
+  font-family: 'ClashDisplay-Bold', sans-serif;
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.08em;
@@ -621,7 +646,7 @@
 }
 
 .pp-edit-sidebar-username {
-  font-family: var(--font-display);
+  font-family: 'ClashDisplay-Bold', sans-serif;
   font-size: 18px;
   font-weight: 700;
   text-transform: uppercase;
@@ -648,9 +673,15 @@
 .pp-edit-main {
   flex: 1;
   overflow-y: auto;
-  padding: 52px 80px 80px;
+  padding: 50px 150px 80px;
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  background: linear-gradient(
+    #0c0c15 0%,   
+    #121220 25%, 
+    #1b1b2e 60%,  
+    #24243d 100%  
+);
 }
 
 .pp-edit-main .pp-edit-page {
@@ -664,24 +695,7 @@
   font-family: var(--font-body);
 }
 
-.pp-back-btn {
-  background: none;
-  border: none;
-  color: var(--text-secondary);
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-  padding: 0;
-  margin-bottom: 40px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: color var(--transition);
-}
-.pp-back-btn:hover { color: var(--accent); }
+
 
 .pp-edit-title {
   font-family: var(--font-display);
@@ -696,8 +710,7 @@
 
 .pp-edit-section {
   padding-bottom: 52px;
-  margin-bottom: 52px;
-  border-bottom: 1px solid var(--border);
+  margin-bottom: px;
   display: flex;
   flex-direction: column;
   gap: 28px;
@@ -708,12 +721,12 @@
 }
 
 .pp-edit-section-title {
-  font-family: var(--font-display);
-  font-size: 10px;
+  font-family: 'ClashDisplay-Medium', sans-serif;
+  font-size: 14px;
   font-weight: 700;
   color: var(--accent);
   text-transform: uppercase;
-  letter-spacing: 0.35em;
+  letter-spacing: 0.1em;
   margin: 0;
 }
 
@@ -778,7 +791,7 @@
   background: none;
   border: 1px solid var(--accent);
   color: var(--accent);
-  font-family: var(--font-body);
+  font-family: 'ClashDisplay-Medium', sans-serif;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -798,7 +811,7 @@
   background: none;
   border: 1px solid var(--border-hover);
   color: var(--text-secondary);
-  font-family: var(--font-body);
+  font-family: 'ClashDisplay-Medium', sans-serif;
   font-size: 11px;
   font-weight: 500;
   text-transform: uppercase;
@@ -806,7 +819,6 @@
   padding: 7px 14px;
   border-radius: var(--radius-sm);
   cursor: pointer;
-  display: inline-flex;
   align-items: center;
   gap: 6px;
   transition: border-color var(--transition), color var(--transition);
@@ -824,7 +836,7 @@
 }
 
 .pp-label {
-  font-family: var(--font-body);
+  font-family: 'ClashDisplay-Medium', sans-serif;
   font-size: 11px;
   font-weight: 700;
   color: var(--text-secondary);
@@ -838,7 +850,7 @@
   border-radius: var(--radius-sm);
   padding: 11px 14px;
   color: var(--text-primary);
-  font-family: var(--font-body);
+  font-family: 'ClashDisplay-Medium', sans-serif;
   font-size: 14px;
   outline: none;
   width: 100%;
@@ -854,7 +866,7 @@
   border-radius: var(--radius-sm);
   color: var(--text-primary);
   padding: 11px 14px;
-  font-family: var(--font-body);
+  font-family: 'ClashDisplay-Medium', sans-serif;
   font-size: 14px;
   line-height: 1.6;
   resize: vertical;
@@ -914,8 +926,8 @@
   background: var(--accent);
   color: #fff;
   border: none;
-  font-family: var(--font-body);
-  font-size: 12px;
+  font-family: 'ClashDisplay-Medium', sans-serif;
+  font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -930,10 +942,9 @@
 .pp-btn-cancel {
   flex: 1;
   background: none;
-  color: var(--text-secondary);
   border: 1px solid var(--border-hover);
-  font-family: var(--font-body);
-  font-size: 12px;
+  font-family: 'ClashDisplay-Medium', sans-serif;
+  font-size: 13px;
   font-weight: 500;
   padding: 13px 20px;
   border-radius: var(--radius-sm);

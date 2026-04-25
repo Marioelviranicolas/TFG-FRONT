@@ -44,14 +44,14 @@ export default function ProfileList({ username }) {
 
   return (
     <div>
-      <span className="pp-section-title">Listas</span>
+      <span className="pp-section-title"></span>
 
       {isOwnProfile && (
         <button
           className="pp-btn-create-list"
           onClick={() => setShowCreateModal(true)}
         >
-          + Crear lista
+          Crear lista
         </button>
       )}
 

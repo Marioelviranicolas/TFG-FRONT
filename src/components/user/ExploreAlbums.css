@@ -1,92 +1,63 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap');
+/* ============================================
+   EXPLORE ALBUMS
+   Mismo sistema visual que UserHome
+   ============================================ */
 
 /* ════════════════════════════════════════
    PAGE
 ════════════════════════════════════════ */
 .ea-page {
     min-height: 100vh;
-    background: #0d0d0d;
-    color: #f5f5f5;
-    font-family: 'DM Sans', sans-serif;
+    background: linear-gradient(
+        #0c0c15 0%,
+        #121220 25%,
+        #1b1b2e 60%,
+        #24243d 100%
+    );
+    color: #f0f0f0;
+    font-family: 'Barlow', sans-serif;
 }
 
 /* ════════════════════════════════════════
-   NAVBAR
+   NAVBAR — igual que UserHome
 ════════════════════════════════════════ */
 .ea-navbar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
     display: flex;
     align-items: center;
     gap: 32px;
-    padding: 0 5vw;
-    height: 72px;
-    background: rgba(13, 13, 13, 0.96);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid #1e1e1e;
+    padding-top: 30px;
+    margin-left: 320px;
+    margin-bottom: 60px;
+    padding-right: 48px;
 }
 
 .ea-navbar-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    letter-spacing: 0.15em;
+    font-family: 'ClashDisplay-Bold', sans-serif;
+    font-size: 3.5rem;
+    margin: 0;
+    letter-spacing: 0.1em;
     color: #fff;
-    cursor: pointer;
     flex-shrink: 0;
-    transition: color 0.2s;
-}
-.ea-navbar-logo:hover { color: #e85d26; }
-
-.ea-navbar-search { flex: 1; max-width: 500px; }
-
-/* ════════════════════════════════════════
-   BUSCADOR
-════════════════════════════════════════ */
-.ea-search-wrap {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: #161616;
-    border: 1.5px solid #2a2a2a;
-    border-radius: 8px;
-    padding: 0 0.875rem;
-    transition: border-color 0.2s;
-}
-.ea-search-wrap:focus-within,
-.ea-search-wrap--active { border-color: #e85d26; }
-
-.ea-search-icon { font-size: 0.9rem; opacity: 0.4; flex-shrink: 0; }
-
-.ea-search-input {
-    flex: 1;
-    background: none;
-    border: none;
-    outline: none;
-    color: #f5f5f5;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    padding: 0.75rem 0;
-}
-.ea-search-input::placeholder { color: #444; }
-
-.ea-search-clear {
-    background: none;
-    border: none;
-    color: #555;
     cursor: pointer;
-    font-size: 0.9rem;
-    padding: 0.2rem;
-    transition: color 0.2s;
-    flex-shrink: 0;
+    transition: color 0.18s ease;
+    text-decoration: none;
+    text-transform: uppercase;
 }
-.ea-search-clear:hover { color: #e85d26; }
+.ea-navbar-logo:hover { color: #ff5500; }
+
+.ea-navbar-search {
+    max-width: 480px;
+    width: 100%;
+}
 
 /* ════════════════════════════════════════
    CONTENT
 ════════════════════════════════════════ */
 .ea-content {
-    padding: 2.5rem 5vw 8rem 5vw;
+    padding-top: 80px;
+    margin-left:320px;
+    margin-right: 280px;
+    margin-bottom: 250px;
 }
 
 /* ════════════════════════════════════════
@@ -95,18 +66,19 @@
 .ea-hero { margin-bottom: 2rem; }
 
 .ea-hero-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-family: 'ClashDisplay-Bold', sans-serif;
+    font-size: clamp(3rem, 1vw, 6rem);
     line-height: 1;
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    color: #f5f5f5;
+    color: #f0f0f0;
     margin: 0 0 0.5rem;
 }
 
 .ea-hero-sub {
+    font-family: 'Barlow', sans-serif;
     font-size: 0.95rem;
-    color: #555;
+    color: #888;
     font-weight: 300;
     margin: 0;
 }
@@ -123,19 +95,21 @@
 
 .ea-genre-btn {
     background: none;
-    border: 1.5px solid #2a2a2a;
+    border: 1px solid #252525;
     color: #888;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 500;
-    padding: 0.45rem 1rem;
-    border-radius: 99px;
+    font-family: 'ClashDisplay-Medium', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.45rem 1.1rem;
+    border-radius: 4px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.18s ease;
     white-space: nowrap;
 }
-.ea-genre-btn:hover { border-color: #e85d26; color: #e85d26; }
-.ea-genre-btn--active { background: #e85d26; border-color: #e85d26; color: #fff; }
+.ea-genre-btn:hover { border-color: #ff5500; color: #ff5500; }
+.ea-genre-btn--active { background: #ff5500; border-color: #ff5500; color: #fff; }
 
 /* ════════════════════════════════════════
    SECCIONES
@@ -148,19 +122,24 @@
     justify-content: space-between;
     margin-bottom: 1.25rem;
     padding-bottom: 0.6rem;
-    border-bottom: 2px solid #e85d26;
+    border-bottom: 1px solid #ff5500;
 }
 
 .ea-section-title {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'ClashDisplay-Bold', sans-serif;
     font-size: 1.6rem;
-    letter-spacing: 0.05em;
-    color: #f5f5f5;
+    letter-spacing: 0.08em;
+    color: #f0f0f0;
     text-transform: uppercase;
     margin: 0;
 }
 
-.ea-section-count { font-size: 0.8rem; color: #555; font-weight: 300; }
+.ea-section-count {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.8rem;
+    color: #444;
+    font-weight: 300;
+}
 
 /* ════════════════════════════════════════
    CARRUSEL
@@ -245,9 +224,12 @@
 .ea-card__info { min-width: 0; }
 
 .ea-card__title {
+    font-family: 'ClashDisplay-Medium', sans-serif;
     font-size: 0.85rem;
-    font-weight: 500;
-    color: #f5f5f5;
+    font-weight: 700;
+    color: #f0f0f0;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
@@ -255,8 +237,9 @@
 }
 
 .ea-card__artist {
+    font-family: 'Barlow', sans-serif;
     font-size: 0.75rem;
-    color: #666;
+    color: #888;
     font-weight: 300;
     margin: 2px 0 0;
     white-space: nowrap;
@@ -274,7 +257,6 @@
     gap: 1.25rem;
 }
 
-/* En el grid la tarjeta ocupa el 100% de la celda */
 .ea-search-grid .ea-card { width: 100%; }
 .ea-search-grid .ea-card__img-wrap { width: 100%; height: auto; aspect-ratio: 1; }
 
@@ -306,10 +288,28 @@
 }
 
 /* ════════════════════════════════════════
+   FADE IN — igual que UserHome
+════════════════════════════════════════ */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.3s; }
+.delay-3 { animation-delay: 0.5s; }
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════════════════
    EMPTY STATES
 ════════════════════════════════════════ */
 .ea-empty {
-    color: #555;
+    font-family: 'Barlow', sans-serif;
+    color: #444;
     font-size: 0.9rem;
     font-style: italic;
     padding: 1rem 0;
@@ -323,13 +323,18 @@
     padding: 5rem 0;
 }
 .ea-empty-state__icon { font-size: 2.5rem; opacity: 0.3; }
-.ea-empty-state__text { font-size: 0.95rem; color: #555; }
+.ea-empty-state__text {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.95rem;
+    color: #444;
+}
 
 /* ════════════════════════════════════════
    RESPONSIVE
 ════════════════════════════════════════ */
 @media (max-width: 600px) {
-    .ea-content { padding: 1.5rem 4vw 8rem 4vw; }
+    .ea-navbar { margin-left: 24px; padding-right: 24px; }
+    .ea-content { padding: 0 4vw 8rem 4vw; }
     .ea-hero-title { font-size: 3rem; }
     .ea-card { width: 120px; }
     .ea-card__img-wrap { width: 120px; height: 120px; }

@@ -35,7 +35,7 @@ const getAvatar = (username, avatarUrl) =>
 // ─── Eventos ──────────────────────────────────────────────────────────────────
 const ReviewEvent = ({ item, navigate }) => (
     <div className="act-event" onClick={() => navigate(`/album/${item.album?.spotifyAlbumId}`)}>
-        <div className="act-icon act-icon--review">★</div>
+        
         <div className="act-body">
             <div className="act-meta">
                 <span className="act-action">Reseñó un álbum</span>
@@ -58,7 +58,7 @@ const ReviewEvent = ({ item, navigate }) => (
 
 const ListEvent = ({ item, navigate }) => (
     <div className="act-event" onClick={() => navigate(`/list/${item.id}`)}>
-        <div className="act-icon act-icon--list">≡</div>
+      
         <div className="act-body">
             <div className="act-meta">
                 <span className="act-action">Creó una lista</span>
@@ -83,7 +83,6 @@ const FollowingEvent = ({ item, navigate, username }) => {
 
     return (
         <div className="act-event" onClick={() => navigate(`/profile/${otherUser.name}`)}>
-            <div className="act-icon act-icon--follow-out">+</div>
             <div className="act-body">
                 <div className="act-meta">
                     <span className="act-action">Empezó a seguir a alguien</span>
@@ -111,7 +110,6 @@ const FollowerEvent = ({ item, navigate, username }) => {
 
     return (
         <div className="act-event" onClick={() => navigate(`/profile/${follower.name}`)}>
-            <div className="act-icon act-icon--follow-in">♥</div>
             <div className="act-body">
                 <div className="act-meta">
                     <span className="act-action">Nuevo seguidor</span>
@@ -228,7 +226,7 @@ export default function ProfileActivity({ username }) {
                         onClick={() => setFilter(f.key)}
                     >
                         {f.label}
-                        <span className="act-filter-count">{counts[f.key]}</span>
+                        <span className="act-filter-count"></span>
                     </button>
                 ))}
             </div>

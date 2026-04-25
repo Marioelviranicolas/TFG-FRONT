@@ -51,7 +51,7 @@ export default function ProfileReviews({ username }) {
 
   return (
     <div>
-      <span className="pp-section-title">Reviews</span>
+      <span className="pp-section-title"></span>
 
       {reviews.length === 0 ? (
         <p className="pp-no-content">No hay reviews todavía.</p>

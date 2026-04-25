@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Trash2 } from 'lucide-react';
 import { apiFetch } from '../../../api';
 import UserSlideMenu from '../../user/UserSlideMenu';
+import Footer from '../../layout/public/Footer';
 import '../profile.css';
 
 export default function EditProfile() {
@@ -180,7 +181,6 @@ export default function EditProfile() {
         {/* ── PANEL IZQUIERDO ── */}
         <aside className="pp-edit-sidebar">
           <button className="pp-edit-sidebar-back" onClick={() => navigate('/profile')}>
-            ← Volver al perfil
           </button>
 
           <div className="pp-edit-sidebar-avatar">
@@ -222,7 +222,7 @@ export default function EditProfile() {
                   onClick={handleRemoveImage}
                   disabled={saving || uploadingImage}
                 >
-                  <Trash2 size={14} />
+                
                   Eliminar avatar
                 </button>
               )}
@@ -323,6 +323,7 @@ export default function EditProfile() {
       </div>
 
       <UserSlideMenu />
+      <Footer/ >
     </div>
   );
 }

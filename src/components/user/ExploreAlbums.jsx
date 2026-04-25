@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiFetch } from '../../api';
 import UserSlideMenu from './UserSlideMenu';
+import SearchBar from '../ui/SearchBar';
+import Footer from '../layout/public/Footer';
 import './ExploreAlbums.css';
 
 // ─── Géneros ──────────────────────────────────────────────────────────────────
@@ -187,27 +189,11 @@ export default function ExploreAlbums() {
         <div className="ea-page">
 
             {/* Navbar */}
-            <nav className="ea-navbar">
-                <span className="ea-navbar-logo" onClick={() => navigate('/user-home')}>
-                    CRATE
-                </span>
-                <div className="ea-navbar-search">
-                    <div className={`ea-search-wrap ${isSearchActive ? 'ea-search-wrap--active' : ''}`}>
-                        <span className="ea-search-icon">🔍</span>
-                        <input
-                            type="text"
-                            className="ea-search-input"
-                            placeholder="Buscar álbum o artista..."
-                            value={searchQuery}
-                            onChange={handleSearch}
-                            autoComplete="off"
-                        />
-                        {searchQuery && (
-                            <button className="ea-search-clear" onClick={clearSearch}>✕</button>
-                        )}
-                    </div>
+                <div className='userhome-header'>
+                <h1 className='title' onClick={() => navigate('/user-home')}>CRATE</h1>
+                <SearchBar />
                 </div>
-            </nav>
+          
 
             <div className="ea-content">
 
@@ -273,7 +259,7 @@ export default function ExploreAlbums() {
                     </>
                 )}
             </div>
-
+            <Footer />
             <UserSlideMenu />
         </div>
     );

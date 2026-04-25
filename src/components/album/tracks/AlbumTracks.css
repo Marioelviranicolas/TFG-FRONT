@@ -26,7 +26,7 @@
 .at-row:hover .at-play-hint { opacity: 1; }
 
 .at-num {
-  font-family: 'Barlow Condensed', sans-serif;
+   font-family: 'ClashDisplay-Medium', sans-serif;
   font-size: 12px;
   font-weight: 700;
   color: #444;
@@ -38,7 +38,7 @@
 
 .at-name {
   flex: 1;
-  font-family: 'Barlow', sans-serif;
+   font-family: 'ClashDisplay-Medium', sans-serif;
   font-size: 14px;
   color: #f0f0f0;
   white-space: nowrap;
@@ -48,7 +48,7 @@
 }
 
 .at-duration {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'ClashDisplay-Medium', sans-serif;
   font-size: 13px;
   color: #444;
   flex-shrink: 0;
@@ -67,7 +67,7 @@
 .at-status {
   color: #555;
   font-size: 14px;
-  font-style: italic;
+   font-family: 'ClashDisplay-Medium', sans-serif;
   text-align: center;
   padding: 40px 0;
   max-width: 900px;
