@@ -1,4 +1,3 @@
-// src/components/perfil/content/ListDetail.jsx
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Trash2, X } from 'lucide-react';
@@ -75,7 +74,7 @@ export default function ListDetail() {
   };
 
   const handleAddAlbum = async (album) => {
-    const alreadyIn = albums.some(a => a.album?.spotifyAlbumId === album.spotifyAlbumId);
+    const alreadyIn = albums.some(a => a.albumSpotifyId === album.spotifyAlbumId);
     if (alreadyIn) { showFeedback('error', 'Este álbum ya está en la lista'); return; }
     try {
       const response = await apiFetch('/listalbum/add', {
@@ -142,7 +141,7 @@ export default function ListDetail() {
       {/* HEADER LISTA */}
       <div className="pp-header" style={{ alignItems: 'flex-start' }}>
         <div className="pp-info">
-          <h1 className="pp-username"> {list.name}</h1>
+          <h1 className="pp-username">{list.name}</h1>
           {list.description && <p className="pp-bio">{list.description}</p>}
           <p className="pp-email">
             Por {list.username} · {albums.length} álbumes
@@ -175,7 +174,6 @@ export default function ListDetail() {
                 <X size={16} />
               </button>
             </div>
-
             <div className="ap-search-container">
               <input
                 className="ap-input"
@@ -224,7 +222,12 @@ export default function ListDetail() {
         </p>
       ) : (
         albums.map(listAlbum => (
-          <div key={listAlbum.idListAlbum} className="pp-review-card">
+          <div
+            key={listAlbum.idListAlbum}
+            className="pp-review-card"
+            style={{ cursor: 'pointer' }}
+            onClick={() => navigate(`/album/${listAlbum.albumSpotifyId}`)}
+          >
             {listAlbum.albumCoverUrl
               ? <img src={listAlbum.albumCoverUrl} alt={listAlbum.albumTitle} className="pp-review-cover" />
               : <div className="pp-review-cover-placeholder">♪</div>
@@ -232,14 +235,12 @@ export default function ListDetail() {
             <div className="pp-review-body">
               <span className="pp-review-album-title">{listAlbum.albumTitle}</span>
               <span className="pp-review-artist">{listAlbum.albumArtist}</span>
-              {listAlbum.albumReleaseYear && (
-                <span className="pp-review-date">{listAlbum.albumReleaseYear}</span>
-              )}
             </div>
+
             {isOwnList && (
               <button
                 className="ap-btn-delete"
-                onClick={() => handleRemoveAlbum(listAlbum.idListAlbum)}
+                onClick={e => { e.stopPropagation(); handleRemoveAlbum(listAlbum.idListAlbum); }}
                 title="Eliminar de la lista"
               >
                 <X size={14} />

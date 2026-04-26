@@ -10,11 +10,8 @@ const formatDuration = (ms) => {
   return `${min}:${sec.toString().padStart(2, '0')}`;
 };
 
-const openSpotifyPopup = (url) => {
-  const w = 450, h = 600;
-  const left = window.screenX + (window.innerWidth  - w) / 2;
-  const top  = window.screenY + (window.innerHeight - h) / 2;
-  window.open(url, 'spotify-player', `width=${w},height=${h},left=${left},top=${top},resizable=yes,scrollbars=yes`);
+const openSpotifyTab = (url) => {
+  window.open(url, '_blank');
 };
 
 export default function AlbumTracks({ spotifyAlbumId }) {
@@ -37,13 +34,13 @@ export default function AlbumTracks({ spotifyAlbumId }) {
   if (!tracks.length) return <p className="at-status">Sin pistas disponibles.</p>;
 
   return (
-    <div className="at-container fade-in-section delay-5">
+    <div className="at-container">
       <ol className="at-list">
         {tracks.map((track, i) => (
           <li
             key={track.id || i}
             className="at-row"
-            onClick={() => track.spotifyUrl && openSpotifyPopup(track.spotifyUrl)}
+            onClick={() => track.spotifyUrl && openSpotifyTab(track.spotifyUrl)}
           >
             <span className="at-num">{i + 1}</span>
             <span className="at-name">{track.name}</span>
