@@ -52,3 +52,24 @@
     transform: translateY(0);
   }
 }
+
+.userhome-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.userhome-greeting {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: #555;
+    font-weight: 300;
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+
+.userhome-greeting-name {
+    color: #ff5500;
+    font-weight: 500;
+}
+

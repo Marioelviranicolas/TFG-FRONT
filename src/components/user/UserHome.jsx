@@ -6,6 +6,7 @@ import Footer from '../layout/public/Footer';
 import SearchBar from '../ui/SearchBar';
 import RecommendedAlbums from '../user/RecommendedAlbums';
 import EditorialSection from '../user/EditorialSection';
+import FeaturedReviews from '../user/FeaturedReviews';
 import './UserHome.css';
 
 const UserHome = () => {
@@ -13,36 +14,37 @@ const UserHome = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Cambiado de localStorage a sessionStorage
         const userData = JSON.parse(sessionStorage.getItem('currentUser'));
         if (!userData) {
-            // Si no hay usuario, mandamos al login
             navigate('/');
             return;
         }
         setUser(userData);
-
-
-        
     }, []);
 
     if (!user) {
         return <div className="loading">Cargando...</div>;
     }
-    
+
+    const getGreeting = () => {
+        return 'Bienvenido';
+    };
+
     return (
         <>
         <div className='fondo-userhome'>
           <div className='userhome-header fade-in-section delay-1'>
-            <h1 className='title'>CRATE</h1>
+            <div className='userhome-header-left'>
+                <h1 className='title'>CRATE</h1>
+                <p className='userhome-greeting'>
+                    {getGreeting()}, <span className='userhome-greeting-name'>{user.username}</span>
+                </p>
+            </div>
             <SearchBar />
           </div>
         <div>
-            {/* Reviews de las personas que sigues */}
             <section className="fade-in-section delay-1">
-                <FollowedReviews 
-                userId={user.idUser} 
-                />
+                <FollowedReviews userId={user.idUser} />
             </section>
             <section className="fade-in-section delay-2">
                 <RecommendedAlbums />
@@ -50,9 +52,12 @@ const UserHome = () => {
             <section className="fade-in-section delay-3">
                 <EditorialSection />
             </section>
+            <section className="fade-in-section delay-4">
+                <FeaturedReviews />
+            </section>
         </div>
          </div>
-         
+
         <UserSlideMenu />
         <div>
         <Footer />

@@ -1,0 +1,141 @@
+.featured-reviews {
+    width: 70%;
+    margin-left: 320px;
+    margin-top: 10px;
+    margin-bottom: 60px;
+}
+
+/* ── Título + subtítulo ── */
+.reviews-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.featured-subtitle {
+    font-size: 0.8rem;
+    color: #666;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    margin-right: 60px;
+}
+
+/* ── Lista horizontal con scroll ── */
+.featured-list {
+    display: flex;
+    gap: 32px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    scrollbar-width: none;
+}
+.featured-list::-webkit-scrollbar { display: none; }
+
+/* ── Tarjeta ── */
+.featured-card {
+    flex: 0 0 calc(33.333% - 22px);
+    background: #1a1a1a;
+    border: 1px solid #252525;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+.featured-card:hover {
+    border-color: #ff5500;
+    transform: translateY(-3px);
+}
+
+/* Portada */
+.featured-cover {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Cuerpo */
+.featured-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+/* Header — avatar + usuario + estrellas */
+.featured-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.featured-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    cursor: pointer;
+    border: 2px solid #2a2a2a;
+    transition: border-color 0.2s;
+}
+.featured-avatar:hover { border-color: #ff5500; }
+
+.featured-user-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    gap: 2px;
+}
+
+.featured-username {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #f0f0f0;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.2s;
+}
+.featured-username:hover { color: #ff5500; }
+
+.featured-album-name {
+    font-size: 0.72rem;
+    color: #555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.featured-stars {
+    display: flex;
+    gap: 1px;
+    flex-shrink: 0;
+}
+
+/* Comentario */
+.featured-comment {
+    font-size: 0.85rem;
+    color: #aaa;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+}
+
+/* Likes */
+.featured-likes {
+    font-size: 0.75rem;
+    color: #ff5500;
+    font-weight: 700;
+}
