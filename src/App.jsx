@@ -9,6 +9,7 @@ import Profile from './components/perfil/Profile';
 import EditProfile from './components/perfil/edit/EditProfile';
 import AboutUs from './components/layout/public/AboutUs';
 import PrivateRoute from './components/layout/PrivateRoute';
+import AdminPanel from './components/admin/AdminPanel';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path='/explore-albums'        element={<PrivateRoute><ExploreAlbums /></PrivateRoute>} />
         <Route path='/album/:spotifyAlbumId' element={<PrivateRoute><AlbumPage /></PrivateRoute>} />
         <Route path='/list/:id'              element={<PrivateRoute><ListDetail /></PrivateRoute>} />
+        <Route path='/admin'                 element={<PrivateRoute><AdminPanel /></PrivateRoute>} />
       </Routes>
     </BrowserRouter>
   );

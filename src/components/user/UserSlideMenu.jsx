@@ -36,7 +36,7 @@ export default function UserSlideMenu() {
       <nav id="user-slide-menu">
         <div className="user-slide-content">
 
-          {/* LEFT — Avatar + Username (igual que .slideTitle en landing) */}
+          {/* LEFT — Avatar + Username */}
           <div className="user-header-left">
             <div className="user-avatar-container">
               <img src={getAvatarUrl()} alt={currentUser?.username || "User"} />
@@ -44,7 +44,7 @@ export default function UserSlideMenu() {
             {currentUser && <p id="userSlideUsername">{currentUser.username}</p>}
           </div>
 
-          {/* CENTER-RIGHT — Links (igual que .landing-slidelink) */}
+          {/* CENTER-RIGHT — Links */}
           <ul>
             <li className="user-slidelink" onClick={() => go("/user-home")}>
               <span>INICIO</span>
@@ -58,11 +58,19 @@ export default function UserSlideMenu() {
             <li className="user-slidelink" onClick={() => go("/explore-users")}>
               <span>EXPLORAR USUARIOS</span>
             </li>
+
+            {/* Solo visible para admins */}
+            {currentUser?.role === 'ADMIN' && (
+              <li className="user-slidelink user-slidelink--admin" onClick={() => go("/admin")}>
+                <span>PANEL ADMIN</span>
+              </li>
+            )}
+
             <li className="user-slidelink" onClick={handleLogout}>
               <span>LOG OUT</span>
             </li>
 
-            {/* BOTTOM-RIGHT — Social (igual que landing) */}
+            {/* BOTTOM — Social */}
             <div className="social-section-SlideMenu">
               <h3 className="social-sectionTitle">Follow Us</h3>
               <h5 className="social-sectionTitle3">crate@crate.com</h5>

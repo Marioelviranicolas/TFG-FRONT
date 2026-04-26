@@ -955,3 +955,16 @@
   border-color: var(--accent);
   color: var(--accent);
 }
+/* ── Lista expandible de canciones ── */
+.ld-tracks-wrap {
+    padding: 0 0 16px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+}
+
+.ld-expand-icon {
+    font-size: 10px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    margin-right: 8px;
+}
