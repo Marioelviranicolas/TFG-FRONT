@@ -57,28 +57,41 @@ export default function ListDetail() {
   };
 
   const handleSearch = (e) => {
-    const query = e.target.value;
-    setSearchQuery(query);
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    if (query.length < 2) { setSearchResults([]); return; }
-    setSearching(true);
-    debounceRef.current = setTimeout(async () => {
-      try {
-        const response = await apiFetch(`/albums/search?query=${encodeURIComponent(query)}`);
-        const data = await response.json();
-        setSearchResults(data || []);
-      } catch {
-        setSearchResults([]);
-      } finally {
-        setSearching(false);
-      }
-    }, 300);
-  };
+      const query = e.target.value;
+      setSearchQuery(query);
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+      if (query.length < 2) { setSearchResults([]); return; }
+      setSearching(true);
+      debounceRef.current = setTimeout(async () => {
+        try {
+          const cacheData = await apiFetch(`/albums/search?query=${encodeURIComponent(query)}`).then(r => r.json());
+          if (cacheData.length < 5) {
+            const spotifyData = await apiFetch(`/spotify/search?query=${encodeURIComponent(query)}`).then(r => r.json());
+            const merged = [...cacheData];
+            for (const album of spotifyData) {
+              if (!merged.some(a => a.spotifyAlbumId === album.spotifyAlbumId)) {
+                merged.push(album);
+              }
+            }
+            setSearchResults(merged);
+          } else {
+            setSearchResults(cacheData);
+          }
+        } catch {
+          setSearchResults([]);
+        } finally {
+          setSearching(false);
+        }
+      }, 300);
+    };
 
-  const handleAddAlbum = async (album) => {
+ const handleAddAlbum = async (album) => {
     const alreadyIn = albums.some(a => a.albumSpotifyId === album.spotifyAlbumId);
     if (alreadyIn) { showFeedback('error', 'Este álbum ya está en la lista'); return; }
     try {
+      // Cachear el álbum si no existe en BD
+      await apiFetch(`/albums/id/${album.spotifyAlbumId}`);
+      
       const response = await apiFetch('/listalbum/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -97,7 +110,7 @@ export default function ListDetail() {
       console.error('Error adding album:', error);
       showFeedback('error', 'Error al añadir el álbum');
     }
-  };
+  };  
 
   const handleRemoveAlbum = async (idListAlbum) => {
     if (!confirm('¿Eliminar este álbum de la lista?')) return;

@@ -56,7 +56,7 @@ export default function FavoriteAlbums({ username, isOwnProfile }) {
     return favList.id;
   };
 
-  const handleSearch = (e) => {
+ const handleSearch = (e) => {
     const q = e.target.value;
     setSearchQuery(q);
     if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -64,9 +64,26 @@ export default function FavoriteAlbums({ username, isOwnProfile }) {
     setSearching(true);
     debounceRef.current = setTimeout(async () => {
       try {
-        const res  = await apiFetch(`/albums/search?query=${encodeURIComponent(q)}`);
-        const data = await res.json();
-        setSearchResults(data || []);
+        // 1. Buscar primero en caché local
+        const cacheRes = await apiFetch(`/albums/search?query=${encodeURIComponent(q)}`);
+        const cacheData = await cacheRes.json();
+
+        // 2. Si hay pocos resultados, complementar con Spotify
+        if (cacheData.length < 5) {
+          const spotifyRes = await apiFetch(`/spotify/search?query=${encodeURIComponent(q)}`);
+          const spotifyData = await spotifyRes.json();
+
+          // Mezclar evitando duplicados por spotifyAlbumId
+          const merged = [...cacheData];
+          for (const album of spotifyData) {
+            if (!merged.some(a => a.spotifyAlbumId === album.spotifyAlbumId)) {
+              merged.push(album);
+            }
+          }
+          setSearchResults(merged);
+        } else {
+          setSearchResults(cacheData);
+        }
       } catch {
         setSearchResults([]);
       } finally {
@@ -78,6 +95,10 @@ export default function FavoriteAlbums({ username, isOwnProfile }) {
   const handleAdd = async (album) => {
     try {
       const id = await getOrCreateList();
+
+      // Asegurarse de que el álbum existe en caché antes de añadirlo
+      await apiFetch(`/albums/id/${album.spotifyAlbumId}`);
+
       const res = await apiFetch('/listalbum/add', {
         method: 'POST',
         body: JSON.stringify({ albumSpotifyId: album.spotifyAlbumId, listId: id })
