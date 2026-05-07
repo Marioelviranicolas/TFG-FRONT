@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Trash2, X } from 'lucide-react';
 import { apiFetch } from '../../../api';
+import Footer from '../../layout/public/Footer';
+import UserSlideMenu from '../../user/UserSlideMenu';
 
 export default function ListDetail() {
   const { id } = useParams();
@@ -121,20 +123,32 @@ export default function ListDetail() {
   if (loading) return <div className="pp-page"><p className="pp-loading">Cargando lista…</p></div>;
   if (!list)   return <div className="pp-page"><p className="pp-error">Lista no encontrada</p></div>;
 
-  return (
+ return (
+  <div className="pp-shell">
+
+    {/* FEEDBACK */}
+    {feedback && (
+      <div
+        className={`ap-feedback ap-feedback--${feedback.type}`}
+        style={{
+          position: 'fixed',
+          top: '24px',
+          right: '24px',
+          zIndex: 9999,
+          minWidth: '260px'
+        }}
+      >
+        {feedback.message}
+      </div>
+    )}
+
     <div className="pp-page">
 
-      {/* FEEDBACK TOAST */}
-      {feedback && (
-        <div className={`ap-feedback ap-feedback--${feedback.type}`}
-          style={{ position: 'fixed', top: '24px', right: '24px', zIndex: 9999, minWidth: '260px' }}
-        >
-          {feedback.message}
-        </div>
-      )}
-
       {/* BACK */}
-      <button className="pp-back-btn" onClick={() => navigate('/profile')}>
+      <button
+        className="pp-back-btn"
+        onClick={() => navigate('/profile')}
+      >
         ← Volver al perfil
       </button>
 
@@ -142,21 +156,40 @@ export default function ListDetail() {
       <div className="pp-header" style={{ alignItems: 'flex-start' }}>
         <div className="pp-info">
           <h1 className="pp-username">{list.name}</h1>
-          {list.description && <p className="pp-bio">{list.description}</p>}
+
+          {list.description && (
+            <p className="pp-bio">{list.description}</p>
+          )}
+
           <p className="pp-email">
             Por {list.username} · {albums.length} álbumes
           </p>
+
           {isOwnList && (
             <div className="pp-header-actions">
-              <button className="pp-btn-edit" onClick={() => setShowSearch(true)}>
+              <button
+                className="pp-btn-edit"
+                onClick={() => setShowSearch(true)}
+              >
                 + Añadir álbum
               </button>
+
               <button
                 className="pp-btn-home"
-                style={{ borderColor: '#e04444', color: '#e04444' }}
+                style={{
+                  borderColor: '#e04444',
+                  color: '#e04444'
+                }}
                 onClick={handleDeleteList}
               >
-                <Trash2 size={13} style={{ display: 'inline', marginRight: '4px' }} />
+                <Trash2
+                  size={13}
+                  style={{
+                    display: 'inline',
+                    marginRight: '4px'
+                  }}
+                />
+
                 Eliminar lista
               </button>
             </div>
@@ -164,16 +197,35 @@ export default function ListDetail() {
         </div>
       </div>
 
-      {/* BUSCADOR */}
+      {/* MODAL BUSCADOR */}
       {isOwnList && showSearch && (
-        <div className="ap-modal-overlay" onClick={() => { setShowSearch(false); setSearchQuery(''); setSearchResults([]); }}>
-          <div className="ap-modal" onClick={e => e.stopPropagation()}>
+        <div
+          className="ap-modal-overlay"
+          onClick={() => {
+            setShowSearch(false);
+            setSearchQuery('');
+            setSearchResults([]);
+          }}
+        >
+          <div
+            className="ap-modal"
+            onClick={e => e.stopPropagation()}
+          >
             <div className="ap-modal-header">
               <h3>Buscar álbum</h3>
-              <button className="ap-modal-close" onClick={() => { setShowSearch(false); setSearchQuery(''); setSearchResults([]); }}>
+
+              <button
+                className="ap-modal-close"
+                onClick={() => {
+                  setShowSearch(false);
+                  setSearchQuery('');
+                  setSearchResults([]);
+                }}
+              >
                 <X size={16} />
               </button>
             </div>
+
             <div className="ap-search-container">
               <input
                 className="ap-input"
@@ -183,10 +235,19 @@ export default function ListDetail() {
                 placeholder="Busca un álbum o artista…"
                 autoFocus
               />
-              {searching && <p className="ap-modal-loading">Buscando…</p>}
-              {searchQuery.length >= 2 && !searching && searchResults.length === 0 && (
-                <p className="ap-modal-empty">Sin resultados en la base de datos</p>
+
+              {searching && (
+                <p className="ap-modal-loading">Buscando…</p>
               )}
+
+              {searchQuery.length >= 2 &&
+                !searching &&
+                searchResults.length === 0 && (
+                  <p className="ap-modal-empty">
+                    Sin resultados en la base de datos
+                  </p>
+              )}
+
               <div className="ap-album-results">
                 {searchResults.map(album => (
                   <div
@@ -194,16 +255,37 @@ export default function ListDetail() {
                     className="ap-album-item"
                     onClick={() => handleAddAlbum(album)}
                   >
-                    {album.coverUrl
-                      ? <img src={album.coverUrl} alt={album.title} className="ap-album-cover" />
-                      : <div className="ap-album-cover-placeholder">♪</div>
-                    }
+                    {album.coverUrl ? (
+                      <img
+                        src={album.coverUrl}
+                        alt={album.title}
+                        className="ap-album-cover"
+                      />
+                    ) : (
+                      <div className="ap-album-cover-placeholder">
+                        ♪
+                      </div>
+                    )}
+
                     <div className="ap-album-info">
-                      <div className="ap-album-title">{album.title}</div>
-                      <div className="ap-album-artist">{album.artist}</div>
-                      {album.releaseYear && <div className="ap-album-year">{album.releaseYear}</div>}
+                      <div className="ap-album-title">
+                        {album.title}
+                      </div>
+
+                      <div className="ap-album-artist">
+                        {album.artist}
+                      </div>
+
+                      {album.releaseYear && (
+                        <div className="ap-album-year">
+                          {album.releaseYear}
+                        </div>
+                      )}
                     </div>
-                    <div className="ap-album-add">+ Añadir</div>
+
+                    <div className="ap-album-add">
+                      + Añadir
+                    </div>
                   </div>
                 ))}
               </div>
@@ -213,12 +295,15 @@ export default function ListDetail() {
       )}
 
       {/* ÁLBUMES */}
-      <span className="pp-section-title">Álbumes ({albums.length})</span>
+      <span className="pp-section-title">
+        Álbumes ({albums.length})
+      </span>
 
       {albums.length === 0 ? (
         <p className="pp-no-content">
           No hay álbumes en esta lista todavía.
-          {isOwnList && ' Pulsa "+ Añadir álbum" para empezar.'}
+          {isOwnList &&
+            ' Pulsa "+ Añadir álbum" para empezar.'}
         </p>
       ) : (
         albums.map(listAlbum => (
@@ -226,21 +311,39 @@ export default function ListDetail() {
             key={listAlbum.idListAlbum}
             className="pp-review-card"
             style={{ cursor: 'pointer' }}
-            onClick={() => navigate(`/album/${listAlbum.albumSpotifyId}`)}
-          >
-            {listAlbum.albumCoverUrl
-              ? <img src={listAlbum.albumCoverUrl} alt={listAlbum.albumTitle} className="pp-review-cover" />
-              : <div className="pp-review-cover-placeholder">♪</div>
+            onClick={() =>
+              navigate(`/album/${listAlbum.albumSpotifyId}`)
             }
+          >
+            {listAlbum.albumCoverUrl ? (
+              <img
+                src={listAlbum.albumCoverUrl}
+                alt={listAlbum.albumTitle}
+                className="pp-review-cover"
+              />
+            ) : (
+              <div className="pp-review-cover-placeholder">
+                ♪
+              </div>
+            )}
+
             <div className="pp-review-body">
-              <span className="pp-review-album-title">{listAlbum.albumTitle}</span>
-              <span className="pp-review-artist">{listAlbum.albumArtist}</span>
+              <span className="pp-review-album-title">
+                {listAlbum.albumTitle}
+              </span>
+
+              <span className="pp-review-artist">
+                {listAlbum.albumArtist}
+              </span>
             </div>
 
             {isOwnList && (
               <button
                 className="ap-btn-delete"
-                onClick={e => { e.stopPropagation(); handleRemoveAlbum(listAlbum.idListAlbum); }}
+                onClick={e => {
+                  e.stopPropagation();
+                  handleRemoveAlbum(listAlbum.idListAlbum);
+                }}
                 title="Eliminar de la lista"
               >
                 <X size={14} />
@@ -249,6 +352,12 @@ export default function ListDetail() {
           </div>
         ))
       )}
+
     </div>
-  );
+
+    <UserSlideMenu />
+    <Footer />
+
+  </div>
+);
 }
