@@ -15,6 +15,7 @@ export default function RegisterModal({ isOpen, onClose, onSwitchToLogin }) {
 
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false); // Añadido estado de carga
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleChange = (e) => {
     setFormData({
@@ -69,9 +70,14 @@ export default function RegisterModal({ isOpen, onClose, onSwitchToLogin }) {
 
       const result = await response.json();
 
-      if (result === 1) {
-        onSwitchToLogin();
-      } else if (result === -1) {
+    if (result === 1) {
+    setSuccessMessage('¡Usuario registrado correctamente!');
+    setTimeout(() => {
+      setSuccessMessage('');
+      onClose();
+      onSwitchToLogin();
+    }, 2000);
+    } else if (result === -1) {
         setErrors({ username: 'Este username o email ya está en uso' });
       } else {
         setErrors({ general: 'Error al registrar. Inténtalo de nuevo.' });
@@ -98,6 +104,9 @@ export default function RegisterModal({ isOpen, onClose, onSwitchToLogin }) {
         <form className="modal-form" onSubmit={handleSubmit}>
           {errors.general && (
             <div className="error-message error-general">{errors.general}</div>
+          )}
+          {successMessage && (
+            <div className="success-message">{successMessage}</div>
           )}
 
           <div className="form-group">
